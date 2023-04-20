@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrickBreaker.Screens;
 
 namespace BrickBreaker
 {
@@ -34,5 +35,15 @@ namespace BrickBreaker
             gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
         }
 
+        private void levelDesignerButton_Click(object sender, EventArgs e)
+        {
+            LevelDesignerScreen lds = new LevelDesignerScreen();
+            Form form = this.FindForm();
+
+            form.Controls.Add(lds);
+            form.Controls.Remove(this);
+
+            lds.Location = new Point((form.Width - lds.Width) / 2, (form.Height - lds.Height) / 2);
+        }
     }
 }
