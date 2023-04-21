@@ -14,6 +14,7 @@ namespace BrickBreaker.Screens
     public partial class LevelDesignerScreen : UserControl
     {
         List<DesignerBrick> bricks = new List<DesignerBrick>();
+        int currentHP = 1;
         public LevelDesignerScreen()
         {
             InitializeComponent();
@@ -26,7 +27,8 @@ namespace BrickBreaker.Screens
             int x = e.X;
             int y = e.Y;
 
-            DesignerBrick brick = new DesignerBrick(x, y, Color.Red);
+            DesignerBrick brick = new DesignerBrick(x, y, 2);
+            DesignerBrick.lastX = x; DesignerBrick.lastY = y;
             bricks.Add(brick);
             Refresh();
         }
@@ -35,7 +37,7 @@ namespace BrickBreaker.Screens
         {
             foreach (DesignerBrick brick in bricks)
             {
-                e.Graphics.FillRectangle(brick.solidBrush, brick.x, brick.y, brick.width, brick.height);
+                e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width/2, brick.y - brick.height/2, brick.width, brick.height);
             }
         }
 
@@ -46,6 +48,28 @@ namespace BrickBreaker.Screens
             writer.WriteStartElement("Level");
 
 
+        }
+
+        private int deltaHP(int by) 
+        {
+            int hp = currentHP += by;
+            int maxHP = 5;
+            if(hp < 1)
+            {
+                hp = maxHP;
+            }
+            if(hp > maxHP)
+            {
+                hp = 1;
+            }
+            return hp;
+        }
+        private void LevelDesignerScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+
+            }
         }
     }
 }

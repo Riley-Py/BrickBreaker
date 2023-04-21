@@ -51,6 +51,7 @@
             this.Size = new System.Drawing.Size(1280, 812);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.LevelDesignerScreen_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LevelDesignerScreen_MouseClick);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LevelDesignerScreen_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }
