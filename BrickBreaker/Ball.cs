@@ -6,7 +6,7 @@ namespace BrickBreaker
 {
     public class Ball
     {
-        public int x, y, xSpeed, ySpeed, size;
+        public int x, y, xSpeed, ySpeed, size, score;
         public Color colour;
 
         public static Random rand = new Random();
@@ -35,6 +35,7 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(blockRec))
             {
                 ySpeed *= -1;
+                score++;
             }
 
             return blockRec.IntersectsWith(ballRec);

@@ -14,6 +14,9 @@ namespace BrickBreaker
     public partial class Form1 : Form
     {
         List<HighScore> highScore = new List<HighScore>();
+
+        public static int score, highScoreD;
+
         public Form1()
         {
             InitializeComponent();
@@ -37,32 +40,27 @@ namespace BrickBreaker
 
         public void LoganCode()
         {
-            
+            if (highScoreD < score)
+            {
+                highScoreD = score;
+                //highScoreLabel.Text = "NEW HIGH SCORE";
+                //highScoreLabel.Text = "";
+                //highScoreLabel.Text = "NEW HIGH SCORE";
+                //highScoreLabel.Text = "";
+                //highScoreLabel.Text = "NEW HIGH SCORE";
+                //highScoreLabel.Text = "";
+                //highScoreLabel.Text = "NEW HIGH SCORE";
+                //highScoreLabel.Text = $"High Score: {highScore}";
+            }
         }
-
         public void LoganSaveHS()
         {
-            //XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml", null);
+            XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml", null);
         }
 
         public void LoganLoadHS()
         {
-            //string score;
-
             //highScoreLabel.Text = $"High Score: {highScore}";
-
-            //XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml", null);
-
-            //while (reader.Read())
-            //{
-            //    if (reader.NodeType == XmlNodeType.Text)
-            //    {
-            //        highScore = reader.();
-
-            //        HighScore newHS = new HighScore(score);
-            //        HighScore.Add(newHS);
-            //    }
-            //}
         }
 
     }
