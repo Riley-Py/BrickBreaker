@@ -109,7 +109,7 @@
             this.levelDesignerButton.TabIndex = 2;
             this.levelDesignerButton.Text = "Level Designer";
             this.levelDesignerButton.UseVisualStyleBackColor = false;
-            this.levelDesignerButton.Click += new System.EventHandler(this.levelDesignerButton_Click);
+            //this.levelDesignerButton.Click += new System.EventHandler(this.levelDesignerButton_Click);
             // 
             // MenuScreen
             // 
