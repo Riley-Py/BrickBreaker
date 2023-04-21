@@ -26,20 +26,13 @@ namespace BrickBreaker
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            // Goes to the game screen
-            GameScreen gs = new GameScreen();
-            Form form = this.FindForm();
-
-            form.Controls.Add(gs);
-            form.Controls.Remove(this);
-
-            gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
+            //Reads the selected mode and see if it's a certain selection.  Otherwise, nothing happens
+            if (modeSelector.SelectedItem == "Level Editor")
+            {
+                Form1.ChangeScreen(this, new LevelDesignerScreen());
+            }
         }
 
-        private void MenuScreen_Load(object sender, EventArgs e)
-        {
-           
-        }
         
         //Comment out for color testing
         private void RileyFunc()
@@ -47,6 +40,8 @@ namespace BrickBreaker
             playButton.BackColor = Color.FromArgb(255, 247, 255, 25);
             modeSelector.BackColor = Color.FromArgb(255, 0, 86, 255);
             exitButton.BackColor = Color.FromArgb(255, 247, 255, 25);
+
+            modeSelector.Items.Add("Level Editor");
 
             
         }
