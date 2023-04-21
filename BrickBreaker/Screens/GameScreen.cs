@@ -45,6 +45,10 @@ namespace BrickBreaker
             OnStart();
         }
 
+        public void Brayden()
+        {
+
+        }
 
         public void OnStart()
         {
@@ -126,6 +130,7 @@ namespace BrickBreaker
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            Brayden();
             // Move the paddle
             if (leftArrowDown && paddle.x > 0)
             {

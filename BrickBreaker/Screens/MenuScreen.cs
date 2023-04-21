@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrickBreaker.Screens;
 
 namespace BrickBreaker
 {
@@ -69,6 +70,15 @@ namespace BrickBreaker
         {
             exitButton.BackColor = Color.FromArgb(255, 247, 255, 25);
 
+        private void levelDesignerButton_Click(object sender, EventArgs e)
+        {
+            LevelDesignerScreen lds = new LevelDesignerScreen();
+            Form form = this.FindForm();
+
+            form.Controls.Add(lds);
+            form.Controls.Remove(this);
+
+            lds.Location = new Point((form.Width - lds.Width) / 2, (form.Height - lds.Height) / 2);
         }
     }
 }

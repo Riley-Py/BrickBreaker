@@ -32,6 +32,7 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
             this.modeSelector = new System.Windows.Forms.ComboBox();
+            this.levelDesignerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playButton
@@ -40,11 +41,13 @@
             this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+
             this.playButton.Font = new System.Drawing.Font("Burbank Big Cd Bk", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.Black;
             this.playButton.Location = new System.Drawing.Point(601, 431);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(194, 77);
+
             this.playButton.TabIndex = 0;
             this.playButton.Text = "Play!";
             this.playButton.UseVisualStyleBackColor = false;
@@ -91,6 +94,23 @@
             this.modeSelector.TabIndex = 3;
             this.modeSelector.Text = "Mode";
             // 
+            // levelDesignerButton
+            // 
+            this.levelDesignerButton.BackColor = System.Drawing.Color.White;
+            this.levelDesignerButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.levelDesignerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.levelDesignerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.levelDesignerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.levelDesignerButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.levelDesignerButton.Location = new System.Drawing.Point(631, 348);
+            this.levelDesignerButton.Margin = new System.Windows.Forms.Padding(5);
+            this.levelDesignerButton.Name = "levelDesignerButton";
+            this.levelDesignerButton.Size = new System.Drawing.Size(409, 115);
+            this.levelDesignerButton.TabIndex = 2;
+            this.levelDesignerButton.Text = "Level Designer";
+            this.levelDesignerButton.UseVisualStyleBackColor = false;
+            this.levelDesignerButton.Click += new System.EventHandler(this.levelDesignerButton_Click);
+            // 
             // MenuScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -116,5 +136,6 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.ComboBox modeSelector;
+        private System.Windows.Forms.Button levelDesignerButton;
     }
 }
