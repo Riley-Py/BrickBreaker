@@ -209,5 +209,24 @@ namespace BrickBreaker
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
+
+        public void createPowerup(string powerName) //, int _xLocation, int _yLocation
+        {
+            #region Overall Notes
+            /* Code written by Isaha Flinch.
+             * This code exists to create powerups for player to use.  The powerups
+             * are stored with the data of a block and are generated upon that block's 
+             * destruction.  The powerup will fall towards the player slowly.  If 
+             * collected, the powerup will be given.  Otherwise the powerup will be 
+             * removed without use.
+             */
+            #endregion
+
+            //create physical entity to for the player to collide with
+            Powerup powerUp = new Powerup(powerName);
+
+            //IN GLOBAL VARIABLES, I NEED A POWERUPS LIST TO STORE ALL POWER UPS
+            //powers.Add(powerUp);
+        }
     }
 }
