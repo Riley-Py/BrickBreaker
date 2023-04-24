@@ -10,7 +10,7 @@ namespace BrickBreaker.Screens
     internal class DesignerBrick
     {
         
-        public static int lastX = 0, lastY = 0;
+        //public static int lastX = 0, lastY = 0;
         public int x, y;
         public int width, height;
         public SolidBrush solidBrush;

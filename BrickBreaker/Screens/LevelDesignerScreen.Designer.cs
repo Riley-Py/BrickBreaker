@@ -28,28 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.generateLevelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // generateLevelButton
-            // 
-            this.generateLevelButton.Location = new System.Drawing.Point(497, 741);
-            this.generateLevelButton.Name = "generateLevelButton";
-            this.generateLevelButton.Size = new System.Drawing.Size(217, 54);
-            this.generateLevelButton.TabIndex = 0;
-            this.generateLevelButton.Text = "Generate XML";
-            this.generateLevelButton.UseVisualStyleBackColor = true;
-            this.generateLevelButton.Click += new System.EventHandler(this.generateLevelButton_Click);
             // 
             // LevelDesignerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RosyBrown;
-            this.Controls.Add(this.generateLevelButton);
             this.Name = "LevelDesignerScreen";
             this.Size = new System.Drawing.Size(1280, 812);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.LevelDesignerScreen_Paint);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LevelDesignerScreen_KeyUp);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LevelDesignerScreen_MouseClick);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LevelDesignerScreen_PreviewKeyDown);
             this.ResumeLayout(false);
@@ -57,7 +46,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button generateLevelButton;
     }
 }
