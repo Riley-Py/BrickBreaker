@@ -13,14 +13,18 @@ namespace BrickBreaker.Screens
 {
     public partial class LevelDesignerScreen : UserControl
     {
+        Powerup currentPowerup;
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
         int spacing = 1;
+        int defWidth = 36;
+        int defHeight = 14;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
         public LevelDesignerScreen()
         {
             InitializeComponent();
+            currentPowerup = Powerup.None;
         }
 
 
@@ -30,9 +34,23 @@ namespace BrickBreaker.Screens
             int x = e.X;
             int y = e.Y;
 
-            DesignerBrick brick = new DesignerBrick(x, y, currentHP);
-           //w DesignerBrick.lastX = x; DesignerBrick.lastY = y;
-            bricks.Add(brick);
+            if(e.Button == MouseButtons.Left)
+            {
+                DesignerBrick brick = new DesignerBrick(x, y, currentHP, defWidth, defHeight, currentPowerup);
+                
+                bricks.Add(brick);
+            }
+            else if(e.Button == MouseButtons.Right)
+            {
+                for(int i = 0; i < bricks.Count; i++)
+                {
+                    if (bricks[i].containsPoint(x, y))
+                    {
+                        bricks.RemoveAt(i);
+                    }
+                }
+            }
+            
             Refresh();
         }
 
@@ -75,11 +93,18 @@ namespace BrickBreaker.Screens
                 if (pressedWASD[i] != lastPressedWASD[i] && bricks.Count > 0) 
                 {
                     DesignerBrick lastBrick = bricks.Last();
-                    int dX = (i == 3 ? lastBrick.width + spacing : 0)-(i == 2 ? lastBrick.width + spacing : 0);
-                    int dY = (i == 1 ? lastBrick.height + spacing : 0) - (i == 0 ? lastBrick.height + spacing : 0);
+                    int dX = (i == 3 ? lastBrick.width/2 + defWidth/2 + spacing : 0)-(i == 2 ? lastBrick.width / 2 + defWidth / 2 + spacing : 0);
+                    int dY = (i == 1 ? lastBrick.height/2 + defHeight/2 + spacing : 0) - (i == 0 ? lastBrick.height / 2 + defHeight / 2 + spacing : 0);
 
-                    DesignerBrick b = new DesignerBrick(lastBrick.x + dX, lastBrick.y + dY, currentHP);
-                    bricks.Add(b);
+                    DesignerBrick brick = new DesignerBrick(lastBrick.x + dX, lastBrick.y + dY, currentHP, defWidth, defHeight, currentPowerup);
+                    for (int j = 0; j < bricks.Count; j++)
+                    {
+                        if (brick.containsBrick(bricks[j]))
+                        {
+                            return;
+                        }
+                    }
+                    bricks.Add(brick);
                     Refresh();
                 }
             }
@@ -128,9 +153,24 @@ namespace BrickBreaker.Screens
                 case Keys.D:
                     pressedWASD[3] = false;
                     break;
-
+                case Keys.R:
+                    int temp = defHeight;
+                    defHeight = defWidth;
+                    defWidth = temp;
+                    break;
             }
             pressedWASD.CopyTo(lastPressedWASD, 0);
         }
+    }
+
+    enum Powerup
+    {
+        None = 0,
+        Ammo = 1,
+        ChugJug = 2,
+        Scar = 3,
+        Shotgun = 4,
+        RocketLauncher = 5,
+        InfinityGauntlet = 6
     }
 }
