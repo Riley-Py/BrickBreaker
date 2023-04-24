@@ -20,7 +20,7 @@ namespace BrickBreaker
         #endregion
 
         public string powerName;
-        public int x, y, ySpeed = 6, size = 20;
+        public int x, y, ySpeed = 4, size = 20;
 
         public Powerup(string _powerName) //, int _xLocation, int _yLocation
         {
@@ -36,10 +36,10 @@ namespace BrickBreaker
 
         public void PaddleCollision(Paddle p)
         {
-            Rectangle ballRec = new Rectangle(x, y, size, size);
+            Rectangle powerRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
-            if (ballRec.IntersectsWith(paddleRec))
+            if (powerRec.IntersectsWith(paddleRec))
             {
                 GivePowerup();
             }
@@ -92,16 +92,16 @@ namespace BrickBreaker
                     break;
 
                 //reduce half of the lives of each block
-                case "InfinityGauntlet ":
+                case "InfinityGauntlet":
                     //for each block, divide it's lives by two (round up on odd numbers)
-                    foreach (Block b in GameScreen.blocks)
+                    for (int i = 0; i < GameScreen.blocks.Count; i++) 
                     {
-                        if (b.hp == 1)
+                        if (GameScreen.blocks[i].hp == 1)
                         {
-                            b.hp--;
+                            GameScreen.blocks[i].hp--;
                         }
 
-                        b.hp /= 2;
+                        GameScreen.blocks[i].hp /= 2;
                     }
                     //to make up for the rounding, any block with one life will be destroyed
                     break;

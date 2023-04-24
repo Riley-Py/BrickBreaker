@@ -23,14 +23,15 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int lives;
+        public static int lives;
 
         // Paddle and Ball objects
         Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
-        List<Block> blocks = new List<Block>();
+        public static List<Block> blocks = new List<Block>();
+        public static List<Powerup> powers = new List<Powerup>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -136,8 +137,14 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            // Move ball
-            ball.Move();
+            // Move the powerups ///////////////
+            foreach (Powerup p in powers)
+            {
+                p.Move();
+            }
+
+            // Move ball ///////////
+            ball.Move(); ///////////
 
             // Check for collision with top and side walls
             ball.WallCollision(this);
@@ -166,6 +173,8 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
+                    createPowerup("InfinityGauntlet");  //////
+
                     blocks.Remove(b);
 
                     if (blocks.Count == 0)
@@ -175,6 +184,22 @@ namespace BrickBreaker
                     }
 
                     break;
+                }
+            }
+
+            // Check if player has collided with any powerups /////////
+            foreach (Powerup p in powers)
+            {
+                // Check for collision of powerup with paddle
+                p.PaddleCollision(paddle);
+            }
+
+            //remove blocks from power ups //////////////
+            for (int i = 0; i < blocks.Count; i++)
+            {
+                if (blocks[i].hp <= 0)
+                {
+                    blocks.RemoveAt(i);
                 }
             }
 
@@ -208,6 +233,12 @@ namespace BrickBreaker
 
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+
+            // Draws powerups
+            foreach (Powerup p in powers)
+            {
+                e.Graphics.FillRectangle(blockBrush, p.x, p.y, p.size, p.size);
+            }
         }
 
         public void createPowerup(string powerName) //, int _xLocation, int _yLocation
@@ -224,9 +255,7 @@ namespace BrickBreaker
 
             //create physical entity to for the player to collide with
             Powerup powerUp = new Powerup(powerName);
-
-            //IN GLOBAL VARIABLES, I NEED A POWERUPS LIST TO STORE ALL POWER UPS
-            //powers.Add(powerUp);
+            powers.Add(powerUp);
         }
     }
 }
