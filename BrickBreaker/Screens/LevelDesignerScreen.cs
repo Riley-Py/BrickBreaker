@@ -17,8 +17,8 @@ namespace BrickBreaker.Screens
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
         int spacing = 1;
-        int defWidth = 36;
-        int defHeight = 14;
+        int defWidth = 42;
+        int defHeight = 18;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
         public LevelDesignerScreen()
@@ -65,18 +65,27 @@ namespace BrickBreaker.Screens
         private void generateLevelButton_Click(object sender, EventArgs e)
         {
             
+            
+        }
+
+        private void generateLevel()
+        {
             XmlWriter writer = XmlWriter.Create("Resources/LevelXML.xml");
 
             writer.WriteStartElement("Level");
             foreach (DesignerBrick b in bricks)
             {
                 writer.WriteStartElement("Brick");
-                writer.WriteStartAttribute("HP");
+                writer.WriteElementString("x",$"{b.x}");
+                writer.WriteElementString("y", $"{b.y}");
+                writer.WriteElementString("width", $"{b.width}");
+                writer.WriteElementString("height", $"{b.height}");
+                writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
+                writer.WriteElementString("powerup", $"{b.powerup}");
             }
 
-
+            writer.Close();
         }
-
         private int deltaHP(int by) 
         {
             int hp = currentHP += by;
@@ -138,6 +147,25 @@ namespace BrickBreaker.Screens
                 case Keys.L:
                     currentHP = deltaHP(-1);
                     break;
+                case Keys.Enter:
+                    generateLevel();
+                    break;
+                case Keys.M:
+                    currentPowerup += 1;
+                    if (currentPowerup >= Powerup.Default || currentPowerup < 0)
+                    {
+                        currentPowerup = 0;
+                    }
+                    powerUpLabel.Text = currentPowerup.ToString();
+                    break;
+                case Keys.N:
+                    currentPowerup -= 1;
+                    if(currentPowerup >= Powerup.Default || currentPowerup < 0)
+                    {
+                        currentPowerup = 0;
+                    }
+                    powerUpLabel.Text = currentPowerup.ToString();
+                    break;
             }
             compareKeys();
         }
@@ -177,6 +205,8 @@ namespace BrickBreaker.Screens
         Scar = 3,
         Shotgun = 4,
         RocketLauncher = 5,
-        InfinityGauntlet = 6
+        InfinityGauntlet = 6,
+        
+        Default = 7
     }
 }

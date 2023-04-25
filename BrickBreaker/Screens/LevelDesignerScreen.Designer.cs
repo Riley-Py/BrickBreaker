@@ -28,13 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.powerUpLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // powerUpLabel
+            // 
+            this.powerUpLabel.AutoSize = true;
+            this.powerUpLabel.Location = new System.Drawing.Point(563, 41);
+            this.powerUpLabel.Name = "powerUpLabel";
+            this.powerUpLabel.Size = new System.Drawing.Size(47, 20);
+            this.powerUpLabel.TabIndex = 0;
+            this.powerUpLabel.Text = "None";
             // 
             // LevelDesignerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RosyBrown;
+            this.Controls.Add(this.powerUpLabel);
             this.Name = "LevelDesignerScreen";
             this.Size = new System.Drawing.Size(1280, 812);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.LevelDesignerScreen_Paint);
@@ -42,9 +53,12 @@
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LevelDesignerScreen_MouseClick);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LevelDesignerScreen_PreviewKeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label powerUpLabel;
     }
 }
