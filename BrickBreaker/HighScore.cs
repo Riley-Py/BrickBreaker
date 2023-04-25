@@ -8,10 +8,11 @@ namespace BrickBreaker
 {
     class HighScore
     {
-        public string score;
-        public HighScore(string _score)
+        public string score, playerName;
+        public HighScore(string _score, string _playerName)
         {
             score = _score;
+            playerName = _playerName;
         }
     }
 }

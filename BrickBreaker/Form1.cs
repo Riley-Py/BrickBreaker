@@ -15,7 +15,7 @@ namespace BrickBreaker
     {
         List<HighScore> highScore = new List<HighScore>();
 
-        public static int score, highScoreD;
+        public static int score;
 
         public Form1()
         {
@@ -40,27 +40,50 @@ namespace BrickBreaker
 
         public void LoganCode()
         {
-            if (highScoreD < score)
-            {
-                highScoreD = score;
-                //highScoreLabel.Text = "NEW HIGH SCORE";
-                //highScoreLabel.Text = "";
-                //highScoreLabel.Text = "NEW HIGH SCORE";
-                //highScoreLabel.Text = "";
-                //highScoreLabel.Text = "NEW HIGH SCORE";
-                //highScoreLabel.Text = "";
-                //highScoreLabel.Text = "NEW HIGH SCORE";
-                //highScoreLabel.Text = $"High Score: {highScore}";
-            }
+
         }
         public void LoganSaveHS()
         {
-            XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml", null);
+            XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml");
+            writer.WriteStartElement("HighScore");
+
+            foreach (HighScore hs in highScore)
+            {
+                writer.WriteStartElement("HighScore");
+
+                writer.WriteElementString("score", hs.score);
+                writer.WriteElementString("playerName", hs.playerName);
+
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+
+            writer.Close();
         }
 
         public void LoganLoadHS()
         {
-            //highScoreLabel.Text = $"High Score: {highScore}";
+
+            string score, playerName;
+
+            XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml", null);
+
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                {
+                    score = reader.ReadString();
+
+                    reader.ReadToNextSibling("playerName");
+                    playerName = reader.ReadString();
+
+                    HighScore newHighScore = new HighScore(score, playerName);
+                    highScore.Add(newHighScore);
+                }
+            }
+
+            reader.Close();
         }
 
     }
