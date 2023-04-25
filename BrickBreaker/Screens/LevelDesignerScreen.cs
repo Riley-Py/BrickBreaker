@@ -70,6 +70,9 @@ namespace BrickBreaker.Screens
             writer.WriteStartElement("Level");
             foreach (DesignerBrick b in bricks)
             {
+                writer.WriteStartElement("Brick");
+                writer.WriteStartAttribute("HP");
+                writer.WriteString(b.)
             }
 
 

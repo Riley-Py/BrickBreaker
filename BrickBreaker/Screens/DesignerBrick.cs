@@ -13,8 +13,9 @@ namespace BrickBreaker.Screens
         //public static int lastX = 0, lastY = 0;
         public int x, y;
         public int width, height;
-        Powerup powerup;
+        public Powerup powerup;
         public SolidBrush solidBrush;
+        public int hp;
 
         public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, Powerup pu)
         {
@@ -24,6 +25,7 @@ namespace BrickBreaker.Screens
             width = _w;
             height = _h;
             powerup = pu;
+            hp = _hp;
         }
 
 
