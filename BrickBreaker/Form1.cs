@@ -20,7 +20,10 @@ namespace BrickBreaker
         public Form1()
         {
             InitializeComponent();
+            HighScore high = new HighScore("23", "Logan");
+            highScore.Add(high);
             LoganCode();
+           // LoganSaveHS();
             LoganLoadHS();
         }
 

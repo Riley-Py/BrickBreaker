@@ -64,9 +64,13 @@ namespace BrickBreaker.Screens
 
         private void generateLevelButton_Click(object sender, EventArgs e)
         {
+            
             XmlWriter writer = XmlWriter.Create("Resources/LevelXML.xml");
 
             writer.WriteStartElement("Level");
+            foreach (DesignerBrick b in bricks)
+            {
+            }
 
 
         }
