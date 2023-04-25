@@ -72,7 +72,6 @@ namespace BrickBreaker.Screens
             {
                 writer.WriteStartElement("Brick");
                 writer.WriteStartAttribute("HP");
-                writer.WriteString(b.)
             }
 
 
