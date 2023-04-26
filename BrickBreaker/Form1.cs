@@ -23,7 +23,7 @@ namespace BrickBreaker
             HighScore high = new HighScore("23", "Logan");
             highScore.Add(high);
             LoganCode();
-           // LoganSaveHS();
+            LoganSaveHS();
             LoganLoadHS();
         }
 

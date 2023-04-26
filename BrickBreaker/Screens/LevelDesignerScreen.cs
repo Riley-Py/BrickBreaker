@@ -82,6 +82,7 @@ namespace BrickBreaker.Screens
                 writer.WriteElementString("height", $"{b.height}");
                 writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
                 writer.WriteElementString("powerup", $"{b.powerup}");
+                writer.WriteEndElement();
             }
 
             writer.Close();
