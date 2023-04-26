@@ -31,6 +31,10 @@ namespace BrickBreaker
             {
                 Form1.ChangeScreen(this, new LevelDesignerScreen());
             }
+            else if (modeSelector.SelectedItem == "Single Player")
+            {
+                Form1.ChangeScreen(this, new GameScreen());
+            }
         }
 
         
@@ -42,6 +46,7 @@ namespace BrickBreaker
             exitButton.BackColor = Color.FromArgb(255, 247, 255, 25);
 
             modeSelector.Items.Add("Level Editor");
+            modeSelector.Items.Add("Single Player");
 
             
         }
