@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="HighScore.cs" />
     <Compile Include="Paddle.cs" />
+    <Compile Include="Powerup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\DesignerBrick.cs" />

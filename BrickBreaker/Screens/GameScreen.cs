@@ -23,14 +23,15 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int lives;
+        public static int lives;
 
         // Paddle and Ball objects
         Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
-        List<Block> blocks = new List<Block>();
+        public static List<Block> blocks = new List<Block>();
+        public static List<Powerup> powers = new List<Powerup>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -141,8 +142,8 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            // Move ball
-            ball.Move();
+            // Move ball 
+            ball.Move(); 
 
             // Check for collision with top and side walls
             ball.WallCollision(this);
@@ -171,6 +172,8 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
+                    createPowerup("InfinityGauntlet");  //////
+
                     blocks.Remove(b);
 
                     if (blocks.Count == 0)
@@ -182,6 +185,9 @@ namespace BrickBreaker
                     break;
                 }
             }
+
+            // powerup actions
+            runLoopPowerup();
 
             //redraw the screen
             Refresh();
@@ -213,6 +219,73 @@ namespace BrickBreaker
 
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+
+            // Draws powerups
+            foreach (Powerup p in powers)
+            {
+                e.Graphics.FillRectangle(blockBrush, p.x, p.y, p.size, p.size);
+            }
+        }
+
+        public void runLoopPowerup()
+        {
+            #region Overall Notes
+            /* Code written by Isaha Flinch.
+             * This code exists to create powerups for player to use.  The powerups
+             * are stored with the data of a block and are generated upon that block's 
+             * destruction.  The powerup will fall towards the player slowly.  If 
+             * collected, the powerup will be given.  Otherwise the powerup will be 
+             * removed without use.
+             */
+            #endregion
+
+            //Creating powerups happens when the bricks break
+            //Painting powerups happens in the paint method
+
+            // move the powerups 
+            foreach (Powerup p in powers)
+            {
+                p.Move();
+            }
+
+            // check if player has collided with any powerups 
+            foreach (Powerup p in powers)
+            {
+                // check for collision of powerup with paddle
+                p.PaddleCollision(paddle);
+            }
+
+            // remove blocks from power ups 
+            for (int i = 0; i < blocks.Count; i++)
+            {
+                if (blocks[i].hp <= 0)
+                {
+                    blocks.RemoveAt(i);
+                }
+            }
+
+            // end game if powerup causes it -- Repeat code from above that could be simplified
+            if (blocks.Count == 0)
+            {
+                gameTimer.Enabled = false;
+                OnEnd();
+            }
+        }
+        public void createPowerup(string powerName) //, int _xLocation, int _yLocation
+        {
+            #region Overall Notes
+            /* Code written by Isaha Flinch.
+             * This code exists to create powerups for player to use.  The powerups
+             * are stored with the data of a block and are generated upon that block's 
+             * destruction.  The powerup will fall towards the player slowly.  If 
+             * collected, the powerup will be given.  Otherwise the powerup will be 
+             * removed without use.
+             */
+            #endregion
+
+            //create physical entity to for the player to collide with
+            Powerup powerUp = new Powerup(powerName);
+            powers.Add(powerUp);
         }
     }
 }
