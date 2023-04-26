@@ -137,14 +137,8 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            // Move the powerups ///////////////
-            foreach (Powerup p in powers)
-            {
-                p.Move();
-            }
-
-            // Move ball ///////////
-            ball.Move(); ///////////
+            // Move ball 
+            ball.Move(); 
 
             // Check for collision with top and side walls
             ball.WallCollision(this);
@@ -187,21 +181,8 @@ namespace BrickBreaker
                 }
             }
 
-            // Check if player has collided with any powerups /////////
-            foreach (Powerup p in powers)
-            {
-                // Check for collision of powerup with paddle
-                p.PaddleCollision(paddle);
-            }
-
-            //remove blocks from power ups //////////////
-            for (int i = 0; i < blocks.Count; i++)
-            {
-                if (blocks[i].hp <= 0)
-                {
-                    blocks.RemoveAt(i);
-                }
-            }
+            // powerup actions
+            runLoopPowerup();
 
             //redraw the screen
             Refresh();
@@ -241,6 +222,50 @@ namespace BrickBreaker
             }
         }
 
+        public void runLoopPowerup()
+        {
+            #region Overall Notes
+            /* Code written by Isaha Flinch.
+             * This code exists to create powerups for player to use.  The powerups
+             * are stored with the data of a block and are generated upon that block's 
+             * destruction.  The powerup will fall towards the player slowly.  If 
+             * collected, the powerup will be given.  Otherwise the powerup will be 
+             * removed without use.
+             */
+            #endregion
+
+            //Creating powerups happens when the bricks break
+            //Painting powerups happens in the paint method
+
+            // move the powerups 
+            foreach (Powerup p in powers)
+            {
+                p.Move();
+            }
+
+            // check if player has collided with any powerups 
+            foreach (Powerup p in powers)
+            {
+                // check for collision of powerup with paddle
+                p.PaddleCollision(paddle);
+            }
+
+            // remove blocks from power ups 
+            for (int i = 0; i < blocks.Count; i++)
+            {
+                if (blocks[i].hp <= 0)
+                {
+                    blocks.RemoveAt(i);
+                }
+            }
+
+            // end game if powerup causes it -- Repeat code from above that could be simplified
+            if (blocks.Count == 0)
+            {
+                gameTimer.Enabled = false;
+                OnEnd();
+            }
+        }
         public void createPowerup(string powerName) //, int _xLocation, int _yLocation
         {
             #region Overall Notes
