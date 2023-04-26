@@ -147,8 +147,12 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Resources\menuScreenBackground.jpg" />
-    <None Include="bin\Debug\Resources\HighScoreXML.xml" />
-    <None Include="bin\Debug\Resources\LevelXML.xml" />
+    <Content Include="bin\Debug\Resources\HighScoreXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bin\Debug\Resources\LevelXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\LevelXML.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
