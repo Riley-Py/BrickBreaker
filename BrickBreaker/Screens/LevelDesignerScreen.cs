@@ -81,7 +81,16 @@ namespace BrickBreaker.Screens
                 writer.WriteElementString("width", $"{b.width}");
                 writer.WriteElementString("height", $"{b.height}");
                 writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
-                writer.WriteElementString("powerup", $"{b.powerup}");
+                if(b.powerup != Powerup.None)
+                {
+                    writer.WriteElementString("powerup", $"{b.powerup}");
+
+                }
+                else
+                {
+                    writer.WriteElementString("powerup", $"");
+
+                }
                 writer.WriteEndElement();
             }
 
@@ -201,6 +210,7 @@ namespace BrickBreaker.Screens
     enum Powerup
     {
         None = 0,
+
         Ammo = 1,
         ChugJug = 2,
         Scar = 3,
