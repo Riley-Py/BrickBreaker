@@ -16,6 +16,11 @@ namespace BrickBreaker.Screens
         Powerup currentPowerup;
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
+        bool[] lastPressedArrow = new bool[4];
+        bool[] pressedArrow = new bool[4];
+        bool replace = false;
+        int selectedBrickIndex = 0;
+        int moveBy = 1;
         int spacing = 1;
         int defWidth = 42;
         int defHeight = 18;
@@ -42,11 +47,28 @@ namespace BrickBreaker.Screens
             }
             else if(e.Button == MouseButtons.Right)
             {
-                for(int i = 0; i < bricks.Count; i++)
+                for(int i = bricks.Count - 1; i >= 0; i--)
                 {
                     if (bricks[i].containsPoint(x, y))
                     {
+                        if (replace)
+                        {
+                            DesignerBrick b = new DesignerBrick(bricks[i].x, bricks[i].y, currentHP, bricks[i].width, bricks[i].height, currentPowerup);
+                            bricks.Add(b);
+                        }
                         bricks.RemoveAt(i);
+                        selectedBrickIndex = bricks.Count-1;
+
+                    }
+                }
+            }
+            else if(e.Button == MouseButtons.Middle)
+            {
+                for (int i = 0; i < bricks.Count; i++)
+                {
+                    if (bricks[i].containsPoint(x, y))
+                    {
+                        selectedBrickIndex = i;
                     }
                 }
             }
@@ -117,7 +139,7 @@ namespace BrickBreaker.Screens
             {
                 if (pressedWASD[i] != lastPressedWASD[i] && bricks.Count > 0) 
                 {
-                    DesignerBrick lastBrick = bricks.Last();
+                    DesignerBrick lastBrick = bricks[selectedBrickIndex];
                     int dX = (i == 3 ? lastBrick.width/2 + defWidth/2 + spacing : 0)-(i == 2 ? lastBrick.width / 2 + defWidth / 2 + spacing : 0);
                     int dY = (i == 1 ? lastBrick.height/2 + defHeight/2 + spacing : 0) - (i == 0 ? lastBrick.height / 2 + defHeight / 2 + spacing : 0);
 
@@ -130,6 +152,18 @@ namespace BrickBreaker.Screens
                         }
                     }
                     bricks.Add(brick);
+                    selectedBrickIndex = bricks.Count - 1;
+                    Refresh();
+                }
+                if (pressedArrow[i] != lastPressedArrow[i] && bricks.Count > 0)
+                {
+                    int dX = (i == 3 ? moveBy : 0) - (i == 2 ? moveBy : 0);
+                    int dY = (i == 1 ? moveBy : 0) - (i == 0 ? moveBy : 0);
+
+
+                    bricks[selectedBrickIndex].x += dX;
+                    bricks[selectedBrickIndex].y += dY;
+
                     Refresh();
                 }
             }
@@ -137,6 +171,7 @@ namespace BrickBreaker.Screens
         private void LevelDesignerScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             pressedWASD.CopyTo(lastPressedWASD,0);
+            pressedArrow.CopyTo(lastPressedArrow,0);
             switch (e.KeyCode)
             {
                 case Keys.W:
@@ -150,6 +185,18 @@ namespace BrickBreaker.Screens
                     break;
                 case Keys.D:
                     pressedWASD[3] = true;
+                    break;
+                case Keys.Up:
+                    pressedArrow[0] = true;
+                    break;
+                case Keys.Down:
+                    pressedArrow[1] = true;
+                    break;
+                case Keys.Left:
+                    pressedArrow[2] = true;
+                    break;
+                case Keys.Right:
+                    pressedArrow[3] = true;
                     break;
                 case Keys.P:
                     currentHP = deltaHP(1);
@@ -176,10 +223,22 @@ namespace BrickBreaker.Screens
                     }
                     powerUpLabel.Text = currentPowerup.ToString();
                     break;
+                case Keys.D1:
+                    moveBy++;
+                    break;
+                case Keys.D2:
+                    moveBy--;
+                    if(moveBy < 0)
+                        moveBy = 0;
+                    break;
+                case Keys.Space:
+                    replace = !replace;
+                    replaceLabel.Text = $"replace:{replace}";
+                    break;
             }
             compareKeys();
         }
-
+        
         private void LevelDesignerScreen_KeyUp(object sender, KeyEventArgs e)
         {
             
@@ -197,11 +256,26 @@ namespace BrickBreaker.Screens
                 case Keys.D:
                     pressedWASD[3] = false;
                     break;
+                case Keys.Up:
+                    pressedArrow[0] = false;
+                    break;
+                case Keys.Down:
+                    pressedArrow[1] = false;
+                    break;
+                case Keys.Left:
+                    pressedArrow[2] = false;
+                    break;
+                case Keys.Right:
+                    pressedArrow[3] = false;
+                    break;
                 case Keys.R:
                     int temp = defHeight;
                     defHeight = defWidth;
                     defWidth = temp;
                     break;
+                case Keys.Escape:
+                    Form1.ChangeScreen(this, new MenuScreen());
+                    break; 
             }
             pressedWASD.CopyTo(lastPressedWASD, 0);
         }
