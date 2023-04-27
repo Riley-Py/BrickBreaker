@@ -204,7 +204,7 @@ namespace BrickBreaker.Screens
         }
         private void RileyFunc()
         {
-            instructionLabel.Text = "Instructions:\n Left mouse click: place first block \n WASD: move position of block position to place \n r: rotate \n p: increase health \n l: decrease health \n m/n: change the powerups \n Enter: save the file";   
+            instructionLabel.Text = "Instructions:\n Left mouse click: place first block \n WASD: move position of block position to place \n r: rotate \n p: increase health \n l: decrease health \n m/n: change the powerups \n Enter: save the file \n v: make this label visible/invisible";   
             
             instructionLabel.Visible = !instructionLabel.Visible;
         }
