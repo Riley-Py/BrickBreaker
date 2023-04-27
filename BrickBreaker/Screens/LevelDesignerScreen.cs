@@ -24,6 +24,7 @@ namespace BrickBreaker.Screens
         public LevelDesignerScreen()
         {
             InitializeComponent();
+            RileyFunc();
             currentPowerup = Powerup.None;
         }
 
@@ -167,6 +168,11 @@ namespace BrickBreaker.Screens
                     }
                     powerUpLabel.Text = currentPowerup.ToString();
                     break;
+                case Keys.V:
+                    RileyFunc();
+                    break;
+
+
             }
             compareKeys();
         }
@@ -196,6 +202,14 @@ namespace BrickBreaker.Screens
             }
             pressedWASD.CopyTo(lastPressedWASD, 0);
         }
+        private void RileyFunc()
+        {
+            instructionLabel.Text = "Instructions:\n Left mouse click: place first block \n WASD: move position of block position to place \n r: rotate \n p: increase health \n l: decrease health \n m/n: change the powerups \n Enter: save the file";   
+            
+            instructionLabel.Visible = !instructionLabel.Visible;
+        }
+
+       
     }
 
     enum Powerup
@@ -210,4 +224,5 @@ namespace BrickBreaker.Screens
         
         Default = 7
     }
+  
 }
