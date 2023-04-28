@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Drawing.Text;
 
 
 namespace BrickBreaker.Screens
@@ -288,6 +289,8 @@ namespace BrickBreaker.Screens
         }
         private void RileyFunc()
         {
+            Form1.loadingFonts("burbank.otf", 18, instructionLabel);
+
             instructionLabel.Text = "Instructions:" +
                 "\n Left mouse click: place first block " +
                 "\n WASD: move position of block position to place " +
@@ -304,6 +307,7 @@ namespace BrickBreaker.Screens
                 "\n Space: Changes on whether using right click adds/removes a block";   
             
             instructionLabel.Visible = !instructionLabel.Visible;
+            
 
            
         }

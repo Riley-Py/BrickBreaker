@@ -62,6 +62,7 @@ namespace BrickBreaker.Properties {
         
         /// <summary>
 
+
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] BurbankBigCondensed_Black {

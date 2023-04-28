@@ -45,6 +45,11 @@ namespace BrickBreaker
             modeSelector.BackColor = Color.FromArgb(255, 0, 86, 255);
             exitButton.BackColor = Color.FromArgb(255, 247, 255, 25);
 
+            Form1.loadingFonts("burbank.otf", 36, titleLabel);
+            Form1.loadingFonts("burbank.otf", 27, playButton, exitButton);
+            Form1.loadingFonts("burbank.otf", 20, modeSelector);
+            
+
             modeSelector.Items.Add("Level Editor");
             modeSelector.Items.Add("Single Player");
 

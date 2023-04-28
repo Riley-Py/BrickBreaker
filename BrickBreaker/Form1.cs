@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Drawing.Text;
+
 
 namespace BrickBreaker
 {
@@ -16,6 +18,7 @@ namespace BrickBreaker
         List<HighScore> highScore = new List<HighScore>();
 
         public static int score;
+        
 
         public Form1()
         {
@@ -107,6 +110,44 @@ namespace BrickBreaker
             }
 
             reader.Close();
+        }
+        /// <summary>
+        /// Loading any sort of fonts and making it visible to all users
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="size"></param>
+        /// <param name="label"></param>
+        public static void loadingFonts(string name, int size, params Label[] labels)
+        {
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+
+            fontCollection.AddFontFile(name);
+
+            foreach (Label label in labels)
+            {
+                label.Font = new Font(fontCollection.Families[0], size);
+
+            }
+            
+        }
+        public static void loadingFonts(string name, int size, params Button[] buttons)
+        {
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+
+            fontCollection.AddFontFile(name);
+
+            foreach (Button button in buttons)
+            {
+                button.Font = new Font(fontCollection.Families[0], size);
+            }
+        }
+        public static void loadingFonts(string name, int size, ComboBox combo)
+        {
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+
+            fontCollection.AddFontFile(name);
+
+            combo.Font = new Font(fontCollection.Families[0], size);
         }
 
     }
