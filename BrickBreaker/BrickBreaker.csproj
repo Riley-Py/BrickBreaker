@@ -119,7 +119,9 @@
       <DependentUpon>GameScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <None Include="Fonts\BurbankBigCondensed-Black.otf" />
+    <None Include="burbank.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,7 +149,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\BurbankBigCondensed-Black.otf" />
     <None Include="Resources\menuScreenBackground.jpg" />
     <Content Include="bin\Debug\Resources\HighScoreXML.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
