@@ -112,7 +112,7 @@ namespace BrickBreaker
             reader.Close();
         }
         /// <summary>
-        /// Loading any sort of fonts and making it visible to all users
+        /// Loading fonts for labels
         /// </summary>
         /// <param name="name"></param>
         /// <param name="size"></param>
@@ -130,6 +130,12 @@ namespace BrickBreaker
             }
             
         }
+        /// <summary>
+        /// Loading fonts for buttons
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="size"></param>
+        /// <param name="buttons"></param>
         public static void loadingFonts(string name, int size, params Button[] buttons)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
@@ -141,6 +147,12 @@ namespace BrickBreaker
                 button.Font = new Font(fontCollection.Families[0], size);
             }
         }
+        /// <summary>
+        /// Loading fonts for comboboxes
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="size"></param>
+        /// <param name="combo"></param>
         public static void loadingFonts(string name, int size, ComboBox combo)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
