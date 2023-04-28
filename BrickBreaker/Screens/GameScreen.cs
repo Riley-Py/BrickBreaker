@@ -24,6 +24,7 @@ namespace BrickBreaker
 
         // Game values
         public static int lives;
+        public static int powerSize = 20;
 
         // Paddle and Ball objects
         Paddle paddle;
@@ -32,11 +33,17 @@ namespace BrickBreaker
         // list of all blocks for current level
         public static List<Block> blocks = new List<Block>();
         public static List<Powerup> powers = new List<Powerup>();
+        public static List<Gun> guns = new List<Gun>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
+
+        // Powerup variables
+        int appearance;
+        SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
+        ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
 
         #endregion
 
@@ -172,7 +179,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("InfinityGauntlet");  //////
+                    createPowerup("Ammo", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
                     blocks.Remove(b);
 
@@ -186,7 +193,7 @@ namespace BrickBreaker
                 }
             }
 
-            // powerup actions
+            //powerup actions
             runLoopPowerup();
 
             //redraw the screen
@@ -223,7 +230,7 @@ namespace BrickBreaker
             // Draws powerups
             foreach (Powerup p in powers)
             {
-                e.Graphics.FillRectangle(blockBrush, p.x, p.y, p.size, p.size);
+                e.Graphics.FillRectangle(powerupBrushes[p.appearance], p.x, p.y, p.size, p.size);
             }
         }
 
@@ -251,8 +258,18 @@ namespace BrickBreaker
             // check if player has collided with any powerups 
             foreach (Powerup p in powers)
             {
+                Rectangle powerRec = new Rectangle(p.x, p.y, p.size, p.size);
+                Rectangle paddleRec = new Rectangle(paddle.x, paddle.y, paddle.width, paddle.height);
+
                 // check for collision of powerup with paddle
                 p.PaddleCollision(paddle);
+
+                ////TO DO - Clean up this repeat code to remove the powerup////
+                if (powerRec.IntersectsWith(paddleRec))
+                {
+                    powers.Remove(p);
+                    break;
+                }
             }
 
             // remove blocks from power ups 
@@ -271,7 +288,7 @@ namespace BrickBreaker
                 OnEnd();
             }
         }
-        public void createPowerup(string powerName) //, int _xLocation, int _yLocation
+        public void createPowerup(string powerName, int x, int y, int size) 
         {
             #region Overall Notes
             /* Code written by Isaha Flinch.
@@ -283,8 +300,36 @@ namespace BrickBreaker
              */
             #endregion
 
+            //assign appearance
+            switch (powerName)
+            {
+                case "Ammo":
+                    appearance = 0;
+                    break;
+
+                case "ChugJug":
+                    appearance = 1;
+                    break;
+
+                case "Scar":
+                    appearance = 2;
+                    break;
+
+                case "Shotgun":
+                    appearance = 3;
+                    break;
+
+                case "RocketLauncher":
+                    appearance = 4;
+                    break;
+
+                case "InfinityGauntlet":
+                    appearance = 5;
+                    break;
+            }
+
             //create physical entity to for the player to collide with
-            Powerup powerUp = new Powerup(powerName);
+            Powerup powerUp = new Powerup(powerName, x, y, size, appearance);
             powers.Add(powerUp);
         }
     }
