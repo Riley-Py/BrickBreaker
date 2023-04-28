@@ -61,8 +61,18 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt; 
-        ///.
+
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BurbankBigCondensed_Black {
+            get {
+                object obj = ResourceManager.GetObject("BurbankBigCondensed_Black", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;/HighScore&gt;.
         /// </summary>
         internal static string HighScoreXML {
             get {

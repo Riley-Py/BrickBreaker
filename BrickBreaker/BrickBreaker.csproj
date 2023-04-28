@@ -148,9 +148,21 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\BurbankBigCondensed-Black.otf" />
     <None Include="Resources\menuScreenBackground.jpg" />
-    <None Include="bin\Debug\Resources\HighScoreXML.xml" />
-    <None Include="bin\Debug\Resources\LevelXML.xml" />
+
+    <Content Include="bin\Debug\Resources\HighScoreXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bin\Debug\Resources\LevelXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LevelXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HighScoreXML.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
