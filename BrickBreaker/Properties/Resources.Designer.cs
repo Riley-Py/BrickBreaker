@@ -61,6 +61,16 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BurbankBigCondensed_Black {
+            get {
+                object obj = ResourceManager.GetObject("BurbankBigCondensed_Black", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;/HighScore&gt;.
         /// </summary>
         internal static string HighScoreXML {
@@ -70,35 +80,10 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///
         ///&lt;Level&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;239&lt;/x&gt;
-        ///		&lt;y&gt;257&lt;/y&gt;
-        ///		&lt;width&gt;42&lt;/width&gt;
-        ///		&lt;height&gt;18&lt;/height&gt;
-        ///		&lt;color&gt;Gray&lt;/color&gt;
-        ///		&lt;powerup&gt;None&lt;/powerup&gt;
-        ///	&lt;/Brick&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;282&lt;/x&gt;
-        ///		&lt;y&gt;257&lt;/y&gt;
-        ///		&lt;width&gt;42&lt;/width&gt;
-        ///		&lt;height&gt;18&lt;/height&gt;
-        ///		&lt;color&gt;Gray&lt;/color&gt;
-        ///		&lt;powerup&gt;None&lt;/powerup&gt;
-        ///	&lt;/Brick&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;325&lt;/x&gt;
-        ///		&lt;y&gt;257&lt;/y&gt;
-        ///		&lt;width&gt;42&lt;/width&gt;
-        ///		&lt;height&gt;18&lt;/height&gt;
-        ///		&lt;color&gt;Gray&lt;/color&gt;
-        ///		&lt;powerup&gt;None&lt;/powerup&gt;
-        ///	&lt;/Brick&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;368&lt;/x&gt;
-        ///		&lt;y&gt;257&lt;/ [rest of string was truncated]&quot;;.
+        ///&lt;/Level&gt;.
         /// </summary>
         internal static string LevelXML {
             get {
