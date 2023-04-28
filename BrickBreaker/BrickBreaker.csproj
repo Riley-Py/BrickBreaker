@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\BurbankBigCondensed-Black.otf" />
     <None Include="Resources\menuScreenBackground.jpg" />
     <Content Include="bin\Debug\Resources\HighScoreXML.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -154,7 +155,6 @@
     <Content Include="bin\Debug\Resources\LevelXML.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-
     <Content Include="Resources\LevelXML.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
