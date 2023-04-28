@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
+
 namespace BrickBreaker.Screens
 {
     public partial class LevelDesignerScreen : UserControl
@@ -295,9 +296,16 @@ namespace BrickBreaker.Screens
                 "\n l: decrease health " +
                 "\n m/n: change the powerups " +
                 "\n Enter: save the file " +
-                "\n v: make this label visible/invisible";   
+                "\n v: make this label visible/invisible" +
+                "\n Arrow keys: move selected block" +
+                "\n Middle Click: select a block" +
+                "\n 1: Increases speed to move blocks with arrow keys" +
+                "\n 2: Decreases speed to move blocks with arrow keys" +
+                "\n Space: Changes on whether using right click adds/removes a block";   
             
             instructionLabel.Visible = !instructionLabel.Visible;
+
+           
         }
 
        
