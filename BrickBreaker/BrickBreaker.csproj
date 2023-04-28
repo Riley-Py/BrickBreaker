@@ -72,6 +72,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gun.cs" />
     <Compile Include="HighScore.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Powerup.cs" />
@@ -150,12 +151,6 @@
     <None Include="Resources\menuScreenBackground.jpg" />
     <None Include="bin\Debug\Resources\HighScoreXML.xml" />
     <None Include="bin\Debug\Resources\LevelXML.xml" />
-    <Content Include="Resources\LevelXML.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HighScoreXML.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

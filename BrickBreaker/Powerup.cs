@@ -18,15 +18,18 @@ namespace BrickBreaker
          * removed without use.
          */
         #endregion
-
         public string powerName;
-        public int x, y, ySpeed = 4, size = 20;
+        public int x, y, size, ySpeed = 4;
+        Bitmap powerSprite;
+        public int appearance;  //use for images later
 
-        public Powerup(string _powerName) //, int _xLocation, int _yLocation
+        public Powerup(string _powerName, int _xLocation, int _yLocation, int _size, int _appearance)
         {
             powerName = _powerName;
-            //x = _xLocation;
-            //y = _yLocation;
+            x = _xLocation;
+            y = _yLocation;
+            size = _size;
+            appearance = _appearance;
         }
 
         public void Move()
@@ -71,24 +74,23 @@ namespace BrickBreaker
 
                 //temporary machine gun that fires straight upwards
                 case "Scar":
-                    #region notes
-                    //create a gun class that stores which of the three guns are in use
-                    //have that gun class launch projectiles upwards
-                    //have code within the game that calls a move method for the gun bullets (so have a class for each type of bullet)
-                    //when the bullets collide with the blocks, have them remove a life from the block
-                    //have the weapon disappear after a few seconds
-
-                    //gun class(gun type), bullet class(bullet type(scar,shot,rpg))
-                    //gun class makes gun, which makes the bullets 
-                    #endregion
+                    //store which of the three guns are in use
+                    Gun gunSc = new Gun("Scar");
+                    GameScreen.guns.Add(gunSc);
                     break;
 
-                //temporary shotgun that fires straight upwards
+                //temporary shotgun that fires in a spread upwards
                 case "Shotgun":
+                    //store which of the three guns are in use
+                    Gun gunSh = new Gun("Shotgun");
+                    GameScreen.guns.Add(gunSh);
                     break;
 
                 //rocket launcher that fires straight upwards once, AOE attack
                 case "RocketLauncher":
+                    //store which of the three guns are in use
+                    Gun gunRL = new Gun("RocketLauncher");
+                    GameScreen.guns.Add(gunRL);
                     break;
 
                 //reduce half of the lives of each block
