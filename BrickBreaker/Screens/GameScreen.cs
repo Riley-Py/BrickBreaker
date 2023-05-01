@@ -84,6 +84,7 @@ namespace BrickBreaker
             int ySpeed = 6;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
+            ballList.Add(ball);
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
             
@@ -150,6 +151,10 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
+            if(!rightArrowDown && !leftArrowDown)
+            {
+                paddle.lastMove = "none";
+            }
             // Move ball 
             ball.Move(); 
 
@@ -232,7 +237,7 @@ namespace BrickBreaker
             }
 
             // Draws ball
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+            e.Graphics.FillRectangle(ballBrush, (int)ball.x, (int)ball.y, (int)ball.size, (int)ball.size);
 
             // Draws powerups
             foreach (Powerup p in powers)

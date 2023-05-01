@@ -5,6 +5,9 @@ namespace BrickBreaker
     public class Paddle
     {
         public int x, y, width, height, speed;
+        public  string lastMove = "none";
+        public double curve = 0.05;
+
         public Color colour;
 
         public Paddle(int _x, int _y, int _width, int _height, int _speed, Color _colour)
@@ -27,6 +30,7 @@ namespace BrickBreaker
             {
                 x += speed;
             }
+            lastMove = direction;
         }
     }
 }
