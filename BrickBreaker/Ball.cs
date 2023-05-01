@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,6 +9,8 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size, score;
         public Color colour;
+
+        List<Ball> ballList = new List<Ball>();
 
         public static Random rand = new Random();
 
@@ -49,6 +52,14 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(paddleRec))
             {
                 ySpeed *= -1;
+            }
+            if (ballRec.IntersectsWith(paddleRec) && p.width == 1)
+            {
+                xSpeed *= -1;
+            }
+            if (ballRec.IntersectsWith(paddleRec) && p.width == 80)
+            {
+                xSpeed *= -1;
             }
         }
 

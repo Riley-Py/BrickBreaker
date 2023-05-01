@@ -15,6 +15,7 @@ using System.Media;
 
 namespace BrickBreaker
 {
+
     public partial class GameScreen : UserControl
     {
         #region global values
@@ -46,7 +47,7 @@ namespace BrickBreaker
         ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
 
         #endregion
-
+        List<Ball> ballList = new List<Ball>();
         public GameScreen()
         {
             InitializeComponent();
@@ -157,8 +158,14 @@ namespace BrickBreaker
 
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
-            {
-                lives--;
+            { 
+                foreach (Ball bb in ballList)
+                {
+                    if (ballList.Count == 0)
+                    {
+                        lives--;
+                    }
+                }
 
                 // Moves the ball back to origin
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
