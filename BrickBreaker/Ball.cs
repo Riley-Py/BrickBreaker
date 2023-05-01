@@ -61,7 +61,12 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(paddleRec))
             {
-                if(p.lastMove == "right")
+                if(ySpeed > 0)
+                {
+                    y = p.y - size;
+                }
+                ySpeed *= -1;
+                if (p.lastMove == "right")
                 {
                     xSpeed += paddleMoveOffset;
                 }
@@ -69,7 +74,7 @@ namespace BrickBreaker
                 {
                     xSpeed -= paddleMoveOffset;
                 }
-                ySpeed *= -1;
+                
                 if (ballRec.IntersectsWith(leftPaddleRec))
                 {
                     if(xSpeed > 0)
