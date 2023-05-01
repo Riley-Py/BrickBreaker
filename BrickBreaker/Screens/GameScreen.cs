@@ -24,10 +24,9 @@ namespace BrickBreaker
 
         // Game values
         public static int lives;
-        public static int powerSize = 20;
 
         // Paddle and Ball objects
-        Paddle paddle;
+        public static Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
@@ -42,6 +41,7 @@ namespace BrickBreaker
 
         // Powerup variables
         int appearance;
+        public static int powerSize = 20;
         SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
         ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
 
@@ -232,6 +232,12 @@ namespace BrickBreaker
             {
                 e.Graphics.FillRectangle(powerupBrushes[p.appearance], p.x, p.y, p.size, p.size);
             }
+
+            // Draws guns
+            foreach (Gun g in guns)
+            {
+                e.Graphics.FillRectangle(paddleBrush, paddle.x + paddle.width / 2 - g.width / 2, paddle.y - 4*paddle.height, g.width, g.height);
+            }
         }
 
         public void runLoopPowerup()
@@ -281,11 +287,33 @@ namespace BrickBreaker
                 }
             }
 
+            // remove unused offscreen powerups
+            foreach (Powerup p in powers)
+            {
+                if (p.y > this.Height)
+                {
+                    powers.Remove(p);
+                        break;
+                }
+            }
+
             // end game if powerup causes it -- Repeat code from above that could be simplified
             if (blocks.Count == 0)
             {
                 gameTimer.Enabled = false;
                 OnEnd();
+            }
+
+            ////GUN CODE
+            //remove guns overtime
+            foreach (Gun g in guns)
+            {
+                g.lifeSpan--;
+                if (g.lifeSpan == 0)
+                {
+                    guns.Remove(g);
+                }
+                break;
             }
         }
         public void createPowerup(string powerName, int x, int y, int size) 

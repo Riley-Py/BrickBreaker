@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace BrickBreaker
 {
@@ -20,13 +21,15 @@ namespace BrickBreaker
 
         public string gunType;
         public int x, y, width, height;
+        public int lifeSpan;
 
         public Gun(string _gunType)
         {
             gunType = _gunType;
+            width = 30;
+            height = 60;
+            lifeSpan = 500;
         }
-        //have that gun class launch projectiles upwards
-        //have code within the game that calls a move method for the gun bullets (so have a class for each type of bullet)
         //when the bullets collide with the blocks, have them remove a life from the block
         //have the weapon disappear after a few seconds
 
@@ -34,16 +37,16 @@ namespace BrickBreaker
         //gun class makes gun, which makes the bullets 
         public void CreateGun()
         {
+            //create a rectangle to display gun
+            Rectangle gunRect = new Rectangle(GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2, GameScreen.paddle.y - 4 * GameScreen.paddle.height, width, height);
+
             //Select the gun type
             switch (gunType)
             {
-                case "":
-                    //Do Nothing
-                    break;
-
                 case "Scar":
-                    //create a rectangle to display gun
-                    //center it around player
+                    //assign its duration
+                    //lifeSpan = 500;
+
                     //have it shoot bullets
                     break;
 
