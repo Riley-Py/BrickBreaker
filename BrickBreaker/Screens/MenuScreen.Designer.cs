@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuScreen));
             this.playButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
@@ -41,13 +42,11 @@
             this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-
             this.playButton.Font = new System.Drawing.Font("Burbank Big Cd Bk", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.Black;
             this.playButton.Location = new System.Drawing.Point(601, 431);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(194, 77);
-
             this.playButton.TabIndex = 0;
             this.playButton.Text = "Play!";
             this.playButton.UseVisualStyleBackColor = false;
@@ -109,14 +108,13 @@
             this.levelDesignerButton.TabIndex = 2;
             this.levelDesignerButton.Text = "Level Designer";
             this.levelDesignerButton.UseVisualStyleBackColor = false;
-            //this.levelDesignerButton.Click += new System.EventHandler(this.levelDesignerButton_Click);
             // 
             // MenuScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::BrickBreaker.Properties.Resources.menuScreenBackground;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.modeSelector);
             this.Controls.Add(this.titleLabel);
