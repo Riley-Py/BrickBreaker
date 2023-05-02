@@ -16,9 +16,17 @@ namespace BrickBreaker
         public int y; 
         public int hp;
         public Color colour;
+        public Powerup powerup;
 
         public static Random rand = new Random();
 
+        public Block(int _x, int _y, int _hp, Color _colour, Powerup powerup)
+        {
+            x = _x;
+            y = _y;
+            hp = _hp;
+            colour = _colour;
+        }
         public Block(int _x, int _y, int _hp, Color _colour)
         {
             x = _x;
