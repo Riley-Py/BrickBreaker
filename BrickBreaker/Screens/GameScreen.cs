@@ -25,16 +25,16 @@ namespace BrickBreaker
 
         // Game values
         public static int lives;
-        public static int powerSize = 20;
 
         // Paddle and Ball objects
-        Paddle paddle;
+        public static Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
         public static List<Block> blocks = new List<Block>();
         public static List<Powerup> powers = new List<Powerup>();
         public static List<Gun> guns = new List<Gun>();
+        public static List<Bullet> bullets = new List<Bullet>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -43,9 +43,10 @@ namespace BrickBreaker
 
         // Powerup variables
         int appearance;
+        public static int powerSize = 20;
         SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
         ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
-
+        
         #endregion
         List<Ball> ballList = new List<Ball>();
         public GameScreen()
@@ -191,7 +192,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("Ammo", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+                    createPowerup("Shotgun", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
                     blocks.Remove(b);
 
@@ -244,6 +245,18 @@ namespace BrickBreaker
             {
                 e.Graphics.FillRectangle(powerupBrushes[p.appearance], p.x, p.y, p.size, p.size);
             }
+
+            // Draws guns
+            foreach (Gun g in guns)
+            {
+                e.Graphics.FillRectangle(paddleBrush, g.x, g.y, g.width, g.height);
+            }
+
+            // Draws bullets
+            foreach (Bullet b in bullets)
+            {
+                e.Graphics.FillRectangle(paddleBrush, b.x, b.y, b.size, b.size);
+            }
         }
 
         public void runLoopPowerup()
@@ -265,6 +278,12 @@ namespace BrickBreaker
             foreach (Powerup p in powers)
             {
                 p.Move();
+            }
+
+            // move the bullets 
+            foreach (Bullet b in bullets)
+            {
+                b.Move();
             }
 
             // check if player has collided with any powerups 
@@ -293,11 +312,39 @@ namespace BrickBreaker
                 }
             }
 
+            // remove unused offscreen powerups
+            foreach (Powerup p in powers)
+            {
+                if (p.y > this.Height)
+                {
+                    powers.Remove(p);
+                        break;
+                }
+            }
+
             // end game if powerup causes it -- Repeat code from above that could be simplified
             if (blocks.Count == 0)
             {
                 gameTimer.Enabled = false;
                 OnEnd();
+            }
+
+            ////GUN CODE
+            foreach (Gun g in guns)
+            {
+                //move to follow player
+                g.Move();
+
+                //decrease life and remove
+                g.lifeSpan--;
+                if (g.lifeSpan == 0)
+                {
+                    guns.Remove(g);
+                }
+
+                //fire if possible
+                g.Shoot(g.gunType);
+                break;
             }
         }
         public void createPowerup(string powerName, int x, int y, int size) 

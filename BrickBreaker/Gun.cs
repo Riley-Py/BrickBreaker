@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace BrickBreaker
 {
@@ -20,34 +21,27 @@ namespace BrickBreaker
 
         public string gunType;
         public int x, y, width, height;
+        public int lifeSpan;
 
         public Gun(string _gunType)
         {
             gunType = _gunType;
-        }
-        //have that gun class launch projectiles upwards
-        //have code within the game that calls a move method for the gun bullets (so have a class for each type of bullet)
-        //when the bullets collide with the blocks, have them remove a life from the block
-        //have the weapon disappear after a few seconds
+            width = 30;
+            height = 60;
+            x = GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2;
+            y = GameScreen.paddle.y - 4 * GameScreen.paddle.height;
 
-        //gun class(gun type), bullet class(bullet type(scar,shot,rpg))
-        //gun class makes gun, which makes the bullets 
-        public void CreateGun()
-        {
             //Select the gun type
             switch (gunType)
             {
-                case "":
-                    //Do Nothing
-                    break;
-
                 case "Scar":
-                    //create a rectangle to display gun
-                    //center it around player
-                    //have it shoot bullets
+                    //assign its duration
+                    lifeSpan = 240;
                     break;
 
                 case "Shotgun":
+                    //assign its duration
+                    lifeSpan = 240;
                     break;
 
                 case "RocketLauncher":
@@ -55,5 +49,38 @@ namespace BrickBreaker
             }
         }
 
+        public void Shoot(string gunType)
+        {
+            switch (gunType)
+            {
+                case "Scar":
+                    //have it shoot bullets
+                    if (lifeSpan % 30 == 0)
+                    {
+                        Bullet bulletSc = new Bullet("Scar", x, width, y);
+                        GameScreen.bullets.Add(bulletSc);
+                    }
+                    break;
+
+                case "Shotgun":
+                    //have it shoot bullets
+                    if (lifeSpan >= 50 && lifeSpan < 55)
+                    {
+                        Bullet bulletSh = new Bullet("Shotgun", x, width, y);
+                        GameScreen.bullets.Add(bulletSh);
+                    }
+                    break;
+
+                case "RocketLauncher":
+                    break;
+            }
+        }
+
+
+        public void Move()
+        {
+            x = GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2;
+            y = GameScreen.paddle.y - 4 * GameScreen.paddle.height;
+        }
     }
 }
