@@ -138,8 +138,9 @@ namespace BrickBreaker.Screens
         /// <returns></returns>
         private int deltaHP(int by) 
         {
-            int hp = currentHP += by;
             int maxHP = 5;
+            int hp = currentHP += by;
+              
             if(hp < 1)
             {
                 hp = maxHP;
@@ -148,6 +149,7 @@ namespace BrickBreaker.Screens
             {
                 hp = 1;
             }
+            hpLabel.Text = $"HP is: {currentHP}";
             return hp;
         }
 
