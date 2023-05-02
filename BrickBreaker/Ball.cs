@@ -55,6 +55,23 @@ namespace BrickBreaker
             return blockRec.IntersectsWith(ballRec);
         }
 
+        private void BlockUnintersectorinator(int bX, int bY, int bW, int bH)
+        {
+           // int realX = x + width
+            Point[] corners =
+            {
+                new Point(bX, bY), //topleft
+                new Point(bX + bW, bY), //topright
+                new Point(bX, bY + bH), //bottomleft
+                new Point(bX + bW, bY)  //bottomright
+            }; 
+            int[] distanceSq = new int[4];
+            for(int i = 0; i < corners.Length; i++)
+            {
+                //distanceSq[i] = Math.Abs()
+            }
+        }
+
         public void PaddleCollision(Paddle p)
         {
             Rectangle ballRec = DoubleRectangle(x, y, size, size);
