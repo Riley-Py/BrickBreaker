@@ -28,29 +28,20 @@ namespace BrickBreaker
             gunType = _gunType;
             width = 30;
             height = 60;
-            lifeSpan = 500;
-        }
-        //when the bullets collide with the blocks, have them remove a life from the block
-        //have the weapon disappear after a few seconds
-
-        //gun class(gun type), bullet class(bullet type(scar,shot,rpg))
-        //gun class makes gun, which makes the bullets 
-        public void CreateGun()
-        {
-            //create a rectangle to display gun
-            Rectangle gunRect = new Rectangle(GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2, GameScreen.paddle.y - 4 * GameScreen.paddle.height, width, height);
+            x = GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2;
+            y = GameScreen.paddle.y - 4 * GameScreen.paddle.height;
 
             //Select the gun type
             switch (gunType)
             {
                 case "Scar":
                     //assign its duration
-                    //lifeSpan = 500;
-
-                    //have it shoot bullets
+                    lifeSpan = 240;
                     break;
 
                 case "Shotgun":
+                    //assign its duration
+                    lifeSpan = 240;
                     break;
 
                 case "RocketLauncher":
@@ -58,5 +49,38 @@ namespace BrickBreaker
             }
         }
 
+        public void Shoot(string gunType)
+        {
+            switch (gunType)
+            {
+                case "Scar":
+                    //have it shoot bullets
+                    if (lifeSpan % 30 == 0)
+                    {
+                        Bullet bulletSc = new Bullet("Scar", x, width, y);
+                        GameScreen.bullets.Add(bulletSc);
+                    }
+                    break;
+
+                case "Shotgun":
+                    //have it shoot bullets
+                    if (lifeSpan >= 50 && lifeSpan < 55)
+                    {
+                        Bullet bulletSh = new Bullet("Shotgun", x, width, y);
+                        GameScreen.bullets.Add(bulletSh);
+                    }
+                    break;
+
+                case "RocketLauncher":
+                    break;
+            }
+        }
+
+
+        public void Move()
+        {
+            x = GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2;
+            y = GameScreen.paddle.y - 4 * GameScreen.paddle.height;
+        }
     }
 }

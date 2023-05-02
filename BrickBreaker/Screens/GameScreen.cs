@@ -33,6 +33,7 @@ namespace BrickBreaker
         public static List<Block> blocks = new List<Block>();
         public static List<Powerup> powers = new List<Powerup>();
         public static List<Gun> guns = new List<Gun>();
+        public static List<Bullet> bullets = new List<Bullet>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -44,7 +45,7 @@ namespace BrickBreaker
         public static int powerSize = 20;
         SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
         ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
-
+        
         #endregion
 
         public GameScreen()
@@ -179,7 +180,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+                    createPowerup("Shotgun", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
                     blocks.Remove(b);
 
@@ -236,7 +237,13 @@ namespace BrickBreaker
             // Draws guns
             foreach (Gun g in guns)
             {
-                e.Graphics.FillRectangle(paddleBrush, paddle.x + paddle.width / 2 - g.width / 2, paddle.y - 4*paddle.height, g.width, g.height);
+                e.Graphics.FillRectangle(paddleBrush, g.x, g.y, g.width, g.height);
+            }
+
+            // Draws bullets
+            foreach (Bullet b in bullets)
+            {
+                e.Graphics.FillRectangle(paddleBrush, b.x, b.y, b.size, b.size);
             }
         }
 
@@ -259,6 +266,12 @@ namespace BrickBreaker
             foreach (Powerup p in powers)
             {
                 p.Move();
+            }
+
+            // move the bullets 
+            foreach (Bullet b in bullets)
+            {
+                b.Move();
             }
 
             // check if player has collided with any powerups 
@@ -305,14 +318,20 @@ namespace BrickBreaker
             }
 
             ////GUN CODE
-            //remove guns overtime
             foreach (Gun g in guns)
             {
+                //move to follow player
+                g.Move();
+
+                //decrease life and remove
                 g.lifeSpan--;
                 if (g.lifeSpan == 0)
                 {
                     guns.Remove(g);
                 }
+
+                //fire if possible
+                g.Shoot(g.gunType);
                 break;
             }
         }
