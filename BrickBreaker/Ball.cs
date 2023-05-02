@@ -44,6 +44,10 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(blockRec))
             {
+                if (ySpeed >0)
+                {
+                    x = b.x - 0;
+                }
                 ySpeed *= -1;
                 score++;
             }
