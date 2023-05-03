@@ -41,35 +41,92 @@ namespace BrickBreaker
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = DoubleRectangle(x, y, size, size);
-
-            if (ballRec.IntersectsWith(blockRec))
+            bool intersects = blockRec.IntersectsWith(ballRec);
+            if (intersects)
             {
-                if (ySpeed >0)
-                {
-                    x = b.x - 0;
-                }
-                ySpeed *= -1;
-                score++;
-            }
+                BlockUnintersectorinator(b.x, b.y, b.width, b.height);
 
-            return blockRec.IntersectsWith(ballRec);
+            }
+            //if (ballRec.IntersectsWith(blockRec))
+            //{
+            //    if (ySpeed > 0)
+            //    {
+            //        x = b.x - 0;
+            //    }
+            //    ySpeed *= -1;
+            //    score++;
+            //}
+
+            return intersects;
         }
 
         private void BlockUnintersectorinator(int bX, int bY, int bW, int bH)
         {
-           // int realX = x + width
+            int realX = (int)(x + size);
+            int realY = (int)(y + size);
+
+
+            Point lastBall = new Point((int)(realX - xSpeed), (int)(realY-ySpeed));
+
             Point[] corners =
             {
                 new Point(bX, bY), //topleft
                 new Point(bX + bW, bY), //topright
                 new Point(bX, bY + bH), //bottomleft
                 new Point(bX + bW, bY)  //bottomright
-            }; 
+            };
             int[] distanceSq = new int[4];
-            for(int i = 0; i < corners.Length; i++)
+            for (int i = 0; i < corners.Length; i++)
             {
-                //distanceSq[i] = Math.Abs()
+                distanceSq[i] = Math.Abs(realX - corners[i].X) + Math.Abs(realY - corners[i].Y);
             }
+            int closestIndex = 0;
+
+            for (int i = 0; i < distanceSq.Length; i++)
+            {
+                if (distanceSq[i] < distanceSq[closestIndex])
+                {
+                    closestIndex = i;
+                }
+            }
+            int secondClosestIndex = closestIndex == 0 ? 1 : 0;
+            for (int i = 0; i < distanceSq.Length; i++)
+            {
+                if (distanceSq[i] < distanceSq[secondClosestIndex] && i != closestIndex)
+                {
+                    secondClosestIndex = i;
+                }
+            }
+            // 0 : top left
+            // 1 : top right
+            // 2: bottom left
+            // 3: bottom right
+
+            int cX = corners[closestIndex].X;
+            int cY = corners[closestIndex].Y;
+
+            int sumOfIndexes = closestIndex + secondClosestIndex;
+            if (sumOfIndexes == 1) // ball hits top of block
+            {
+                y = cY - (2 * size);
+                ySpeed *= -1;
+            }
+            else if (sumOfIndexes == 5) // bottom
+            {
+                y = cY;
+                ySpeed *= -1;
+            }
+            else if (sumOfIndexes == 4) // right
+            {
+                x = cX;
+                xSpeed *= -1;
+            }
+            else if (sumOfIndexes == 3) // left
+            {
+                x = cX - (2 * size);
+                xSpeed *= -1;
+            }
+
         }
 
         public void PaddleCollision(Paddle p)
@@ -78,11 +135,11 @@ namespace BrickBreaker
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             Rectangle leftPaddleRec = new Rectangle(p.x, p.y, p.width / 2, p.height);
-            Rectangle rightPaddleRec = new Rectangle(p.x + (p.width/2), p.y, p.width / 2, p.height);
+            Rectangle rightPaddleRec = new Rectangle(p.x + (p.width / 2), p.y, p.width / 2, p.height);
 
             if (ballRec.IntersectsWith(paddleRec))
             {
-                if(ySpeed > 0)
+                if (ySpeed > 0)
                 {
                     y = p.y - size;
                 }
@@ -95,18 +152,18 @@ namespace BrickBreaker
                 {
                     xSpeed -= paddleMoveOffset;
                 }
-                
+
                 if (ballRec.IntersectsWith(leftPaddleRec))
                 {
-                    if(xSpeed > 0)
+                    if (xSpeed > 0)
                     {
-                        xSpeed *= 1+p.curve;
+                        xSpeed *= 1 + p.curve;
                     }
                     else
                     {
                         xSpeed *= 1 - p.curve;
                     }
-                    
+
                 }
                 if (ballRec.IntersectsWith(rightPaddleRec))
                 {
@@ -119,25 +176,25 @@ namespace BrickBreaker
                         xSpeed *= 1 + p.curve;
                     }
                 }
-                if(xSpeed > speedCap)
+                if (xSpeed > speedCap)
                 {
                     xSpeed = speedCap;
                 }
-                else if(xSpeed < -speedCap)
+                else if (xSpeed < -speedCap)
                 {
                     xSpeed = -speedCap;
                 }
-                else if(xSpeed < speedMin && xSpeed >= 0)
+                else if (xSpeed < speedMin && xSpeed >= 0)
                 {
                     xSpeed = speedMin;
                 }
-                else if(xSpeed > -speedMin && xSpeed < 0)
+                else if (xSpeed > -speedMin && xSpeed < 0)
                 {
                     xSpeed = -speedMin;
                 }
-                
+
             }
-            
+
         }
 
         public void WallCollision(UserControl UC)

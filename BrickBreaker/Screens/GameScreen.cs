@@ -192,7 +192,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("Shotgun", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
                     blocks.Remove(b);
 
