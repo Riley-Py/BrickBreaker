@@ -1,0 +1,26 @@
+﻿<Level>
+  <Brick>
+    <x>352</x>
+    <y>252</y>
+    <width>42</width>
+    <height>18</height>
+    <color>Gray</color>
+    <powerup />
+  </Brick>
+  <Brick>
+    <x>403</x>
+    <y>94</y>
+    <width>42</width>
+    <height>18</height>
+    <color>Gray</color>
+    <powerup />
+  </Brick>
+  <Brick>
+    <x>538</x>
+    <y>243</y>
+    <width>42</width>
+    <height>18</height>
+    <color>Gray</color>
+    <powerup />
+  </Brick>
+</Level>

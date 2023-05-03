@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Drawing.Text;
+using System.IO;
 
 
 namespace BrickBreaker.Screens
@@ -119,31 +120,51 @@ namespace BrickBreaker.Screens
         private void generateLevel()
         {
             //TODO: being able to name levels and saving each unique level into resources folder
-            XmlWriter writer = XmlWriter.Create("Resources/LevelXML.xml", null);
 
-            writer.WriteStartElement("Level");
-            foreach (DesignerBrick b in bricks)
+            SaveFileDialog dialogue = new SaveFileDialog();
+            dialogue.Filter = "XML (*.xml)|*.xml|All files (*.*)|*.*";
+            dialogue.Title = "Save as an XML";
+            dialogue.FilterIndex = 2;
+
+            if (dialogue.ShowDialog() == DialogResult.OK)
             {
-                writer.WriteStartElement("Brick");
-                writer.WriteElementString("x",$"{b.x}");
-                writer.WriteElementString("y", $"{b.y}");
-                writer.WriteElementString("width", $"{b.width}");
-                writer.WriteElementString("height", $"{b.height}");
-                writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
-                if(b.powerup != Powerup.None)
+                          
+                using (XmlTextWriter writer = new XmlTextWriter(dialogue.FileName, System.Text.Encoding.UTF8))
                 {
-                    writer.WriteElementString("powerup", $"{b.powerup}");
+                    writer.Formatting = Formatting.Indented;
+                    writer.WriteStartElement("Level");
+
+                    foreach (DesignerBrick b in bricks)
+                    {
+                        writer.WriteStartElement("Brick");
+                        writer.WriteElementString("x", $"{b.x}");
+                        writer.WriteElementString("y", $"{b.y}");
+                        writer.WriteElementString("width", $"{b.width}");
+                        writer.WriteElementString("height", $"{b.height}");
+                        writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
+                        if (b.powerup != Powerup.None)
+                        {
+                            writer.WriteElementString("powerup", $"{b.powerup}");
+
+                        }
+                        else
+                        {
+                            writer.WriteElementString("powerup", $"");
+
+                        }
+                        writer.WriteEndElement();
+                    }
+
+                    writer.Close();
 
                 }
-                else
-                {
-                    writer.WriteElementString("powerup", $"");
 
-                }
-                writer.WriteEndElement();
             }
+                
 
-            writer.Close();
+
+
+            
         }
         /// <summary>
         /// Adds/subtracts HP
@@ -327,9 +348,6 @@ namespace BrickBreaker.Screens
 
             deleteLabel.Text = $"Delete: {delete}";
             
-
-            
-
             
 
 
