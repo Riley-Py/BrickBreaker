@@ -326,7 +326,7 @@ namespace BrickBreaker.Screens
             Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
 
             deleteLabel.Text = $"Delete: {delete}";
-            hpLabel.Text = $"HP is 1";
+            
 
             
 
