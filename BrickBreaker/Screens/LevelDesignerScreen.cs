@@ -98,7 +98,19 @@ namespace BrickBreaker.Screens
         {
             foreach (DesignerBrick brick in bricks)
             {
-                e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width/2, brick.y - brick.height/2, brick.width, brick.height);
+               
+
+                try {
+                    e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+                    e.Graphics.DrawImage(brick.powerupImage, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+                   
+                }
+                catch
+                {
+                    e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+
+                }
+              
             }
         }
 
@@ -149,7 +161,7 @@ namespace BrickBreaker.Screens
             {
                 hp = 1;
             }
-            hpLabel.Text = $"HP is: {currentHP}";
+            hpLabel.Text = $"HP is: {hp}";
             return hp;
         }
 
@@ -309,9 +321,10 @@ namespace BrickBreaker.Screens
         private void RileyFunc()
         {
             Form1.loadingFonts("burbank.otf", 18, instructionLabel);
-            Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel);
+            Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
 
             deleteLabel.Text = $"Delete: {delete}";
+            hpLabel.Text = $"HP is 1";
 
             
 
@@ -330,7 +343,7 @@ namespace BrickBreaker.Screens
                 "\n WASD: move position of block position to place " +
                 "\n r: rotate " +
                 "\n p: increase health " +
-                "\n l: decrease health " +
+                "\n L: decrease health " +
                 "\n m/n: change the powerups " +
                 "\n Enter: save the file " +
                 "\n v: make this label visible/invisible" +

@@ -38,7 +38,8 @@
             // powerUpLabel
             // 
             this.powerUpLabel.AutoSize = true;
-            this.powerUpLabel.Location = new System.Drawing.Point(535, 495);
+            this.powerUpLabel.ForeColor = System.Drawing.Color.White;
+            this.powerUpLabel.Location = new System.Drawing.Point(434, 492);
             this.powerUpLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.powerUpLabel.Name = "powerUpLabel";
             this.powerUpLabel.Size = new System.Drawing.Size(33, 13);
@@ -61,11 +62,11 @@
             // replaceLabel
             // 
             this.replaceLabel.AutoSize = true;
-            this.replaceLabel.Font = new System.Drawing.Font("Burbank Big Cd Bk", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replaceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replaceLabel.ForeColor = System.Drawing.Color.White;
             this.replaceLabel.Location = new System.Drawing.Point(13, 492);
             this.replaceLabel.Name = "replaceLabel";
-            this.replaceLabel.Size = new System.Drawing.Size(81, 16);
+            this.replaceLabel.Size = new System.Drawing.Size(112, 20);
             this.replaceLabel.TabIndex = 1;
             this.replaceLabel.Text = "replace:false";
             // 
@@ -83,6 +84,7 @@
             // hpLabel
             // 
             this.hpLabel.AutoSize = true;
+            this.hpLabel.ForeColor = System.Drawing.Color.White;
             this.hpLabel.Location = new System.Drawing.Point(338, 492);
             this.hpLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.hpLabel.Name = "hpLabel";
@@ -100,7 +102,7 @@
             this.Controls.Add(this.instructionLabel);
             this.Controls.Add(this.replaceLabel);
             this.Controls.Add(this.powerUpLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LevelDesignerScreen";
             this.Size = new System.Drawing.Size(853, 528);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.LevelDesignerScreen_Paint);
