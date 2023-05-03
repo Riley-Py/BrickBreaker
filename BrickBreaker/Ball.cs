@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace BrickBreaker
@@ -37,6 +38,15 @@ namespace BrickBreaker
         {
             return new Rectangle((int)x, (int)y, (int)width, (int)height);
         }
+
+        private Point deltaPoint(Point p1, Point p2)
+        {
+            return new Point(Math.Abs(p2.X - p1.X), Math.Abs(p2.Y - p1.Y));
+        }
+        private double distSq(Point p1, Point p2)
+        {
+            return Math.Abs(p2.X - p1.X) + Math.Abs(p2.Y - p1.Y);
+        }
         public bool BlockCollision(Block b)
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
@@ -66,15 +76,16 @@ namespace BrickBreaker
             int realY = (int)(y + size);
 
 
-            Point lastBall = new Point((int)(realX - xSpeed), (int)(realY-ySpeed));
+            Point ballPoint = new Point((realX), (realY));
 
             Point[] corners =
             {
                 new Point(bX, bY), //topleft
                 new Point(bX + bW, bY), //topright
                 new Point(bX, bY + bH), //bottomleft
-                new Point(bX + bW, bY)  //bottomright
+                new Point(bX + bW, bY + bH)  //bottomright
             };
+
             int[] distanceSq = new int[4];
             for (int i = 0; i < corners.Length; i++)
             {
@@ -89,42 +100,74 @@ namespace BrickBreaker
                     closestIndex = i;
                 }
             }
-            int secondClosestIndex = closestIndex == 0 ? 1 : 0;
-            for (int i = 0; i < distanceSq.Length; i++)
-            {
-                if (distanceSq[i] < distanceSq[secondClosestIndex] && i != closestIndex)
-                {
-                    secondClosestIndex = i;
-                }
-            }
+
+            
+
+            int cX = corners[closestIndex].X;
+            int cY = corners[closestIndex].Y;
+            Point deltaCorner = deltaPoint(corners[closestIndex], ballPoint);
             // 0 : top left
             // 1 : top right
             // 2: bottom left
             // 3: bottom right
-
-            int cX = corners[closestIndex].X;
-            int cY = corners[closestIndex].Y;
-
-            int sumOfIndexes = closestIndex + secondClosestIndex;
-            if (sumOfIndexes == 1) // ball hits top of block
+            if (closestIndex == 0) 
             {
-                y = cY - (2 * size);
-                ySpeed *= -1;
+                if(deltaCorner.X < deltaCorner.Y) //top
+                {
+                    y = cY - (2 * size);
+                    ySpeed *= -1;
+                }
+
+                else //left
+                {
+                    x = cX - (2 * size);
+                    xSpeed *= -1;
+                }
+                
             }
-            else if (sumOfIndexes == 5) // bottom
+            else if (closestIndex == 1) // 
             {
+                if (deltaCorner.X < deltaCorner.Y) //top
+                {
+                    y = cY - (2 * size);
+                    ySpeed *= -1;
+                }
+
+                else //right
+                {
+                    x = cX;
+                    xSpeed *= -1;
+                }
                 y = cY;
                 ySpeed *= -1;
             }
-            else if (sumOfIndexes == 4) // right
+            else if (closestIndex == 2) 
             {
-                x = cX;
-                xSpeed *= -1;
+                if (deltaCorner.X < deltaCorner.Y) //bottom
+                {
+                    y = cY;
+                    ySpeed *= -1;
+                }
+
+                else //left
+                {
+                    x = cX - (2 * size);
+                    xSpeed *= -1;
+                }
             }
-            else if (sumOfIndexes == 3) // left
+            else if (closestIndex == 3) 
             {
-                x = cX - (2 * size);
-                xSpeed *= -1;
+                if (deltaCorner.X < deltaCorner.Y) //bottom
+                {
+                    y = cY;
+                    ySpeed *= -1;
+                }
+
+                else //right
+                {
+                    x = cX;
+                    xSpeed *= -1;
+                }
             }
 
         }
