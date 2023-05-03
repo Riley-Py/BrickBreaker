@@ -64,7 +64,7 @@ namespace BrickBreaker
 
                 case "Shotgun":
                     //have it shoot bullets
-                    if (lifeSpan >= 50 && lifeSpan < 55)
+                    if (lifeSpan >= 50 && lifeSpan < 55) 
                     {
                         Bullet bulletSh = new Bullet("Shotgun", x, width, y);
                         GameScreen.bullets.Add(bulletSh);

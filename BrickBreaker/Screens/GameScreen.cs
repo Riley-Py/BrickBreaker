@@ -32,6 +32,7 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         public static List<Block> blocks = new List<Block>();
+        public static List<Ball> ballList = new List<Ball>();
         public static List<Powerup> powers = new List<Powerup>();
         public static List<Gun> guns = new List<Gun>();
         public static List<Bullet> bullets = new List<Bullet>();
@@ -46,9 +47,7 @@ namespace BrickBreaker
         public static int powerSize = 20;
         SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
         ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
-        
-        #endregion
-        List<Ball> ballList = new List<Ball>();
+                #endregion
         public GameScreen()
         {
             InitializeComponent();
@@ -62,6 +61,9 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+            // reset powerup code
+            onStartPowerup();
+
             //set life counter
             lives = 3;
 
@@ -156,6 +158,7 @@ namespace BrickBreaker
             {
                 paddle.lastMove = "none";
             }
+
             // Move ball 
             ball.Move(); 
 
@@ -335,18 +338,58 @@ namespace BrickBreaker
                 //move to follow player
                 g.Move();
 
+                //fire if possible
+                g.Shoot(g.gunType);
+
                 //decrease life and remove
                 g.lifeSpan--;
                 if (g.lifeSpan == 0)
                 {
                     guns.Remove(g);
+                    break;
                 }
+            }
 
-                //fire if possible
-                g.Shoot(g.gunType);
-                break;
+            // check if bullet hit block
+            try
+            {
+                for (int i = 0; i < bullets.Count; i++)
+                {
+                    foreach (Block b in blocks)
+                    {
+                        if (bullets[i].Collision(b) == true)
+                        {
+                            //remove lives from blocks
+                            b.hp--;
+
+                            //add powerup created from bullet
+                            createPowerup("Shotgun", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
+                            ////ANOTHER ISSUE FOR BALL GUY, THE BALL DELETES BRICKS INSTEAD OF TAKING A LIFE
+
+                            //remove bullets upon collison
+                            bullets.RemoveAt(i);
+
+                            if (bullets.Count == 0)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch {  } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and ball hit a block at the same time
+
+            // remove offscreen bullets
+            foreach (Bullet b in bullets)
+            {
+                if (b.y < -50)
+                {
+                    bullets.Remove(b);
+                    break;
+                }
             }
         }
+
         public void createPowerup(string powerName, int x, int y, int size) 
         {
             #region Overall Notes
@@ -390,6 +433,24 @@ namespace BrickBreaker
             //create physical entity to for the player to collide with
             Powerup powerUp = new Powerup(powerName, x, y, size, appearance);
             powers.Add(powerUp);
+        }
+
+        public void onStartPowerup()
+        {
+            #region Overall Notes
+            /* Code written by Isaha Flinch.
+             * This code exists to create powerups for player to use.  The powerups
+             * are stored with the data of a block and are generated upon that block's 
+             * destruction.  The powerup will fall towards the player slowly.  If 
+             * collected, the powerup will be given.  Otherwise the powerup will be 
+             * removed without use.
+             */
+            #endregion
+
+            powers.Clear();
+            bullets.Clear();
+            ballList.Clear();
+            guns.Clear();
         }
     }
 }

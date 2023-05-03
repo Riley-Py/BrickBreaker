@@ -55,11 +55,8 @@ namespace BrickBreaker
             {
                 //add ball
                 case "Ammo":
-                    #region notes
-                    //add a ball to the game
-                    //store the ball within a list
-                    //only take a life from the player if the balls in that list = 0
-                    #endregion
+                    Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y + GameScreen.paddle.height/2, 6, 6, 20);
+                    GameScreen.ballList.Add(ball);
                     break;
 
                 //add extra life, to a maximum of one extra life
