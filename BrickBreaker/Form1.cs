@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Drawing.Text;
-
+using System.Runtime.CompilerServices;
 
 namespace BrickBreaker
 {
@@ -18,7 +18,9 @@ namespace BrickBreaker
         List<HighScore> highScore = new List<HighScore>();
 
         public static int score;
-        
+
+       
+
 
         public Form1()
         {
@@ -26,6 +28,7 @@ namespace BrickBreaker
             HighScore high = new HighScore("23", "Logan");
             highScore.Add(high);
             LoganCode();
+            
             //LoganSaveHS();
             //LoganLoadHS();
         }
@@ -123,10 +126,14 @@ namespace BrickBreaker
 
             fontCollection.AddFontFile(name);
 
+            Font font = new Font(fontCollection.Families[0], size);
+
             foreach (Label label in labels)
             {
-                label.Font = new Font(fontCollection.Families[0], size);
-
+              
+               label.Font = font;
+                
+               
             }
             
         }
@@ -140,11 +147,14 @@ namespace BrickBreaker
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
+
             fontCollection.AddFontFile(name);
+
+            Font font = new Font(fontCollection.Families[0], size);
 
             foreach (Button button in buttons)
             {
-                button.Font = new Font(fontCollection.Families[0], size);
+                button.Font = font;
             }
         }
         /// <summary>
@@ -159,7 +169,9 @@ namespace BrickBreaker
 
             fontCollection.AddFontFile(name);
 
-            combo.Font = new Font(fontCollection.Families[0], size);
+            Font font = new Font(fontCollection.Families[0], size);
+
+            combo.Font = font;
         }
 
     }

@@ -155,10 +155,22 @@
     <None Include="Resources\menuScreenBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HighScoreXML.xml" />
+    <None Include="Resources\thanos.png" />
+    <None Include="Resources\shotgun.png" />
+    <None Include="Resources\scar.png" />
     <None Include="Resources\rocketLauncher.png" />
     <None Include="Resources\chugJugEdited.png" />
     <None Include="Resources\ammoBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HighScoreXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LevelXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

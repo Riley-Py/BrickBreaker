@@ -58,6 +58,7 @@ namespace BrickBreaker.Screens
         {
             Powerup power = powerup;
             
+            //Add more powerups as needed (modify the enum list in level designer, however)
             switch (power)
             {
                 case Powerup.Ammo:
@@ -66,6 +67,12 @@ namespace BrickBreaker.Screens
                     return Properties.Resources.chugJugEdited;
                 case Powerup.RocketLauncher:
                      return Properties.Resources.rocketLauncher;
+                case Powerup.Scar:
+                    return Properties.Resources.scar;
+                case Powerup.Shotgun:
+                    return Properties.Resources.shotgun;
+                case Powerup.InfinityGauntlet:
+                    return Properties.Resources.thanos;
 
             }
             return null;
