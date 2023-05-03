@@ -80,6 +80,11 @@
     <Compile Include="Powerup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Screens\DesignerBrick.cs" />
     <Compile Include="Screens\LevelDesignerScreen.cs">
       <SubType>UserControl</SubType>
@@ -104,14 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Screens\LevelDesignerScreen.resx">
       <DependentUpon>LevelDesignerScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,18 +150,29 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\menuScreenBackground.jpg" />
-    <Content Include="bin\Debug\Resources\HighScoreXML.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Resources\LevelXML.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HighScoreXML.xml" />
+    <None Include="Resources\menuScreenBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thanos.png" />
+    <None Include="Resources\shotgun.png" />
+    <None Include="Resources\scar.png" />
+    <None Include="Resources\rocketLauncher.png" />
+    <None Include="Resources\chugJugEdited.png" />
+    <None Include="Resources\ammoBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HighScoreXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LevelXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

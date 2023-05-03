@@ -61,19 +61,27 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
-
-
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] BurbankBigCondensed_Black {
+        internal static System.Drawing.Bitmap ammoBox {
             get {
-                object obj = ResourceManager.GetObject("BurbankBigCondensed_Black", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("ammoBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;/HighScore&gt;.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chugJugEdited {
+            get {
+                object obj = ResourceManager.GetObject("chugJugEdited", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;/HighScore&gt;.
         /// </summary>
         internal static string HighScoreXML {
             get {
@@ -99,6 +107,46 @@ namespace BrickBreaker.Properties {
         internal static System.Drawing.Bitmap menuScreenBackground {
             get {
                 object obj = ResourceManager.GetObject("menuScreenBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rocketLauncher {
+            get {
+                object obj = ResourceManager.GetObject("rocketLauncher", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scar {
+            get {
+                object obj = ResourceManager.GetObject("scar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shotgun {
+            get {
+                object obj = ResourceManager.GetObject("shotgun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thanos {
+            get {
+                object obj = ResourceManager.GetObject("thanos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
