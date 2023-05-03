@@ -101,17 +101,17 @@ namespace BrickBreaker.Screens
             foreach (DesignerBrick brick in bricks)
             {
                
-
-                try {
-                    e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
-                    e.Graphics.DrawImage(brick.powerupImage, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
-                   
-                }
-                catch
+                if(brick.powerup == Powerup.None)
                 {
                     e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
 
                 }
+                else
+                {
+                    e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+                    e.Graphics.DrawImage(brick.powerupImage, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+                }
+
               
             }
         }
