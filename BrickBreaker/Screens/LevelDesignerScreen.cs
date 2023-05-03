@@ -118,7 +118,7 @@ namespace BrickBreaker.Screens
 
         private void generateLevel()
         {
-            //TODO: being able to name levels and saving each unique level into the resources folder with "Copy if Newer"
+            //TODO: being able to name levels and saving each unique level into resources folder
             XmlWriter writer = XmlWriter.Create("Resources/LevelXML.xml", null);
 
             writer.WriteStartElement("Level");
