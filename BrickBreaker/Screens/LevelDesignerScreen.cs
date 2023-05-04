@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Drawing.Text;
 using System.IO;
-
+using System.Resources;
+using System.Xml.Linq;
 
 namespace BrickBreaker.Screens
 {
@@ -30,6 +31,7 @@ namespace BrickBreaker.Screens
         int defHeight = 18;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
+        
         public LevelDesignerScreen()
         {
             InitializeComponent();
@@ -92,7 +94,7 @@ namespace BrickBreaker.Screens
             }
             #endregion
 
-            RileyFunc();
+            //RileyFunc();
 
             Refresh();
         }
@@ -126,12 +128,17 @@ namespace BrickBreaker.Screens
             dialogue.Title = "Save as an XML";
             dialogue.FilterIndex = 2;
 
+
+
             if (dialogue.ShowDialog() == DialogResult.OK)
             {
-                          
+                
+                
                 using (XmlTextWriter writer = new XmlTextWriter(dialogue.FileName, System.Text.Encoding.UTF8))
                 {
                     writer.Formatting = Formatting.Indented;
+                    
+                 
                     writer.WriteStartElement("Level");
 
                     foreach (DesignerBrick b in bricks)
@@ -153,13 +160,20 @@ namespace BrickBreaker.Screens
 
                         }
                         writer.WriteEndElement();
+                       
                     }
 
+                    
+                    writer.Flush();
                     writer.Close();
+                    
+                    
 
                 }
+                
 
             }
+
                 
 
 
@@ -185,6 +199,8 @@ namespace BrickBreaker.Screens
                 hp = 1;
             }
             hpLabel.Text = $"HP is: {hp}";
+
+            
             return hp;
         }
 
@@ -347,11 +363,18 @@ namespace BrickBreaker.Screens
             Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
 
             deleteLabel.Text = $"Delete: {delete}";
-            
-            
+
+            XmlTextReader r = new XmlTextReader("Levels/dingus.xml");
+
+            while (r.Read())
+            {
+                if (r.NodeType == XmlNodeType.Text)
+                {
+                    label1.Text += r.Value + "\n";
+                }
+            }
 
 
-           
         }
         /// <summary>
         /// Reveals the instructions with using a key
@@ -374,8 +397,10 @@ namespace BrickBreaker.Screens
                 "\n Space: Changes on whether using right click adds/removes a block";
 
             instructionLabel.Visible = !instructionLabel.Visible;
+            
 
         }
+     
        
     }
 

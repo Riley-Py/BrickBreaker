@@ -33,6 +33,7 @@
             this.replaceLabel = new System.Windows.Forms.Label();
             this.deleteLabel = new System.Windows.Forms.Label();
             this.hpLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // powerUpLabel
@@ -92,11 +93,22 @@
             this.hpLabel.TabIndex = 3;
             this.hpLabel.Text = "None";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(600, 132);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 4;
+            // 
             // LevelDesignerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RosyBrown;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.hpLabel);
             this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.instructionLabel);
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Label replaceLabel;
         private System.Windows.Forms.Label deleteLabel;
         private System.Windows.Forms.Label hpLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
