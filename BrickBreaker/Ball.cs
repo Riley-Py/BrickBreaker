@@ -85,7 +85,6 @@ namespace BrickBreaker
                 new Point(bX, bY + bH), //bottomleft
                 new Point(bX + bW, bY + bH)  //bottomright
             };
-
             int[] distanceSq = new int[4];
             for (int i = 0; i < corners.Length; i++)
             {
@@ -100,9 +99,6 @@ namespace BrickBreaker
                     closestIndex = i;
                 }
             }
-
-            
-
             int cX = corners[closestIndex].X;
             int cY = corners[closestIndex].Y;
             Point deltaCorner = deltaPoint(corners[closestIndex], ballPoint);

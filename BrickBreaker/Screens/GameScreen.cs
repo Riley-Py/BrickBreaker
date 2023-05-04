@@ -49,7 +49,6 @@ namespace BrickBreaker
         
         #endregion
         List<Ball> ballList = new List<Ball>();
-        public int hp = 3;
         public GameScreen()
         {
             InitializeComponent();
@@ -60,6 +59,8 @@ namespace BrickBreaker
         {
 
         }
+
+        
 
         public void OnStart()
         {
@@ -164,25 +165,34 @@ namespace BrickBreaker
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
-            { 
-                foreach (Ball bb in ballList)
+            for(int i = ballList.Count-1; i >= 0; i--)
+            {
+                if (ballList[i].BottomCollision(this))
                 {
-                    if (ballList.Count == 0)
-                    {
-                        lives--;
-                    }
+                    ballList.RemoveAt(i);
                 }
+            }
 
-                // Moves the ball back to origin
+            if(ballList.Count == 0)
+            {
+                lives--;
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
                 ball.y = (this.Height - paddle.height) - 85;
-
-                if (lives == 0)
+                ballList.Add(ball);
+                if (lives <= 0)
                 {
                     gameTimer.Enabled = false;
                     OnEnd();
                 }
+            }
+            if (ball.BottomCollision(this))
+            { 
+
+
+                // Moves the ball back to origin
+               
+
+                
             }
 
             // Check for collision of ball with paddle, (incl. paddle movement)

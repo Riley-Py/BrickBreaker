@@ -9,18 +9,43 @@ namespace BrickBreaker
 {
     internal class Animator
     {
-        int x, y;
+        public int x, y;
 
-        int frameCount;
-        int duration;
-        AnimationStyle animationStyle;
+        protected int frameCount;
+        protected int duration;
+        protected AnimationStyle animationStyle;
+        
 
-        public Animator(int x, int y, int frameCount, Color c)
+        public Animator(int x, int y, int frameCount)
         {
 
         }
+        
         public Animator(int x, int y, int frameCount, Bitmap[] bitmaps)
         {
+            animationStyle = AnimationStyle.Bitmap;
+        }
+    }
+
+    internal class BitmapAnimator : Animator
+    {
+        Bitmap[] bitmaps;
+        public BitmapAnimator(int x, int y, int frameCount, Bitmap[] bmps) :base(x, y, frameCount)
+        {
+            animationStyle = AnimationStyle.Particle;
+
+            
+        }
+    }
+  
+    internal class ParticleAnimator : Animator
+    {
+        Color color;
+
+        public ParticleAnimator(int x, int y, int frameCount, Color c) : base(x, y, frameCount)
+        {
+            animationStyle = AnimationStyle.Particle;
+
 
         }
     }
