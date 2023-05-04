@@ -49,6 +49,7 @@ namespace BrickBreaker
         
         #endregion
         List<Ball> ballList = new List<Ball>();
+        public int hp = 3;
         public GameScreen()
         {
             InitializeComponent();
@@ -81,8 +82,8 @@ namespace BrickBreaker
             int ballY = this.Height - paddle.height - 80;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
+            int xSpeed = 3;
+            int ySpeed = 3;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
