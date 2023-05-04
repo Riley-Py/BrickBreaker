@@ -37,15 +37,16 @@ namespace BrickBreaker
             y = y + ySpeed;
         }
 
-        public void PaddleCollision(Paddle p)
+        public bool PaddleCollision(Paddle p)
         {
             Rectangle powerRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (powerRec.IntersectsWith(paddleRec))
             {
-                GivePowerup();
+                return true;
             }
+            return false;
         }
 
         public void GivePowerup()

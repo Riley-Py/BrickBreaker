@@ -28,6 +28,7 @@ namespace BrickBreaker
             gunType = _gunType;
             width = 30;
             height = 60;
+            lifeSpan = 240;
             x = GameScreen.paddle.x + GameScreen.paddle.width / 2 - width / 2;
             y = GameScreen.paddle.y - 4 * GameScreen.paddle.height;
 
@@ -35,13 +36,11 @@ namespace BrickBreaker
             switch (gunType)
             {
                 case "Scar":
-                    //assign its duration
-                    lifeSpan = 240;
+                    //assign image here?
                     break;
 
                 case "Shotgun":
-                    //assign its duration
-                    lifeSpan = 240;
+
                     break;
 
                 case "RocketLauncher":
@@ -72,6 +71,11 @@ namespace BrickBreaker
                     break;
 
                 case "RocketLauncher":
+                    if (lifeSpan == 50)
+                    {
+                        Bullet bulletRL = new Bullet("RocketLauncher", x, width, y);
+                        GameScreen.bullets.Add(bulletRL);
+                    }
                     break;
             }
         }

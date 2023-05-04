@@ -195,7 +195,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("Shotgun", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize); //should be able to write b.powerType to decode what power is in the block
 
                     blocks.Remove(b);
 
@@ -209,10 +209,10 @@ namespace BrickBreaker
                 }
             }
 
-            //powerup actions
-            runLoopPowerup();
+            // Powerup actions
+            runPowerupLoop();
 
-            //redraw the screen
+            // Redraw the screen
             Refresh();
         }
 
@@ -262,7 +262,7 @@ namespace BrickBreaker
             }
         }
 
-        public void runLoopPowerup()
+        public void runPowerupLoop()
         {
             #region Overall Notes
             /* Code written by Isaha Flinch.
@@ -277,35 +277,29 @@ namespace BrickBreaker
             //Creating powerups happens when the bricks break
             //Painting powerups happens in the paint method
 
-            // move the powerups 
-            foreach (Powerup p in powers)
+            //// Powerup code
+            for (int i = 0; i < powers.Count; i++)
             {
-                p.Move();
-            }
-
-            // move the bullets 
-            foreach (Bullet b in bullets)
-            {
-                b.Move();
-            }
-
-            // check if player has collided with any powerups 
-            foreach (Powerup p in powers)
-            {
-                Rectangle powerRec = new Rectangle(p.x, p.y, p.size, p.size);
-                Rectangle paddleRec = new Rectangle(paddle.x, paddle.y, paddle.width, paddle.height);
+                // move powerup
+                powers[i].Move();
 
                 // check for collision of powerup with paddle
-                p.PaddleCollision(paddle);
-
-                ////TO DO - Clean up this repeat code to remove the powerup////
-                if (powerRec.IntersectsWith(paddleRec))
+                if (powers[i].PaddleCollision(paddle) == true)
                 {
-                    powers.Remove(p);
-                    break;
+                    powers[i].GivePowerup();
+                    powers.RemoveAt(i);
                 }
+
+                try{ // remove offscreen powerups
+                    if (powers[i].y > this.Height)
+                    {
+                        powers.RemoveAt(i);
+                    }
+                }catch{} // can probably be fixed with a break; but I am trying to remove those right now
             }
 
+            #region code that should be in the game loop and used by everyone
+            ////This code deletes blocks in what I think is a more proper way than just deleting a block when it is hit
             // remove blocks from power ups 
             for (int i = 0; i < blocks.Count; i++)
             {
@@ -314,38 +308,42 @@ namespace BrickBreaker
                     blocks.RemoveAt(i);
                 }
             }
-
-            // remove unused offscreen powerups
-            foreach (Powerup p in powers)
-            {
-                if (p.y > this.Height)
-                {
-                    powers.Remove(p);
-                        break;
-                }
-            }
-
             // end game if powerup causes it -- Repeat code from above that could be simplified
             if (blocks.Count == 0)
             {
                 gameTimer.Enabled = false;
                 OnEnd();
             }
+            #endregion
 
-            ////GUN CODE
+            //// Gun code
             foreach (Gun g in guns)
             {
-                //move to follow player
+                // move to follow player
                 g.Move();
 
-                //fire if possible
+                // fire if possible
                 g.Shoot(g.gunType);
 
-                //decrease life and remove
+                // decrease life and remove if necessary
                 g.lifeSpan--;
                 if (g.lifeSpan == 0)
                 {
                     guns.Remove(g);
+                    break;
+                }
+            }
+
+            //// Bullet code
+            foreach (Bullet b in bullets)
+            {
+                // move bullets
+                b.Move();
+
+                // remove offscreen bullets
+                if (b.y < -100)
+                {
+                    bullets.Remove(b);
                     break;
                 }
             }
@@ -359,16 +357,24 @@ namespace BrickBreaker
                     {
                         if (bullets[i].Collision(b) == true)
                         {
-                            //remove lives from blocks
+                            // remove lives from blocks
                             b.hp--;
 
-                            //add powerup created from bullet
-                            createPowerup("Shotgun", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
-                            ////ANOTHER ISSUE FOR BALL GUY, THE BALL DELETES BRICKS INSTEAD OF TAKING A LIFE
+                            // add powerup created from bullet if the block was destroyed
+                            if (b.hp <= 0)
+                            {
+                                createPowerup("Scar", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
+                            }
 
-                            //remove bullets upon collison
-                            bullets.RemoveAt(i);
+                            // remove bullet if it cannot do anything anymore
+                            bullets[i].damageVal--;
 
+                            if (bullets[i].damageVal == 0)
+                            {
+                                bullets.RemoveAt(i);
+                            }
+
+                            // allow code to keep running even if the bullets are removed
                             if (bullets.Count == 0)
                             {
                                 break;
@@ -377,17 +383,7 @@ namespace BrickBreaker
                     }
                 }
             }
-            catch {  } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and ball hit a block at the same time
-
-            // remove offscreen bullets
-            foreach (Bullet b in bullets)
-            {
-                if (b.y < -50)
-                {
-                    bullets.Remove(b);
-                    break;
-                }
-            }
+            catch { } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and ball hit a block at the same time
         }
 
         public void createPowerup(string powerName, int x, int y, int size) 
@@ -402,37 +398,40 @@ namespace BrickBreaker
              */
             #endregion
 
-            //assign appearance
-            switch (powerName)
-            {
-                case "Ammo":
-                    appearance = 0;
-                    break;
+            // check to see if there was a valid powerup
+            if (powerName == "Ammo" || powerName == "ChugJug" || powerName == "Scar" || powerName == "Shotgun" || powerName == "RocketLauncher" || powerName == "InfinityGauntlet")
+            {   // assign appearance
+                switch (powerName)
+                {
+                    case "Ammo":
+                        appearance = 0;
+                        break;
 
-                case "ChugJug":
-                    appearance = 1;
-                    break;
+                    case "ChugJug":
+                        appearance = 1;
+                        break;
 
-                case "Scar":
-                    appearance = 2;
-                    break;
+                    case "Scar":
+                        appearance = 2;
+                        break;
 
-                case "Shotgun":
-                    appearance = 3;
-                    break;
+                    case "Shotgun":
+                        appearance = 3;
+                        break;
 
-                case "RocketLauncher":
-                    appearance = 4;
-                    break;
+                    case "RocketLauncher":
+                        appearance = 4;
+                        break;
 
-                case "InfinityGauntlet":
-                    appearance = 5;
-                    break;
+                    case "InfinityGauntlet":
+                        appearance = 5;
+                        break;
+                }
+
+                // create physical entity to for the player to collide with
+                Powerup powerUp = new Powerup(powerName, x, y, size, appearance);
+                powers.Add(powerUp);
             }
-
-            //create physical entity to for the player to collide with
-            Powerup powerUp = new Powerup(powerName, x, y, size, appearance);
-            powers.Add(powerUp);
         }
 
         public void onStartPowerup()
@@ -447,6 +446,7 @@ namespace BrickBreaker
              */
             #endregion
 
+            //set values
             powers.Clear();
             bullets.Clear();
             ballList.Clear();

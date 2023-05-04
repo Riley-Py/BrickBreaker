@@ -21,17 +21,27 @@ namespace BrickBreaker
 
         public string bulletType;
         public int x, y, size = 10;
+        public int damageVal = 1;
 
         Random randGen = new Random();
         int xSpread;
 
         public Bullet(string _bulletType, int _x, int _gWidth, int _y)
         {
+            //assign bullet type and spread
             bulletType = _bulletType;
-            x = _x + _gWidth/2 - size/2;
-            y = _y;
-
             xSpread = randGen.Next(-5, 6);
+
+            //have the rocket launcher deal more damage and be larger
+            if (bulletType == "RocketLauncher")
+            {
+                damageVal = 5;
+                size = 80;
+            }
+
+            //find the location of the bullet
+            x = _x + _gWidth / 2 - size / 2;
+            y = _y;
         }
 
         public void Move()
@@ -48,6 +58,7 @@ namespace BrickBreaker
                     break;
 
                 case "RocketLauncher":
+                    y -= 10;
                     break;
             }
         }
