@@ -15,9 +15,10 @@ namespace BrickBreaker
 {
     public partial class Form1 : Form
     {
-        List<HighScore> highScore = new List<HighScore>();
+        public static List<HighScore> highScore = new List<HighScore>();
 
         public static int score;
+        public static string username;
 
        
 
@@ -28,7 +29,7 @@ namespace BrickBreaker
             HighScore high = new HighScore("23", "Logan");
             highScore.Add(high);
             LoganCode();
-            
+
             //LoganSaveHS();
             //LoganLoadHS();
         }
@@ -71,56 +72,56 @@ namespace BrickBreaker
         {
 
         }
-        //public void LoganSaveHS()
-        //{
-        //    XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml");
-        //    writer.WriteStartElement("HighScore");
+        public static void LoganSaveHS(List<HighScore> highScore)
+        {
+            XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml");
+            writer.WriteStartElement("HighScore");
 
-        //    foreach (HighScore hs in highScore)
-        //    {
-        //        writer.WriteStartElement("HighScore");
+            foreach (HighScore hs in highScore)
+            {
+                writer.WriteStartElement("HighScore");
 
-        //        writer.WriteElementString("score", hs.score);
-        //        writer.WriteElementString("playerName", hs.playerName);
+                writer.WriteElementString("score", hs.score);
+                writer.WriteElementString("playerName", hs.playerName);
 
-        //        writer.WriteEndElement();
-        //    }
+                writer.WriteEndElement();
+            }
 
-        //    writer.WriteEndElement();
+            writer.WriteEndElement();
 
-        //    writer.Close();
-        //}
+            writer.Close();
+        }
 
-        //public void LoganLoadHS()
-        //{
+        public static void LoganLoadHS()
+        {
 
-        //    string score, playerName;
+            string score, playerName;
 
-        //    XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml", null);
+            XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml", null);
 
-        //    while (reader.Read())
-        //    {
-        //        if (reader.NodeType == XmlNodeType.Text)
-        //        {
-        //            score = reader.ReadString();
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                {
+                    score = reader.ReadString();
 
-        //            reader.ReadToNextSibling("playerName");
-        //            playerName = reader.ReadString();
+                    reader.ReadToNextSibling("playerName");
+                    playerName = reader.ReadString();
 
-        //            HighScore newHighScore = new HighScore(score, playerName);
-        //            highScore.Add(newHighScore);
-        //        }
-        //    }
+                    HighScore newHighScore = new HighScore(score, playerName);
+                    highScore.Add(newHighScore);
+                }
+            }
 
-        //    reader.Close();
-        //}
+            reader.Close();
+        }
         /// <summary>
         /// Loading fonts for labels
         /// </summary>
         /// <param name="name"></param>
         /// <param name="size"></param>
         /// <param name="label"></param>
-        public static void loadingFonts(string name, int size, params Label[] labels)
+        public static void LoadingFonts(string name, int size, params Label[] labels)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
@@ -143,7 +144,7 @@ namespace BrickBreaker
         /// <param name="name"></param>
         /// <param name="size"></param>
         /// <param name="buttons"></param>
-        public static void loadingFonts(string name, int size, params Button[] buttons)
+        public static void LoadingFonts(string name, int size, params Button[] buttons)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
@@ -163,7 +164,7 @@ namespace BrickBreaker
         /// <param name="name"></param>
         /// <param name="size"></param>
         /// <param name="combo"></param>
-        public static void loadingFonts(string name, int size, ComboBox combo)
+        public static void LoadingFonts(string name, int size, ComboBox combo)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
