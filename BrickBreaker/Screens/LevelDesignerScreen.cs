@@ -17,6 +17,7 @@ namespace BrickBreaker.Screens
 {
     public partial class LevelDesignerScreen : UserControl
     {
+        #region global variables for game (put them all here)
         Powerup currentPowerup;
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
@@ -31,7 +32,8 @@ namespace BrickBreaker.Screens
         int defHeight = 18;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
-        
+        #endregion
+
         public LevelDesignerScreen()
         {
             InitializeComponent();
@@ -94,7 +96,7 @@ namespace BrickBreaker.Screens
             }
             #endregion
 
-            //RileyFunc();
+            RileyFunc();
 
             Refresh();
         }
@@ -113,27 +115,23 @@ namespace BrickBreaker.Screens
                 {
                     e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
                     e.Graphics.DrawImage(brick.powerupImage, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
-                }
-
-              
+                }             
             }
         }
-
+        /// <summary>
+        /// Generates level with name
+        /// </summary>
         private void generateLevel()
-        {
-            //TODO: being able to name levels and saving each unique level into resources folder
-
+        {         
             SaveFileDialog dialogue = new SaveFileDialog();
             dialogue.Filter = "XML (*.xml)|*.xml|All files (*.*)|*.*";
             dialogue.Title = "Save as an XML";
             dialogue.FilterIndex = 2;
 
-
-
+            #region writes all of the bricks to the specified xml file (put it in levels folder, please!)
             if (dialogue.ShowDialog() == DialogResult.OK)
             {
-                
-                
+                            
                 using (XmlTextWriter writer = new XmlTextWriter(dialogue.FileName, System.Text.Encoding.UTF8))
                 {
                     writer.Formatting = Formatting.Indented;
@@ -173,12 +171,8 @@ namespace BrickBreaker.Screens
                 
 
             }
+            #endregion
 
-                
-
-
-
-            
         }
         /// <summary>
         /// Adds/subtracts HP
@@ -362,17 +356,7 @@ namespace BrickBreaker.Screens
             Form1.loadingFonts("burbank.otf", 18, instructionLabel);
             Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
 
-            deleteLabel.Text = $"Delete: {delete}";
-
-            XmlTextReader r = new XmlTextReader("Levels/dingus.xml");
-
-            while (r.Read())
-            {
-                if (r.NodeType == XmlNodeType.Text)
-                {
-                    label1.Text += r.Value + "\n";
-                }
-            }
+            deleteLabel.Text = $"Delete: {delete}";         
 
 
         }
