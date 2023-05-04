@@ -151,9 +151,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\menuScreenBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +170,15 @@
     <None Include="Resources\LevelXML.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Levels\dingus.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Levels\dingus.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
