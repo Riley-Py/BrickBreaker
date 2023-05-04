@@ -112,7 +112,8 @@ namespace BrickBreaker
             // 3: bottom right
             if (closestIndex == 0) 
             {
-                if(deltaCorner.X < deltaCorner.Y) //top
+                //if(deltaCorner.X < deltaCorner.Y) //top
+                if(realX < cX+size)
                 {
                     y = cY - (2 * size);
                     ySpeed *= -1;
@@ -127,7 +128,8 @@ namespace BrickBreaker
             }
             else if (closestIndex == 1) // 
             {
-                if (deltaCorner.X < deltaCorner.Y) //top
+                //if (deltaCorner.X < deltaCorner.Y) //top
+                if(realX > cX + size)
                 {
                     y = cY - (2 * size);
                     ySpeed *= -1;
@@ -143,7 +145,8 @@ namespace BrickBreaker
             }
             else if (closestIndex == 2) 
             {
-                if (deltaCorner.X < deltaCorner.Y) //bottom
+                //if (deltaCorner.X < deltaCorner.Y) //bottom
+                if (realX < cX + size)
                 {
                     y = cY;
                     ySpeed *= -1;
@@ -156,8 +159,10 @@ namespace BrickBreaker
                 }
             }
             else if (closestIndex == 3) 
+            
             {
-                if (deltaCorner.X < deltaCorner.Y) //bottom
+                //if (deltaCorner.X < deltaCorner.Y) //bottom
+                if (realX > cX + size)
                 {
                     y = cY;
                     ySpeed *= -1;
