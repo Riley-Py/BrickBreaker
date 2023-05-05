@@ -27,6 +27,7 @@ namespace BrickBreaker
         {
             InitializeComponent();
             HighScore high = new HighScore("23", "Logan");
+            
             highScore.Add(high);
             LoganCode();
 
@@ -137,6 +138,7 @@ namespace BrickBreaker
                
             }
             
+            
         }
         /// <summary>
         /// Loading fonts for buttons
@@ -157,6 +159,9 @@ namespace BrickBreaker
             {
                 button.Font = font;
             }
+           
+
+
         }
         /// <summary>
         /// Loading fonts for comboboxes
@@ -173,6 +178,7 @@ namespace BrickBreaker
             Font font = new Font(fontCollection.Families[0], size);
 
             combo.Font = font;
+
         }
 
     }

@@ -35,5 +35,10 @@ namespace BrickBreaker.Screens
         {
             Form1.ChangeScreen(this, new GameScreen());
         }
+
+        private void UserInfo_Load(object sender, EventArgs e)
+        {
+            Form1.LoadingFonts("burbank.otf", 27, playButton, backButton);
+        }
     }
 }
