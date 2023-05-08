@@ -172,7 +172,111 @@ namespace BrickBreaker
             }
 
         }
+        private void BlockUnintersectorinatorV2(int bX, int bY, int bW, int bH)
+        {
+            int realX = (int)(x + size);
+            int realY = (int)(y + size);
 
+
+            PointF ballPoint = new PointF((realX), (realY));
+
+            PointF[] corners =
+            {
+                new Point(bX, bY), //topleft
+                new Point(bX + bW, bY), //topright
+                new Point(bX, bY + bH), //bottomleft
+                new Point(bX + bW, bY + bH)  //bottomright
+            };
+
+            double[] distances =
+            {
+                FindDistanceToSegment(ballPoint, corners[0],corners[1]),//top
+                FindDistanceToSegment(ballPoint, corners[0],corners[2]),//left
+                FindDistanceToSegment(ballPoint, corners[2],corners[3]),//bottom
+                FindDistanceToSegment(ballPoint, corners[1],corners[3]) //right
+            };
+            int[] distanceSq = new int[4];
+            for (int i = 0; i < corners.Length; i++)
+            {
+                distanceSq[i] = (int)(Math.Abs(realX - corners[i].X) + Math.Abs(realY - corners[i].Y));
+            }
+            int closestIndex = 0;
+
+            for (int i = 0; i < distances.Length; i++)
+            {
+                if (distances[i] < distances[closestIndex])
+                {
+                    closestIndex = i;
+                }
+            }
+            // 0 : top 
+            // 1 : left
+            // 2: bottom
+            // 3: right
+            if (closestIndex == 0)
+            {
+                ySpeed *= -1;
+                realY = 0;
+
+
+            }
+            else if (closestIndex == 1) // 
+            {
+               
+            }
+            else if (closestIndex == 2)
+            {
+              
+            }
+            else if (closestIndex == 3)
+
+            {
+               
+            }
+
+        }
+        private double FindDistanceToSegment(
+        PointF pt, PointF p1, PointF p2)
+        {
+            PointF closest;
+            float dx = p2.X - p1.X;
+            float dy = p2.Y - p1.Y;
+            if ((dx == 0) && (dy == 0))
+            {
+                // It's a point not a line segment.
+                closest = p1;
+                dx = pt.X - p1.X;
+                dy = pt.Y - p1.Y;
+                return Math.Sqrt(dx * dx + dy * dy);
+            }
+
+            // Calculate the t that minimizes the distance.
+            float t = ((pt.X - p1.X) * dx + (pt.Y - p1.Y) * dy) /
+                (dx * dx + dy * dy);
+
+            // See if this represents one of the segment's
+            // end points or a point in the middle.
+            if (t < 0)
+            {
+                closest = new PointF(p1.X, p1.Y);
+                dx = pt.X - p1.X;
+                dy = pt.Y - p1.Y;
+            }
+            else if (t > 1)
+            {
+                closest = new PointF(p2.X, p2.Y);
+                dx = pt.X - p2.X;
+                dy = pt.Y - p2.Y;
+            }
+            else
+            {
+                closest = new PointF(p1.X + t * dx, p1.Y + t * dy);
+                dx = pt.X - closest.X;
+                dy = pt.Y - closest.Y;
+            }
+
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
         public void PaddleCollision(Paddle p)
         {
             Rectangle ballRec = DoubleRectangle(x, y, size, size);
