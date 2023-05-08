@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BrickBreaker.Screens
 {
@@ -15,6 +16,7 @@ namespace BrickBreaker.Screens
         public Powerup powerup;
         public SolidBrush solidBrush;
         public int hp;
+        public Image powerupImage;
 
         public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, Powerup pu)
         {
@@ -24,6 +26,7 @@ namespace BrickBreaker.Screens
             width = _w;
             height = _h;
             powerup = pu;
+            powerupImage = PowerUpToImage(pu);
             hp = _hp;
         }
 
@@ -45,6 +48,37 @@ namespace BrickBreaker.Screens
                 default:
                     return Color.White;
             }
+        }
+        /// <summary>
+        /// Converting powerups to images to be used for editing
+        /// </summary>
+        /// <param name="powerup"></param>
+        /// <returns></returns>
+        private Image PowerUpToImage(Powerup powerup)
+        {
+            Powerup power = powerup;
+            
+            //Add more powerups as needed (modify the enum list in level designer, however)
+            switch (power)
+            {
+                case Powerup.Ammo:
+                    return Properties.Resources.ammoBox;
+                case Powerup.ChugJug:
+                    return Properties.Resources.chugJugEdited;
+                case Powerup.RocketLauncher:
+                     return Properties.Resources.rocketLauncher;
+                case Powerup.Scar:
+                    return Properties.Resources.scar;
+                case Powerup.Shotgun:
+                    return Properties.Resources.shotgun;
+                case Powerup.InfinityGauntlet:
+                    return Properties.Resources.thanos;
+
+            }
+            return null;
+            
+            
+
         }
 
         public bool containsPoint(int pX,  int pY)

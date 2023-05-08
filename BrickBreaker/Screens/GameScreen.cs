@@ -45,9 +45,12 @@ namespace BrickBreaker
         // Powerup variables
         int appearance;
         public static int powerSize = 20;
-        SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
-        ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
-                #endregion
+
+        Image[] images = new Image[] {Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos};
+        
+        
+        #endregion
+        List<Ball> ballList = new List<Ball>();
         public GameScreen()
         {
             InitializeComponent();
@@ -58,6 +61,8 @@ namespace BrickBreaker
         {
 
         }
+
+        
 
         public void OnStart()
         {
@@ -83,8 +88,8 @@ namespace BrickBreaker
             int ballY = this.Height - paddle.height - 80;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
+            int xSpeed = 3;
+            int ySpeed = 3;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
@@ -166,25 +171,34 @@ namespace BrickBreaker
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
-            { 
-                foreach (Ball bb in ballList)
+            for(int i = ballList.Count-1; i >= 0; i--)
+            {
+                if (ballList[i].BottomCollision(this))
                 {
-                    if (ballList.Count == 0)
-                    {
-                        lives--;
-                    }
+                    ballList.RemoveAt(i);
                 }
+            }
 
-                // Moves the ball back to origin
+            if(ballList.Count == 0)
+            {
+                lives--;
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
                 ball.y = (this.Height - paddle.height) - 85;
-
-                if (lives == 0)
+                ballList.Add(ball);
+                if (lives <= 0)
                 {
                     gameTimer.Enabled = false;
                     OnEnd();
                 }
+            }
+            if (ball.BottomCollision(this))
+            { 
+
+
+                // Moves the ball back to origin
+               
+
+                
             }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
@@ -195,7 +209,8 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize); //should be able to write b.powerType to decode what power is in the block
+
+                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
                     blocks.Remove(b);
 
@@ -246,7 +261,7 @@ namespace BrickBreaker
             // Draws powerups
             foreach (Powerup p in powers)
             {
-                e.Graphics.FillRectangle(powerupBrushes[p.appearance], p.x, p.y, p.size, p.size);
+                e.Graphics.DrawImage(images[p.appearance], p.x, p.y, p.size, p.size);
             }
 
             // Draws guns

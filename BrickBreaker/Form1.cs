@@ -9,25 +9,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Drawing.Text;
-
+using System.Runtime.CompilerServices;
 
 namespace BrickBreaker
 {
     public partial class Form1 : Form
     {
-        List<HighScore> highScore = new List<HighScore>();
+        public static List<HighScore> highScore = new List<HighScore>();
 
         public static int score;
-        
+        public static string username;
+
+       
+
 
         public Form1()
         {
             InitializeComponent();
             HighScore high = new HighScore("23", "Logan");
+            
             highScore.Add(high);
             LoganCode();
-            LoganSaveHS();
-            LoganLoadHS();
+
+            //LoganSaveHS();
+            //LoganLoadHS();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -61,14 +66,14 @@ namespace BrickBreaker
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            LoganSaveHS();
+            //LoganSaveHS();
         }
 
         public void LoganCode()
         {
 
         }
-        public void LoganSaveHS()
+        public static void LoganSaveHS(List<HighScore> highScore)
         {
             XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml");
             writer.WriteStartElement("HighScore");
@@ -88,7 +93,7 @@ namespace BrickBreaker
             writer.Close();
         }
 
-        public void LoganLoadHS()
+        public static void LoganLoadHS()
         {
 
             string score, playerName;
@@ -112,42 +117,68 @@ namespace BrickBreaker
             reader.Close();
         }
         /// <summary>
-        /// Loading any sort of fonts and making it visible to all users
+        /// Loading fonts for labels
         /// </summary>
         /// <param name="name"></param>
         /// <param name="size"></param>
         /// <param name="label"></param>
-        public static void loadingFonts(string name, int size, params Label[] labels)
+        public static void LoadingFonts(string name, int size, params Label[] labels)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
             fontCollection.AddFontFile(name);
+
+            Font font = new Font(fontCollection.Families[0], size);
 
             foreach (Label label in labels)
             {
-                label.Font = new Font(fontCollection.Families[0], size);
-
+              
+               label.Font = font;
+                
+               
             }
             
+            
         }
-        public static void loadingFonts(string name, int size, params Button[] buttons)
+        /// <summary>
+        /// Loading fonts for buttons
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="size"></param>
+        /// <param name="buttons"></param>
+        public static void LoadingFonts(string name, int size, params Button[] buttons)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
+
             fontCollection.AddFontFile(name);
+
+            Font font = new Font(fontCollection.Families[0], size);
 
             foreach (Button button in buttons)
             {
-                button.Font = new Font(fontCollection.Families[0], size);
+                button.Font = font;
             }
+           
+
+
         }
-        public static void loadingFonts(string name, int size, ComboBox combo)
+        /// <summary>
+        /// Loading fonts for comboboxes
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="size"></param>
+        /// <param name="combo"></param>
+        public static void LoadingFonts(string name, int size, ComboBox combo)
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
             fontCollection.AddFontFile(name);
 
-            combo.Font = new Font(fontCollection.Families[0], size);
+            Font font = new Font(fontCollection.Families[0], size);
+
+            combo.Font = font;
+
         }
 
     }
