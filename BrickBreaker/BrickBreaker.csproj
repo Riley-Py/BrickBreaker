@@ -110,6 +110,10 @@
     <Compile Include="Screens\UserInfo.Designer.cs">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\tiltedTowersImage.jpg" />
+    <None Include="Resources\retailRoadImage.jpg" />
+    <None Include="Resources\luckyLandingImage.jpg" />
+    <None Include="Resources\pleasantParkImage.jpg" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
