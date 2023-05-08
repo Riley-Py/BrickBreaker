@@ -37,15 +37,16 @@ namespace BrickBreaker
             y = y + ySpeed;
         }
 
-        public void PaddleCollision(Paddle p)
+        public bool PaddleCollision(Paddle p)
         {
             Rectangle powerRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (powerRec.IntersectsWith(paddleRec))
             {
-                GivePowerup();
+                return true;
             }
+            return false;
         }
 
         public void GivePowerup()
@@ -55,11 +56,8 @@ namespace BrickBreaker
             {
                 //add ball
                 case "Ammo":
-                    #region notes
-                    //add a ball to the game
-                    //store the ball within a list
-                    //only take a life from the player if the balls in that list = 0
-                    #endregion
+                    Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y + GameScreen.paddle.height/2, 6, 6, 20);
+                    GameScreen.ballList.Add(ball);
                     break;
 
                 //add extra life, to a maximum of one extra life
