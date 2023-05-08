@@ -195,7 +195,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize); //should be able to write b.powerType to decode what power is in the block
+                    createPowerup("RocketLauncher", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize); //should be able to write b.powerType to decode what power is in the block
 
                     blocks.Remove(b);
 
@@ -363,7 +363,7 @@ namespace BrickBreaker
                             // add powerup created from bullet if the block was destroyed
                             if (b.hp <= 0)
                             {
-                                createPowerup("Scar", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
+                                createPowerup("RocketLauncher", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
                             }
 
                             // remove bullet if it cannot do anything anymore
