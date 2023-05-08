@@ -353,8 +353,8 @@ namespace BrickBreaker.Screens
         }
         private void RileyFunc()
         {
-            Form1.loadingFonts("burbank.otf", 18, instructionLabel);
-            Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
+            Form1.LoadingFonts("burbank.otf", 18, instructionLabel);
+            Form1.LoadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
 
             deleteLabel.Text = $"Delete: {delete}";         
 

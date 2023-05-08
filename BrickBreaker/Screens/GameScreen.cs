@@ -44,8 +44,8 @@ namespace BrickBreaker
         // Powerup variables
         int appearance;
         public static int powerSize = 20;
-        SolidBrush[] powerupBrushes = new SolidBrush[] { new SolidBrush(Color.Red), new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow), new SolidBrush(Color.Green), new SolidBrush(Color.Blue), new SolidBrush(Color.Violet) };
-        ////TO ADD IMAGES, CHANGE THIS ARRAY INTO AN IMAGE ARRAY AND FILL WITH THE IMAGES////
+        Image[] images = new Image[] {Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos};
+        
         
         #endregion
         List<Ball> ballList = new List<Ball>();
@@ -254,7 +254,7 @@ namespace BrickBreaker
             // Draws powerups
             foreach (Powerup p in powers)
             {
-                e.Graphics.FillRectangle(powerupBrushes[p.appearance], p.x, p.y, p.size, p.size);
+                e.Graphics.DrawImage(images[p.appearance], p.x, p.y, p.size, p.size);
             }
 
             // Draws guns
