@@ -216,22 +216,25 @@ namespace BrickBreaker
             if (closestIndex == 0)
             {
                 ySpeed *= -1;
-                realY = 0;
+                y = corners[0].Y - 2 * size;
 
 
             }
             else if (closestIndex == 1) // 
             {
-               
+               xSpeed *= -1;
+                x = corners[0].X - 2 * size;
             }
             else if (closestIndex == 2)
             {
-              
+                ySpeed *= -1;
+                y = corners[3].Y;
             }
             else if (closestIndex == 3)
 
             {
-               
+                xSpeed *= -1;
+                x = corners[3].X;
             }
 
         }

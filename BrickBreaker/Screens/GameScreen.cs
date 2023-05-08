@@ -50,7 +50,7 @@ namespace BrickBreaker
         
         
         #endregion
-        List<Ball> ballList = new List<Ball>();
+        //List<Ball> ballList = new List<Ball>();
         public GameScreen()
         {
             InitializeComponent();
