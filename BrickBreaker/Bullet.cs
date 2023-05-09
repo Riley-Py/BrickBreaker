@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using BrickBreaker.Screens;
 
 namespace BrickBreaker
 {
@@ -64,6 +65,17 @@ namespace BrickBreaker
         }
 
         public bool Collision(Block b)
+        {
+            Rectangle bulletRec = new Rectangle(x, y, size, size);
+            Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+
+            if (bulletRec.IntersectsWith(blockRec))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool Collision(DesignerBrick b)
         {
             Rectangle bulletRec = new Rectangle(x, y, size, size);
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);

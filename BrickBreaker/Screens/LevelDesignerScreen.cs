@@ -18,7 +18,7 @@ namespace BrickBreaker.Screens
     public partial class LevelDesignerScreen : UserControl
     {
         #region global variables for game (put them all here)
-        Powerup currentPowerup;
+        PowerupEnum currentPowerup;
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
         bool[] lastPressedArrow = new bool[4];
@@ -39,7 +39,7 @@ namespace BrickBreaker.Screens
         {
             InitializeComponent();
             RileyFunc();
-            currentPowerup = Powerup.None;
+            currentPowerup = PowerupEnum.None;
         }
 
 
@@ -107,7 +107,7 @@ namespace BrickBreaker.Screens
             foreach (DesignerBrick brick in bricks)
             {
                
-                if(brick.powerup == Powerup.None)
+                if(brick.powerup == PowerupEnum.None)
                 {
                     e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
 
@@ -147,8 +147,10 @@ namespace BrickBreaker.Screens
                         writer.WriteElementString("y", $"{b.y}");
                         writer.WriteElementString("width", $"{b.width}");
                         writer.WriteElementString("height", $"{b.height}");
+                        writer.WriteElementString("hp", $"{b.hp}");
                         writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
-                        if (b.powerup != Powerup.None)
+                        
+                        if (b.powerup != PowerupEnum.None)
                         {
                             writer.WriteElementString("powerup", $"{b.powerup}");
 
@@ -309,7 +311,7 @@ namespace BrickBreaker.Screens
                     break;
                 case Keys.M:
                     currentPowerup += 1;
-                    if (currentPowerup >= Powerup.Default || currentPowerup < 0)
+                    if (currentPowerup >= PowerupEnum.Default || currentPowerup < 0)
                     {
                         currentPowerup = 0;
                     }
@@ -317,7 +319,7 @@ namespace BrickBreaker.Screens
                     break;
                 case Keys.N:
                     currentPowerup -= 1;
-                    if(currentPowerup >= Powerup.Default || currentPowerup < 0)
+                    if(currentPowerup >= PowerupEnum.Default || currentPowerup < 0)
                     {
                         currentPowerup = 0;
                     }
@@ -426,18 +428,6 @@ namespace BrickBreaker.Screens
        
     }
 
-    enum Powerup
-    {
-        None = 0,
-
-        Ammo = 1,
-        ChugJug = 2,
-        Scar = 3,
-        Shotgun = 4,
-        RocketLauncher = 5,
-        InfinityGauntlet = 6,
-        
-        Default = 7
-    }
+    
   
 }

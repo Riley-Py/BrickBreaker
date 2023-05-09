@@ -7,6 +7,19 @@ using System.Drawing;
 
 namespace BrickBreaker
 {
+    public enum PowerupEnum
+    {
+        None = 0,
+
+        Ammo = 1,
+        ChugJug = 2,
+        Scar = 3,
+        Shotgun = 4,
+        RocketLauncher = 5,
+        InfinityGauntlet = 6,
+
+        Default = 7
+    }
     public class Powerup
     {
         #region Overall Notes
@@ -22,7 +35,7 @@ namespace BrickBreaker
         public int x, y, size, ySpeed = 4;
         Bitmap powerSprite;
         public int appearance;  //use for images later
-
+        
         public Powerup(string _powerName, int _xLocation, int _yLocation, int _size, int _appearance)
         {
             powerName = _powerName;
@@ -56,7 +69,7 @@ namespace BrickBreaker
             {
                 //add ball
                 case "Ammo":
-                    Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y + GameScreen.paddle.height/2, 6, 6, 20);
+                    Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y - GameScreen.paddle.height, 3, 3, 20);
                     GameScreen.ballList.Add(ball);
                     break;
 
@@ -94,14 +107,14 @@ namespace BrickBreaker
                 //reduce half of the lives of each block
                 case "InfinityGauntlet":
                     //for each block, divide it's lives by two (round up on odd numbers)
-                    for (int i = 0; i < GameScreen.blocks.Count; i++) 
+                    for (int i = 0; i < GameScreen.bricks.Count; i++) 
                     {
-                        if (GameScreen.blocks[i].hp == 1)
+                        if (GameScreen.bricks[i].hp == 1)
                         {
-                            GameScreen.blocks[i].hp--;
+                            GameScreen.bricks[i].hp--;
                         }
 
-                        GameScreen.blocks[i].hp /= 2;
+                        GameScreen.bricks[i].hp /= 2;
                     }
                     //to make up for the rounding, any block with one life will be destroyed
                     break;
