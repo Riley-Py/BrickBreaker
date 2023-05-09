@@ -33,11 +33,13 @@
             this.replaceLabel = new System.Windows.Forms.Label();
             this.deleteLabel = new System.Windows.Forms.Label();
             this.hpLabel = new System.Windows.Forms.Label();
+            this.backgroundLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // powerUpLabel
             // 
             this.powerUpLabel.AutoSize = true;
+            this.powerUpLabel.BackColor = System.Drawing.Color.Transparent;
             this.powerUpLabel.ForeColor = System.Drawing.Color.White;
             this.powerUpLabel.Location = new System.Drawing.Point(434, 492);
             this.powerUpLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -62,6 +64,7 @@
             // replaceLabel
             // 
             this.replaceLabel.AutoSize = true;
+            this.replaceLabel.BackColor = System.Drawing.Color.Transparent;
             this.replaceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replaceLabel.ForeColor = System.Drawing.Color.White;
             this.replaceLabel.Location = new System.Drawing.Point(13, 492);
@@ -73,6 +76,7 @@
             // deleteLabel
             // 
             this.deleteLabel.AutoSize = true;
+            this.deleteLabel.BackColor = System.Drawing.Color.Transparent;
             this.deleteLabel.ForeColor = System.Drawing.Color.White;
             this.deleteLabel.Location = new System.Drawing.Point(191, 492);
             this.deleteLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -84,6 +88,7 @@
             // hpLabel
             // 
             this.hpLabel.AutoSize = true;
+            this.hpLabel.BackColor = System.Drawing.Color.Transparent;
             this.hpLabel.ForeColor = System.Drawing.Color.White;
             this.hpLabel.Location = new System.Drawing.Point(338, 492);
             this.hpLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -92,11 +97,24 @@
             this.hpLabel.TabIndex = 3;
             this.hpLabel.Text = "None";
             // 
+            // backgroundLabel
+            // 
+            this.backgroundLabel.AutoSize = true;
+            this.backgroundLabel.BackColor = System.Drawing.Color.Transparent;
+            this.backgroundLabel.ForeColor = System.Drawing.Color.White;
+            this.backgroundLabel.Location = new System.Drawing.Point(573, 492);
+            this.backgroundLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.backgroundLabel.Name = "backgroundLabel";
+            this.backgroundLabel.Size = new System.Drawing.Size(33, 13);
+            this.backgroundLabel.TabIndex = 4;
+            this.backgroundLabel.Text = "None";
+            // 
             // LevelDesignerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RosyBrown;
+            this.Controls.Add(this.backgroundLabel);
             this.Controls.Add(this.hpLabel);
             this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.instructionLabel);
@@ -121,5 +139,6 @@
         private System.Windows.Forms.Label replaceLabel;
         private System.Windows.Forms.Label deleteLabel;
         private System.Windows.Forms.Label hpLabel;
+        private System.Windows.Forms.Label backgroundLabel;
     }
 }

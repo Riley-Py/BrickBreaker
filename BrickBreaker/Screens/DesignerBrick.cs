@@ -17,6 +17,7 @@ namespace BrickBreaker.Screens
         public SolidBrush solidBrush;
         public int hp;
         public Image powerupImage;
+      
 
         public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, Powerup pu)
         {
@@ -28,6 +29,7 @@ namespace BrickBreaker.Screens
             powerup = pu;
             powerupImage = PowerUpToImage(pu);
             hp = _hp;
+       
         }
 
 
@@ -101,5 +103,6 @@ namespace BrickBreaker.Screens
             }
             return false;
         }
+       
     }
 }
