@@ -131,7 +131,7 @@ namespace BrickBreaker
             if (closestIndex == 0) 
             {
                 //if(deltaCorner.X < deltaCorner.Y) //top
-                if(realX > cX+size)
+                if(realX > cX + size / 2)
                 {
                     y = cY - (size);
                     ySpeed *= -1;
@@ -147,7 +147,7 @@ namespace BrickBreaker
             else if (closestIndex == 1) // 
             {
                 //if (deltaCorner.X < deltaCorner.Y) //top
-                if(realX < cX + size )
+                if(realX < cX + size / 2)
                 {
                     y = cY - (size);
                     ySpeed *= -1;
