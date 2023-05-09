@@ -32,6 +32,7 @@ namespace BrickBreaker.Screens
         int defHeight = 18;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
+        int backgrounds = 0;
         #endregion
 
         public LevelDesignerScreen()
@@ -200,6 +201,40 @@ namespace BrickBreaker.Screens
             return hp;
         }
 
+        private void ChangingBackground(int back)
+        {
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            switch (back)
+            {
+                case 1:
+                    this.BackgroundImage = Properties.Resources.tiltedTowersImage;
+                    backgroundLabel.Text = "Tilted Towers";
+                    break;
+                case 2:
+                    this.BackgroundImage = Properties.Resources.pleasantParkImage;
+                    backgroundLabel.Text = "Pleasant Park";
+                    break;
+                case 3:
+                    this.BackgroundImage = Properties.Resources.luckyLandingImage;
+                    backgroundLabel.Text = "Lucky Landing";
+                    break;
+                case 4:
+                    this.BackgroundImage = Properties.Resources.retailRoadImage;
+                    backgroundLabel.Text = "Retail Road";
+                    break;
+
+                default:
+                    this.BackgroundImage = null;
+                    backgroundLabel.Text = "None";
+                    backgrounds = 0;
+                    break;
+                    
+            }
+        }
+       
+        
+
         private void compareKeys()
         {
             for(int i = 0; i < 4; i++)
@@ -304,9 +339,12 @@ namespace BrickBreaker.Screens
                 case Keys.Space:
                     replace = !replace;
                     delete = !delete;
-
                     replaceLabel.Text = $"Replace: {replace}";
                     deleteLabel.Text = $"Delete: {delete}";
+                    break;
+                case Keys.B:
+                    backgrounds += 1;
+                    ChangingBackground(backgrounds);
 
                     break;
             }
@@ -356,7 +394,7 @@ namespace BrickBreaker.Screens
         private void RileyFunc()
         {
             Form1.LoadingFonts("burbank.otf", 18, instructionLabel);
-            Form1.LoadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
+            Form1.LoadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel, backgroundLabel);
 
             deleteLabel.Text = $"Delete: {delete}";         
 

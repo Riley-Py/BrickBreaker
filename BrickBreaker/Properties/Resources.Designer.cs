@@ -114,9 +114,39 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap luckyLandingImage {
+            get {
+                object obj = ResourceManager.GetObject("luckyLandingImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menuScreenBackground {
             get {
                 object obj = ResourceManager.GetObject("menuScreenBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pleasantParkImage {
+            get {
+                object obj = ResourceManager.GetObject("pleasantParkImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap retailRoadImage {
+            get {
+                object obj = ResourceManager.GetObject("retailRoadImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -157,6 +187,16 @@ namespace BrickBreaker.Properties {
         internal static System.Drawing.Bitmap thanos {
             get {
                 object obj = ResourceManager.GetObject("thanos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tiltedTowersImage {
+            get {
+                object obj = ResourceManager.GetObject("tiltedTowersImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

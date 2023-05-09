@@ -228,7 +228,25 @@ namespace BrickBreaker
             // Check for collision of ball with paddle, (incl. paddle movement)
 
             // Check if ball has collided with any blocks
-            
+            foreach (Block b in blocks)
+            {
+                if (ball.BlockCollision(b))
+                {
+
+                    createPowerup("Ammo", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+
+                    blocks.Remove(b);
+
+                    if (blocks.Count == 0)
+                    {
+                        gameTimer.Enabled = false;
+                        OnEnd();
+                    }
+
+                    break;
+                }
+            }
+
 
             // Powerup actions
             runPowerupLoop();
@@ -283,7 +301,7 @@ namespace BrickBreaker
             // Draws powerups
             foreach (Powerup p in powers)
             {
-                e.Graphics.DrawImage(images[p.appearance], p.x, p.y, p.size, p.size);
+                e.Graphics.DrawImage(images[p.appearance], p.x, p.y, p.size + 40, p.size + 40);
             }
 
             // Draws guns

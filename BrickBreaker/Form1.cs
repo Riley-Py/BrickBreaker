@@ -150,7 +150,6 @@ namespace BrickBreaker
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
 
-
             fontCollection.AddFontFile(name);
 
             Font font = new Font(fontCollection.Families[0], size);
