@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrickBreaker.Screens;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -69,7 +70,28 @@ namespace BrickBreaker
 
             return intersects;
         }
+        public bool BlockCollision(DesignerBrick b)
+        {
+            Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+            Rectangle ballRec = DoubleRectangle(x, y, size, size);
+            bool intersects = blockRec.IntersectsWith(ballRec);
+            if (intersects)
+            {
+                BlockUnintersectorinator(b.x, b.y, b.width, b.height);
 
+            }
+            //if (ballRec.IntersectsWith(blockRec))
+            //{
+            //    if (ySpeed > 0)
+            //    {
+            //        x = b.x - 0;
+            //    }
+            //    ySpeed *= -1;
+            //    score++;
+            //}
+
+            return intersects;
+        }
         private void BlockUnintersectorinator(int bX, int bY, int bW, int bH)
         {
             int realX = (int)(x + size);

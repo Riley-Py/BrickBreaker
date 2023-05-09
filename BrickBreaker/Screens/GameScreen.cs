@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using BrickBreaker.Screens;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace BrickBreaker
 {
@@ -25,13 +27,15 @@ namespace BrickBreaker
 
         // Game values
         public static int lives;
+        TempLoader tempLoader;
 
         // Paddle and Ball objects
         public static Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
-        public static List<Block> blocks = new List<Block>();
+        //public static List<Block> blocks = new List<Block>();
+        public static List<DesignerBrick> bricks = new List<DesignerBrick>();
         public static List<Ball> ballList = new List<Ball>();
         public static List<Powerup> powers = new List<Powerup>();
         public static List<Gun> guns = new List<Gun>();
@@ -67,6 +71,8 @@ namespace BrickBreaker
         public void OnStart()
         {
             // reset powerup code
+            tempLoader = new TempLoader("0.xml");
+            
             onStartPowerup();
 
             //set life counter
@@ -98,15 +104,8 @@ namespace BrickBreaker
             
             //TODO - replace all the code in this region eventually with code that loads levels from xml files
             
-            blocks.Clear();
-            int x = 10;
-
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
+            bricks.Clear();
+            bricks = tempLoader.LoadDesigner();
 
             #endregion
 
@@ -173,16 +172,16 @@ namespace BrickBreaker
                 b.WallCollision(this);
                 b.PaddleCollision(paddle);
 
-                foreach (Block block in blocks)
+                foreach (DesignerBrick block in bricks)
                 {
                     if (b.BlockCollision(block))
                     {
 
                         createPowerup("Ammo", block.x + block.width / 2 - powerSize / 2, block.y + block.height / 2 - powerSize / 2, powerSize);
 
-                        blocks.Remove(block);
+                        bricks.Remove(block);
 
-                        if (blocks.Count == 0)
+                        if (bricks.Count == 0)
                         {
                             gameTimer.Enabled = false;
                             OnEnd();
@@ -257,11 +256,23 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
             // Draws blocks
-            foreach (Block b in blocks)
+            //foreach (DesignerBrick b in bricks)
+            //{
+            //    e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+            //}
+            foreach (DesignerBrick b in bricks)
             {
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-            }
+                if (b.powerup == PowerupEnum.None)
+                {
+                    e.Graphics.FillRectangle(b.solidBrush, b.x - b.width / 2, b.y - b.height / 2, b.width, b.height);
 
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(b.solidBrush, b.x - b.width / 2, b.y - b.height / 2, b.width, b.height);
+                    e.Graphics.DrawImage(b.powerupImage, b.x - b.width / 2, b.y - b.height / 2, b.width, b.height);
+                }
+            }
             // Draws ball
             foreach (Ball b in ballList)
             {
@@ -327,15 +338,15 @@ namespace BrickBreaker
             #region code that should be in the game loop and used by everyone
             ////This code deletes blocks in what I think is a more proper way than just deleting a block when it is hit
             // remove blocks from power ups 
-            for (int i = 0; i < blocks.Count; i++)
+            for (int i = 0; i < bricks.Count; i++)
             {
-                if (blocks[i].hp <= 0)
+                if (bricks[i].hp <= 0)
                 {
-                    blocks.RemoveAt(i);
+                    bricks.RemoveAt(i);
                 }
             }
             // end game if powerup causes it -- Repeat code from above that could be simplified
-            if (blocks.Count == 0)
+            if (bricks.Count == 0)
             {
                 gameTimer.Enabled = false;
                 OnEnd();
@@ -379,7 +390,7 @@ namespace BrickBreaker
             {
                 for (int i = 0; i < bullets.Count; i++)
                 {
-                    foreach (Block b in blocks)
+                    foreach (DesignerBrick b in bricks)
                     {
                         if (bullets[i].Collision(b) == true)
                         {
