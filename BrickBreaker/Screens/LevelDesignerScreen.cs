@@ -150,7 +150,8 @@ namespace BrickBreaker.Screens
                         writer.WriteElementString("hp", $"{b.hp}");
                         writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
                         
-                        if (b.powerup != PowerupEnum.None)
+                        //if (b.powerup != PowerupEnum.None)
+                        if(true)
                         {
                             writer.WriteElementString("powerup", $"{b.powerup}");
 

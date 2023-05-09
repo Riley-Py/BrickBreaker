@@ -78,26 +78,27 @@ namespace BrickBreaker
             XmlReader reader = XmlReader.Create(path);
             reader.ReadToFollowing("Level");
             List<DesignerBrick> blocks = new List<DesignerBrick>();
+            int iter = 0;
             while (reader.Read())
             {
 
                 if (reader.NodeType == XmlNodeType.Text)
 
                 {
-
-                    reader.ReadToFollowing("x");
+                    //reader.ReadToFollowing("Brick");
+                    //reader.ReadToNextSibling("x");
                     string x = reader.ReadString();
-                    reader.ReadToFollowing("y");
+                    reader.ReadToNextSibling("y");
                     string y = reader.ReadString();
-                    reader.ReadToFollowing("width");
+                    reader.ReadToNextSibling("width");
                     string w = reader.ReadString();
-                    reader.ReadToFollowing("height");
+                    reader.ReadToNextSibling("height");
                     string h = reader.ReadString();
-                    reader.ReadToFollowing("hp");
+                    reader.ReadToNextSibling("hp");
                     string hp = reader.ReadString();
-                    reader.ReadToFollowing("color");
+                    reader.ReadToNextSibling("color");
                     string c = reader.ReadString();
-                    reader.ReadToFollowing("powerup");
+                    reader.ReadToNextSibling("powerup");
                     string pu = reader.ReadString();
 
                     if (x.Length > 0)
@@ -108,11 +109,12 @@ namespace BrickBreaker
                         blocks.Add(b);
                     }
 
-                    reader.ReadToFollowing("Brick");
-
+                    //
+                    iter++;
                 }
 
             }
+            reader.Close();
             return blocks;
         }
         public bool ChangeLevel()

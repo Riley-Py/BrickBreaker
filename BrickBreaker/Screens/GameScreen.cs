@@ -228,16 +228,16 @@ namespace BrickBreaker
             // Check for collision of ball with paddle, (incl. paddle movement)
 
             // Check if ball has collided with any blocks
-            foreach (Block b in blocks)
+            foreach (DesignerBrick b in bricks)
             {
                 if (ball.BlockCollision(b))
                 {
 
                     createPowerup("Ammo", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
-                    blocks.Remove(b);
+                    bricks.Remove(b);
 
-                    if (blocks.Count == 0)
+                    if (bricks.Count == 0)
                     {
                         gameTimer.Enabled = false;
                         OnEnd();
