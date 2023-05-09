@@ -88,8 +88,8 @@ namespace BrickBreaker
             int ballY = this.Height - paddle.height - 80;
 
             // Creates a new ball
-            int xSpeed = 3;
-            int ySpeed = 3;
+            int xSpeed = 6;
+            int ySpeed = 6;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
@@ -165,13 +165,38 @@ namespace BrickBreaker
             }
 
             // Move ball 
-            ball.Move(); 
+            //ball.Move();
 
+            foreach (Ball b in ballList)
+            {
+                b.Move();
+                b.WallCollision(this);
+                b.PaddleCollision(paddle);
+
+                foreach (Block block in blocks)
+                {
+                    if (b.BlockCollision(block))
+                    {
+
+                        createPowerup("Ammo", block.x + block.width / 2 - powerSize / 2, block.y + block.height / 2 - powerSize / 2, powerSize);
+
+                        blocks.Remove(block);
+
+                        if (blocks.Count == 0)
+                        {
+                            gameTimer.Enabled = false;
+                            OnEnd();
+                        }
+                        
+                        break;
+                    }
+                }
+            }
             // Check for collision with top and side walls
-            ball.WallCollision(this);
+
 
             // Check for ball hitting bottom of screen
-            for(int i = ballList.Count-1; i >= 0; i--)
+            for (int i = ballList.Count-1; i >= 0; i--)
             {
                 if (ballList[i].BottomCollision(this))
                 {
@@ -202,27 +227,9 @@ namespace BrickBreaker
             }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
-            ball.PaddleCollision(paddle);
 
             // Check if ball has collided with any blocks
-            foreach (Block b in blocks)
-            {
-                if (ball.BlockCollision(b))
-                {
-
-                    createPowerup("Scar", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
-
-                    blocks.Remove(b);
-
-                    if (blocks.Count == 0)
-                    {
-                        gameTimer.Enabled = false;
-                        OnEnd();
-                    }
-
-                    break;
-                }
-            }
+            
 
             // Powerup actions
             runPowerupLoop();
@@ -256,7 +263,11 @@ namespace BrickBreaker
             }
 
             // Draws ball
-            e.Graphics.FillRectangle(ballBrush, (int)ball.x, (int)ball.y, (int)ball.size, (int)ball.size);
+            foreach (Ball b in ballList)
+            {
+                e.Graphics.FillRectangle(ballBrush, (int)b.x, (int)b.y, (int)b.size, (int)b.size);
+
+            }
 
             // Draws powerups
             foreach (Powerup p in powers)
@@ -378,7 +389,7 @@ namespace BrickBreaker
                             // add powerup created from bullet if the block was destroyed
                             if (b.hp <= 0)
                             {
-                                createPowerup("Scar", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
+                                createPowerup("Ammo", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
                             }
 
                             // remove bullet if it cannot do anything anymore
@@ -398,7 +409,8 @@ namespace BrickBreaker
                     }
                 }
             }
-            catch { } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and ball hit a block at the same time
+            catch { } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and
+                      //hit a block at the same time
         }
 
         public void createPowerup(string powerName, int x, int y, int size) 

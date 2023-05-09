@@ -56,7 +56,7 @@ namespace BrickBreaker
             {
                 //add ball
                 case "Ammo":
-                    Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y + GameScreen.paddle.height/2, 6, 6, 20);
+                    Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y - GameScreen.paddle.height, 3, 3, 20);
                     GameScreen.ballList.Add(ball);
                     break;
 
