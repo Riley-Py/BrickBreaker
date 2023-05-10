@@ -44,9 +44,10 @@
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.playButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.Black;
-            this.playButton.Location = new System.Drawing.Point(601, 431);
+            this.playButton.Location = new System.Drawing.Point(751, 539);
+            this.playButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(194, 77);
+            this.playButton.Size = new System.Drawing.Size(242, 96);
             this.playButton.TabIndex = 0;
             this.playButton.Text = "Play!";
             this.playButton.UseVisualStyleBackColor = false;
@@ -59,9 +60,10 @@
             this.exitButton.BackColor = System.Drawing.Color.Yellow;
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(19, 433);
+            this.exitButton.Location = new System.Drawing.Point(24, 541);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(194, 77);
+            this.exitButton.Size = new System.Drawing.Size(242, 96);
             this.exitButton.TabIndex = 1;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
@@ -75,9 +77,10 @@
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.White;
-            this.titleLabel.Location = new System.Drawing.Point(280, 17);
+            this.titleLabel.Location = new System.Drawing.Point(350, 21);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(427, 55);
+            this.titleLabel.Size = new System.Drawing.Size(528, 69);
             this.titleLabel.TabIndex = 2;
             this.titleLabel.Text = "BRICK BREAKER\r\n";
             // 
@@ -87,9 +90,10 @@
             this.modeSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.modeSelector.ForeColor = System.Drawing.Color.White;
             this.modeSelector.FormattingEnabled = true;
-            this.modeSelector.Location = new System.Drawing.Point(600, 372);
+            this.modeSelector.Location = new System.Drawing.Point(750, 465);
+            this.modeSelector.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.modeSelector.Name = "modeSelector";
-            this.modeSelector.Size = new System.Drawing.Size(194, 39);
+            this.modeSelector.Size = new System.Drawing.Size(242, 47);
             this.modeSelector.TabIndex = 3;
             this.modeSelector.Text = "Mode";
             // 
@@ -111,7 +115,7 @@
             // 
             // MenuScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
@@ -122,8 +126,9 @@
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MenuScreen";
-            this.Size = new System.Drawing.Size(852, 540);
+            this.Size = new System.Drawing.Size(1065, 675);
             this.ResumeLayout(false);
             this.PerformLayout();
 

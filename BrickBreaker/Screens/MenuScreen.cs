@@ -17,6 +17,7 @@ namespace BrickBreaker
         {
             InitializeComponent();
             RileyFunc();
+            
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -35,6 +36,8 @@ namespace BrickBreaker
             {
                 Form1.ChangeScreen(this, new GameScreen());
             }
+
+
         }
 
         

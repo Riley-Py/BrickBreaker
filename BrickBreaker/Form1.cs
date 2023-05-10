@@ -17,24 +17,27 @@ namespace BrickBreaker
     {
         List<HighScore> highScore = new List<HighScore>();
 
-        public static int score;
+        public static string score;
+        public static string playerName;
 
+        
        
 
 
         public Form1()
         {
             InitializeComponent();
-            HighScore high = new HighScore("23", "Logan");
-            highScore.Add(high);
-            LoganCode();
-            
+            JamesLoadHS();
+            ////LoganCode();
+
             //LoganSaveHS();
             //LoganLoadHS();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            HighScore high = new HighScore(score, playerName);
+            highScore.Add(high);
             // Start the program centred on the Menu Screen
             ChangeScreen(this, new MenuScreen());
         }
@@ -65,12 +68,57 @@ namespace BrickBreaker
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             //LoganSaveHS();
+            JamesSaveHS();
         }
 
-        public void LoganCode()
+        public void JamesLoadHS()
         {
+            string score, playerName;
 
+            XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml");
+
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                {
+                    score = reader.ReadString();
+
+                    reader.ReadToNextSibling("firstName");
+                    playerName = reader.ReadString();
+
+                    HighScore high = new HighScore(score, playerName);
+                    highScore.Add(high);
+                }
+            }
+
+            reader.Close();
         }
+
+        public void JamesSaveHS()
+        {
+            XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml", null);
+
+            writer.WriteStartElement("HighScore");
+
+            foreach (HighScore high in highScore)
+            {
+                writer.WriteStartElement("HighScore");
+
+                writer.WriteElementString("score", high.score);
+                writer.WriteElementString("playerName", high.playerName);
+
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+
+            writer.Close();
+        }
+
+        //public void LoganCode()
+        //{
+
+        //}
         //public void LoganSaveHS()
         //{
         //    XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml");
@@ -93,15 +141,17 @@ namespace BrickBreaker
 
         //public void LoganLoadHS()
         //{
-
         //    string score, playerName;
+
 
         //    XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml", null);
 
         //    while (reader.Read())
         //    {
+
         //        if (reader.NodeType == XmlNodeType.Text)
         //        {
+
         //            score = reader.ReadString();
 
         //            reader.ReadToNextSibling("playerName");

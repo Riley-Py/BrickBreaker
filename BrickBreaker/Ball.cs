@@ -55,6 +55,8 @@ namespace BrickBreaker
             if (intersects)
             {
                 BlockUnintersectorinator(b.x, b.y, b.width, b.height);
+                Convert.ToInt16(Form1.score);
+                score++;
 
             }
             //if (ballRec.IntersectsWith(blockRec))
