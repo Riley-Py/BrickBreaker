@@ -177,8 +177,8 @@ namespace BrickBreaker
                 {
                     if (b.BlockCollision(block))
                     {
-
-                        createPowerup("Ammo", block.x + block.width / 2 - powerSize / 2, block.y + block.height / 2 - powerSize / 2, powerSize);
+                        
+                        createPowerup(powerupName(block.powerup), block.x + block.width / 2 - powerSize / 2, block.y + block.height / 2 - powerSize / 2, powerSize);
 
                         bricks.Remove(block);
 
@@ -234,7 +234,7 @@ namespace BrickBreaker
                 if (ball.BlockCollision(b))
                 {
 
-                    createPowerup("Ammo", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+                    createPowerup(powerupName(b.powerup), b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
 
                     bricks.Remove(b);
 
@@ -443,7 +443,29 @@ namespace BrickBreaker
             catch { } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and
                       //hit a block at the same time
         }
-
+        
+        public string powerupName(PowerupEnum powerup)
+        {
+            switch (powerup)
+            {
+                case PowerupEnum.None:
+                    return "None";
+                    break;
+                case PowerupEnum.Ammo:
+                    return "Ammo";
+                case PowerupEnum.ChugJug:
+                    return "ChugJug";
+                case PowerupEnum.Scar:
+                    return "Scar";
+                case PowerupEnum.Shotgun:
+                    return "Shotgun";
+                case PowerupEnum.RocketLauncher:
+                    return "RocketLauncher";
+                case PowerupEnum.InfinityGauntlet:
+                    return "InfinityGauntlet";
+            }
+            return "Err";
+        }
         public void createPowerup(string powerName, int x, int y, int size) 
         {
             #region Overall Notes
