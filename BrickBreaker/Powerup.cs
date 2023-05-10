@@ -20,8 +20,7 @@ namespace BrickBreaker
         #endregion
         public string powerName;
         public int x, y, size, ySpeed = 4;
-        Bitmap powerSprite;
-        public int appearance;  //use for images later
+        public int appearance; 
 
         public Powerup(string _powerName, int _xLocation, int _yLocation, int _size, int _appearance)
         {
@@ -34,7 +33,7 @@ namespace BrickBreaker
 
         public void Move()
         {
-            y = y + ySpeed;
+            y += ySpeed;
         }
 
         public bool PaddleCollision(Paddle p)
@@ -51,7 +50,6 @@ namespace BrickBreaker
 
         public void GivePowerup()
         {
-            ////TO FIX ERRORS, I NEED lives AND blocks TO BE A PUBLIC STATIC
             switch (powerName)
             {
                 //add ball

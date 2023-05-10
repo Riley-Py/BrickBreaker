@@ -46,9 +46,10 @@ namespace BrickBreaker
         int appearance;
         public static int powerSize = 20;
 
-        Image[] images = new Image[] {Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos};
-        
-        
+        Image[] powerupImages = new Image[] { Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos };
+        Image[] gunImages = new Image[] { Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos };
+        Image[] bulletImages = new Image[] { Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos };
+     
         #endregion
         //List<Ball> ballList = new List<Ball>();
         public GameScreen()
@@ -261,7 +262,7 @@ namespace BrickBreaker
             // Draws powerups
             foreach (Powerup p in powers)
             {
-                e.Graphics.DrawImage(images[p.appearance], p.x, p.y, p.size, p.size);
+                e.Graphics.DrawImage(powerupImages[p.appearance], p.x, p.y, p.size, p.size);
             }
 
             // Draws guns
