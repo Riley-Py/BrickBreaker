@@ -177,18 +177,8 @@ namespace BrickBreaker
                 {
                     if (b.BlockCollision(block))
                     {
-                        
-                        createPowerup(powerupName(block.powerup), block.x + block.width / 2 - powerSize / 2, block.y + block.height / 2 - powerSize / 2, powerSize);
 
-                        bricks.Remove(block);
-
-                        if (bricks.Count == 0)
-                        {
-                            gameTimer.Enabled = false;
-                            OnEnd();
-                        }
-                        
-                        break;
+                        block.hp--;
                     }
                 }
             }
@@ -233,8 +223,18 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
+                    b.hp--;
+                }
+            }
 
-                    createPowerup(powerupName(b.powerup), b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+
+            // Powerup actions
+            runPowerupLoop();
+            foreach (DesignerBrick b in bricks)
+            {
+                if(b.hp <= 0)
+                {
+                    createPowerup(powerupName(b.powerup), b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
 
                     bricks.Remove(b);
 
@@ -248,24 +248,29 @@ namespace BrickBreaker
                 }
             }
 
-
-            // Powerup actions
-            runPowerupLoop();
-
             // Redraw the screen
             Refresh();
         }
 
         public void OnEnd()
         {
-            // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-            
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+            if (tempLoader.ChangeLevel())
+            {
+                bricks = tempLoader.LoadDesigner();
+            }
+            else
+            {
+                Form form = this.FindForm();
+                MenuScreen ps = new MenuScreen();
 
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
+                ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
+                form.Controls.Add(ps);
+                form.Controls.Remove(this);
+            }
+            
+            // Goes to the game over screen
+            
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
