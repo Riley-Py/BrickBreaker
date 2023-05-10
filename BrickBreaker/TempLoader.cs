@@ -50,6 +50,8 @@ namespace BrickBreaker
                     string c = reader.ReadString();
                     reader.ReadToFollowing("powerup");
                     string pu = reader.ReadString();
+                    reader.ReadToFollowing("background");
+                    string back = reader.ReadString();
 
                     if(x.Length > 0)
                     {
@@ -100,12 +102,14 @@ namespace BrickBreaker
                     string c = reader.ReadString();
                     reader.ReadToNextSibling("powerup");
                     string pu = reader.ReadString();
+                    reader.ReadToNextSibling("background");
+                    string back = reader.ReadString();
 
                     if (x.Length > 0)
                     {
                         DesignerBrick b = new DesignerBrick(Convert.ToInt32(x),
                         Convert.ToInt32(y), Convert.ToInt32(hp),
-                        Convert.ToInt32(w), Convert.ToInt32(h), PowerupEnum.None);
+                        Convert.ToInt32(w), Convert.ToInt32(h), PowerupEnum.None, Convert.ToInt32(back));
                         blocks.Add(b);
                     }
 

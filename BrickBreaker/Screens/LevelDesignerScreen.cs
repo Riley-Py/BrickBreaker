@@ -56,7 +56,7 @@ namespace BrickBreaker.Screens
             #region if left mouse button is clicked, add block
             if (e.Button == MouseButtons.Left)
             {
-                DesignerBrick brick = new DesignerBrick(x, y, currentHP, defWidth, defHeight, currentPowerup);
+                DesignerBrick brick = new DesignerBrick(x, y, currentHP, defWidth, defHeight, currentPowerup, backgrounds);
                 
                 bricks.Add(brick);
             }
@@ -72,7 +72,7 @@ namespace BrickBreaker.Screens
                         if (replace)
                         {
                             
-                            DesignerBrick b = new DesignerBrick(bricks[i].x, bricks[i].y, currentHP, bricks[i].width, bricks[i].height, currentPowerup);
+                            DesignerBrick b = new DesignerBrick(bricks[i].x, bricks[i].y, currentHP, bricks[i].width, bricks[i].height, currentPowerup, backgrounds);
                             bricks.Add(b);
                         }
                         bricks.RemoveAt(i);
@@ -149,6 +149,7 @@ namespace BrickBreaker.Screens
                         writer.WriteElementString("height", $"{b.height}");
                         writer.WriteElementString("hp", $"{b.hp}");
                         writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
+                        writer.WriteElementString("background", $"{b.background}");
                         
                         //if (b.powerup != PowerupEnum.None)
                         if(true)
@@ -246,7 +247,7 @@ namespace BrickBreaker.Screens
                     int dX = (i == 3 ? lastBrick.width/2 + defWidth/2 + spacing : 0)-(i == 2 ? lastBrick.width / 2 + defWidth / 2 + spacing : 0);
                     int dY = (i == 1 ? lastBrick.height/2 + defHeight/2 + spacing : 0) - (i == 0 ? lastBrick.height / 2 + defHeight / 2 + spacing : 0);
 
-                    DesignerBrick brick = new DesignerBrick(lastBrick.x + dX, lastBrick.y + dY, currentHP, defWidth, defHeight, currentPowerup);
+                    DesignerBrick brick = new DesignerBrick(lastBrick.x + dX, lastBrick.y + dY, currentHP, defWidth, defHeight, currentPowerup, backgrounds);
                     for (int j = 0; j < bricks.Count; j++)
                     {
                         if (brick.containsBrick(bricks[j]))
