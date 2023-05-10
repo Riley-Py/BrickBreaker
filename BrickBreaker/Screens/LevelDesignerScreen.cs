@@ -9,18 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Drawing.Text;
-
+using System.IO;
+using System.Resources;
+using System.Xml.Linq;
 
 namespace BrickBreaker.Screens
 {
     public partial class LevelDesignerScreen : UserControl
     {
+        #region global variables for game (put them all here)
         Powerup currentPowerup;
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
         bool[] lastPressedArrow = new bool[4];
         bool[] pressedArrow = new bool[4];
         bool replace = false;
+        bool delete = true;
         int selectedBrickIndex = 0;
         int moveBy = 1;
         int spacing = 1;
@@ -28,6 +32,8 @@ namespace BrickBreaker.Screens
         int defHeight = 18;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
+        #endregion
+
         public LevelDesignerScreen()
         {
             InitializeComponent();
@@ -36,19 +42,27 @@ namespace BrickBreaker.Screens
         }
 
 
-
+        /// <summary>
+        /// Placing and replacing blocks
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LevelDesignerScreen_MouseClick(object sender, MouseEventArgs e)
         {
             int x = e.X;
             int y = e.Y;
 
-            if(e.Button == MouseButtons.Left)
+            #region if left mouse button is clicked, add block
+            if (e.Button == MouseButtons.Left)
             {
                 DesignerBrick brick = new DesignerBrick(x, y, currentHP, defWidth, defHeight, currentPowerup);
                 
                 bricks.Add(brick);
             }
-            else if(e.Button == MouseButtons.Right)
+            #endregion
+
+            #region if right mouse button is clicked, remove the block that is selected
+            else if (e.Button == MouseButtons.Right)
             {
                 for(int i = bricks.Count - 1; i >= 0; i--)
                 {
@@ -56,16 +70,21 @@ namespace BrickBreaker.Screens
                     {
                         if (replace)
                         {
+                            
                             DesignerBrick b = new DesignerBrick(bricks[i].x, bricks[i].y, currentHP, bricks[i].width, bricks[i].height, currentPowerup);
                             bricks.Add(b);
                         }
                         bricks.RemoveAt(i);
                         selectedBrickIndex = bricks.Count-1;
+                        
 
                     }
                 }
             }
-            else if(e.Button == MouseButtons.Middle)
+            #endregion
+
+            #region if middle mouse buttion is clicked, select it
+            else if (e.Button == MouseButtons.Middle)
             {
                 for (int i = 0; i < bricks.Count; i++)
                 {
@@ -75,7 +94,10 @@ namespace BrickBreaker.Screens
                     }
                 }
             }
-            
+            #endregion
+
+            RileyFunc();
+
             Refresh();
         }
 
@@ -83,48 +105,85 @@ namespace BrickBreaker.Screens
         {
             foreach (DesignerBrick brick in bricks)
             {
-                e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width/2, brick.y - brick.height/2, brick.width, brick.height);
-            }
-        }
-
-        private void generateLevelButton_Click(object sender, EventArgs e)
-        {
-            
-            
-        }
-
-        private void generateLevel()
-        {
-            XmlWriter writer = XmlWriter.Create("Resources/LevelXML.xml");
-
-            writer.WriteStartElement("Level");
-            foreach (DesignerBrick b in bricks)
-            {
-                writer.WriteStartElement("Brick");
-                writer.WriteElementString("x",$"{b.x}");
-                writer.WriteElementString("y", $"{b.y}");
-                writer.WriteElementString("width", $"{b.width}");
-                writer.WriteElementString("height", $"{b.height}");
-                writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
-                if(b.powerup != Powerup.None)
+               
+                if(brick.powerup == Powerup.None)
                 {
-                    writer.WriteElementString("powerup", $"{b.powerup}");
+                    e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
 
                 }
                 else
                 {
-                    writer.WriteElementString("powerup", $"");
+                    e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+                    e.Graphics.DrawImage(brick.powerupImage, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
+                }             
+            }
+        }
+        /// <summary>
+        /// Generates level with name
+        /// </summary>
+        private void generateLevel()
+        {         
+            SaveFileDialog dialogue = new SaveFileDialog();
+            dialogue.Filter = "XML (*.xml)|*.xml|All files (*.*)|*.*";
+            dialogue.Title = "Save as an XML";
+            dialogue.FilterIndex = 2;
+
+            #region writes all of the bricks to the specified xml file (put it in levels folder, please!)
+            if (dialogue.ShowDialog() == DialogResult.OK)
+            {
+                            
+                using (XmlTextWriter writer = new XmlTextWriter(dialogue.FileName, System.Text.Encoding.UTF8))
+                {
+                    writer.Formatting = Formatting.Indented;
+                    
+                 
+                    writer.WriteStartElement("Level");
+
+                    foreach (DesignerBrick b in bricks)
+                    {
+                        writer.WriteStartElement("Brick");
+                        writer.WriteElementString("x", $"{b.x}");
+                        writer.WriteElementString("y", $"{b.y}");
+                        writer.WriteElementString("width", $"{b.width}");
+                        writer.WriteElementString("height", $"{b.height}");
+                        writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
+                        if (b.powerup != Powerup.None)
+                        {
+                            writer.WriteElementString("powerup", $"{b.powerup}");
+
+                        }
+                        else
+                        {
+                            writer.WriteElementString("powerup", $"");
+
+                        }
+                        writer.WriteEndElement();
+                       
+                    }
+
+                    
+                    writer.Flush();
+                    writer.Close();
+                    
+                    
 
                 }
-                writer.WriteEndElement();
-            }
+                
 
-            writer.Close();
+            }
+            #endregion
+
         }
+        /// <summary>
+        /// Adds/subtracts HP
+        /// </summary>
+        /// <param name="by"></param>
+        /// <returns></returns>
         private int deltaHP(int by) 
         {
-            int hp = currentHP += by;
             int maxHP = 5;
+            int hp = currentHP += by;
+              
             if(hp < 1)
             {
                 hp = maxHP;
@@ -133,6 +192,9 @@ namespace BrickBreaker.Screens
             {
                 hp = 1;
             }
+            hpLabel.Text = $"HP is: {hp}";
+
+            
             return hp;
         }
 
@@ -227,10 +289,8 @@ namespace BrickBreaker.Screens
                     powerUpLabel.Text = currentPowerup.ToString();
                     break;
                 case Keys.V:
-                    RileyFunc();
+                    RevealInstructions();
                     break;
-
-
                 case Keys.D1:
                     moveBy++;
                     break;
@@ -241,7 +301,11 @@ namespace BrickBreaker.Screens
                     break;
                 case Keys.Space:
                     replace = !replace;
-                    replaceLabel.Text = $"replace:{replace}";
+                    delete = !delete;
+
+                    replaceLabel.Text = $"Replace: {replace}";
+                    deleteLabel.Text = $"Delete: {delete}";
+
                     break;
             }
             compareKeys();
@@ -289,14 +353,24 @@ namespace BrickBreaker.Screens
         }
         private void RileyFunc()
         {
-            Form1.loadingFonts("burbank.otf", 18, instructionLabel);
+            Form1.LoadingFonts("burbank.otf", 18, instructionLabel);
+            Form1.LoadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
 
+            deleteLabel.Text = $"Delete: {delete}";         
+
+
+        }
+        /// <summary>
+        /// Reveals the instructions with using a key
+        /// </summary>
+        private void RevealInstructions()
+        {
             instructionLabel.Text = "Instructions:" +
                 "\n Left mouse click: place first block " +
                 "\n WASD: move position of block position to place " +
                 "\n r: rotate " +
                 "\n p: increase health " +
-                "\n l: decrease health " +
+                "\n L: decrease health " +
                 "\n m/n: change the powerups " +
                 "\n Enter: save the file " +
                 "\n v: make this label visible/invisible" +
@@ -304,14 +378,13 @@ namespace BrickBreaker.Screens
                 "\n Middle Click: select a block" +
                 "\n 1: Increases speed to move blocks with arrow keys" +
                 "\n 2: Decreases speed to move blocks with arrow keys" +
-                "\n Space: Changes on whether using right click adds/removes a block";   
-            
+                "\n Space: Changes on whether using right click adds/removes a block";
+
             instructionLabel.Visible = !instructionLabel.Visible;
             
 
-           
         }
-
+     
        
     }
 
