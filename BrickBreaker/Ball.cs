@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrickBreaker.Screens;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -47,6 +48,8 @@ namespace BrickBreaker
         {
             return Math.Abs(p2.X - p1.X) + Math.Abs(p2.Y - p1.Y);
         }
+
+        
         public bool BlockCollision(Block b)
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
@@ -59,19 +62,81 @@ namespace BrickBreaker
                 score++;
 
             }
-            //if (ballRec.IntersectsWith(blockRec))
-            //{
-            //    if (ySpeed > 0)
-            //    {
-            //        x = b.x - 0;
-            //    }
-            //    ySpeed *= -1;
-            //    score++;
-            //}
 
             return intersects;
         }
 
+        private int BoolToInt(bool i)
+        {
+            return (i) ? 1 : 0;
+        }
+
+        private bool IntersectsWithBrick(Rectangle b)
+        {
+            //Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+            int bX = b.X;
+            int bY = b.Y;
+            int bW = b.Width;
+            int bH = b.Height;
+
+            if (x + size > bX && x < bX + bW && y + size > bY && y < bY + bH)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool BlockCollision(DesignerBrick b)
+        {
+            Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+            Rectangle ballRec = DoubleRectangle(x, y, size, size);
+
+            int thres = 7;
+            Rectangle blockTop = new Rectangle(b.x + thres, b.y, b.width - (thres * 2), b.height / 2);
+            Rectangle blockBottom = new Rectangle(b.x + thres, b.y + (b.height/2), b.width - (thres * 2), b.height / 2);
+
+            Rectangle blockLeft = new Rectangle(b.x, b.y + (thres), thres, b.height - (thres*2));
+            Rectangle blockRight = new Rectangle(b.x + b.width - thres, b.y + (thres), thres, b.height - (thres * 2));
+            bool intersects = IntersectsWithBrick(blockRec);
+            if (intersects)
+            {
+                //BlockUnintersectorinator(b.x, b.y, b.width, b.height);
+
+                bool top = IntersectsWithBrick(blockTop);
+                bool bottom = IntersectsWithBrick(blockBottom);
+                bool left = IntersectsWithBrick(blockLeft);
+                bool right = IntersectsWithBrick(blockRight);
+
+                //if(BoolToInt(top) + BoolToInt(bottom) + BoolToInt(left) + BoolToInt(right) > 1)
+                //{
+                //    Application.Exit();
+                //}
+
+                if (top)
+                {
+                    y = blockRec.Top - size;
+                    ySpeed *= -1;
+                }
+                else if (bottom)
+                {
+                    y = blockRec.Bottom;
+                    ySpeed *= -1;
+                }
+                else if (left)
+                {
+                    x = blockRec.Left - size;
+                    xSpeed *= -1;
+                }
+                else if (right)
+                {
+                    x = blockRec.Right;
+                    xSpeed *= -1;
+                }
+
+            }
+
+            return intersects;
+        }
         private void BlockUnintersectorinator(int bX, int bY, int bW, int bH)
         {
             int realX = (int)(x + size);
@@ -87,7 +152,6 @@ namespace BrickBreaker
                 new Point(bX, bY + bH), //bottomleft
                 new Point(bX + bW, bY + bH)  //bottomright
             };
-
             int[] distanceSq = new int[4];
             for (int i = 0; i < corners.Length; i++)
             {
@@ -102,9 +166,6 @@ namespace BrickBreaker
                     closestIndex = i;
                 }
             }
-
-            
-
             int cX = corners[closestIndex].X;
             int cY = corners[closestIndex].Y;
             Point deltaCorner = deltaPoint(corners[closestIndex], ballPoint);
@@ -115,15 +176,15 @@ namespace BrickBreaker
             if (closestIndex == 0) 
             {
                 //if(deltaCorner.X < deltaCorner.Y) //top
-                if(realX < cX+size)
+                if(realX > cX - size/2)
                 {
-                    y = cY - (2 * size);
+                    y = cY - (size);
                     ySpeed *= -1;
                 }
 
                 else //left
                 {
-                    x = cX - (2 * size);
+                    x = cX - (size);
                     xSpeed *= -1;
                 }
                 
@@ -131,9 +192,9 @@ namespace BrickBreaker
             else if (closestIndex == 1) // 
             {
                 //if (deltaCorner.X < deltaCorner.Y) //top
-                if(realX > cX + size)
+                if(realX < cX + size/2)
                 {
-                    y = cY - (2 * size);
+                    y = cY - (size);
                     ySpeed *= -1;
                 }
 
@@ -148,7 +209,7 @@ namespace BrickBreaker
             else if (closestIndex == 2) 
             {
                 //if (deltaCorner.X < deltaCorner.Y) //bottom
-                if (realX < cX + size)
+                if (realX > cX - size/2)
                 {
                     y = cY;
                     ySpeed *= -1;
@@ -156,7 +217,7 @@ namespace BrickBreaker
 
                 else //left
                 {
-                    x = cX - (2 * size);
+                    x = cX - (size);
                     xSpeed *= -1;
                 }
             }
@@ -164,7 +225,7 @@ namespace BrickBreaker
             
             {
                 //if (deltaCorner.X < deltaCorner.Y) //bottom
-                if (realX > cX + size)
+                if (realX < cX + size/2)
                 {
                     y = cY;
                     ySpeed *= -1;
@@ -178,7 +239,49 @@ namespace BrickBreaker
             }
 
         }
+        
+        private double FindDistanceToSegment(
+        PointF pt, PointF p1, PointF p2)
+        {
+            PointF closest;
+            float dx = p2.X - p1.X;
+            float dy = p2.Y - p1.Y;
+            if ((dx == 0) && (dy == 0))
+            {
+                // It's a point not a line segment.
+                closest = p1;
+                dx = pt.X - p1.X;
+                dy = pt.Y - p1.Y;
+                return Math.Sqrt(dx * dx + dy * dy);
+            }
 
+            // Calculate the t that minimizes the distance.
+            float t = ((pt.X - p1.X) * dx + (pt.Y - p1.Y) * dy) /
+                (dx * dx + dy * dy);
+
+            // See if this represents one of the segment's
+            // end points or a point in the middle.
+            if (t < 0)
+            {
+                closest = new PointF(p1.X, p1.Y);
+                dx = pt.X - p1.X;
+                dy = pt.Y - p1.Y;
+            }
+            else if (t > 1)
+            {
+                closest = new PointF(p2.X, p2.Y);
+                dx = pt.X - p2.X;
+                dy = pt.Y - p2.Y;
+            }
+            else
+            {
+                closest = new PointF(p1.X + t * dx, p1.Y + t * dy);
+                dx = pt.X - closest.X;
+                dy = pt.Y - closest.Y;
+            }
+
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
         public void PaddleCollision(Paddle p)
         {
             Rectangle ballRec = DoubleRectangle(x, y, size, size);

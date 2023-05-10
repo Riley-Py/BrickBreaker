@@ -124,14 +124,29 @@
   <data name="chugJugEdited" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chugJugEdited.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Classic_Lobby_Music" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Classic Lobby Music.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="HighScoreXML" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HighScoreXML.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="informationBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\informationBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LevelXML" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LevelXML.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="luckyLandingImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\luckyLandingImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="menuScreenBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menuScreenBackground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pleasantParkImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pleasantParkImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="retailRoadImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\retailRoadImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rocketLauncher" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rocketLauncher.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -144,5 +159,8 @@
   </data>
   <data name="thanos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\thanos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tiltedTowersImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tiltedTowersImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

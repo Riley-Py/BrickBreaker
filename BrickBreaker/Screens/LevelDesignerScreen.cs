@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Drawing.Text;
-
+using System.IO;
+using System.Resources;
+using System.Xml.Linq;
 
 namespace BrickBreaker.Screens
 {
     public partial class LevelDesignerScreen : UserControl
     {
-        Powerup currentPowerup;
+        #region global variables for game (put them all here)
+        PowerupEnum currentPowerup;
         bool[] lastPressedWASD = new bool[4];
         bool[] pressedWASD = new bool[4];
         bool[] lastPressedArrow = new bool[4];
@@ -29,11 +32,14 @@ namespace BrickBreaker.Screens
         int defHeight = 18;
         List<DesignerBrick> bricks = new List<DesignerBrick>();
         int currentHP = 1;
+        int backgrounds = 0;
+        #endregion
+
         public LevelDesignerScreen()
         {
             InitializeComponent();
             RileyFunc();
-            currentPowerup = Powerup.None;
+            currentPowerup = PowerupEnum.None;
         }
 
 
@@ -101,7 +107,7 @@ namespace BrickBreaker.Screens
             foreach (DesignerBrick brick in bricks)
             {
                
-                if(brick.powerup == Powerup.None)
+                if(brick.powerup == PowerupEnum.None)
                 {
                     e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
 
@@ -110,40 +116,67 @@ namespace BrickBreaker.Screens
                 {
                     e.Graphics.FillRectangle(brick.solidBrush, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
                     e.Graphics.DrawImage(brick.powerupImage, brick.x - brick.width / 2, brick.y - brick.height / 2, brick.width, brick.height);
-                }
-
-              
+                }             
             }
         }
-
+        /// <summary>
+        /// Generates level with name
+        /// </summary>
         private void generateLevel()
-        {
-            //TODO: being able to name levels and saving each unique level into resources folder
-            XmlWriter writer = XmlWriter.Create("Resources/LevelXML.xml", null);
+        {         
+            SaveFileDialog dialogue = new SaveFileDialog();
+            dialogue.Filter = "XML (*.xml)|*.xml|All files (*.*)|*.*";
+            dialogue.Title = "Save as an XML";
+            dialogue.FilterIndex = 2;
 
-            writer.WriteStartElement("Level");
-            foreach (DesignerBrick b in bricks)
+            #region writes all of the bricks to the specified xml file (put it in levels folder, please!)
+            if (dialogue.ShowDialog() == DialogResult.OK)
             {
-                writer.WriteStartElement("Brick");
-                writer.WriteElementString("x",$"{b.x}");
-                writer.WriteElementString("y", $"{b.y}");
-                writer.WriteElementString("width", $"{b.width}");
-                writer.WriteElementString("height", $"{b.height}");
-                writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
-                if(b.powerup != Powerup.None)
+                            
+                using (XmlTextWriter writer = new XmlTextWriter(dialogue.FileName, System.Text.Encoding.UTF8))
                 {
-                    writer.WriteElementString("powerup", $"{b.powerup}");
+                    writer.Formatting = Formatting.Indented;
+                    
+                 
+                    writer.WriteStartElement("Level");
+
+                    foreach (DesignerBrick b in bricks)
+                    {
+                        writer.WriteStartElement("Brick");
+                        writer.WriteElementString("x", $"{b.x}");
+                        writer.WriteElementString("y", $"{b.y}");
+                        writer.WriteElementString("width", $"{b.width}");
+                        writer.WriteElementString("height", $"{b.height}");
+                        writer.WriteElementString("hp", $"{b.hp}");
+                        writer.WriteElementString("color", $"{b.solidBrush.Color.Name}");
+                        
+                        //if (b.powerup != PowerupEnum.None)
+                        if(true)
+                        {
+                            writer.WriteElementString("powerup", $"{b.powerup}");
+
+                        }
+                        else
+                        {
+                            writer.WriteElementString("powerup", $"");
+
+                        }
+                        writer.WriteEndElement();
+                       
+                    }
+
+                    
+                    writer.Flush();
+                    writer.Close();
+                    
+                    
 
                 }
-                else
-                {
-                    writer.WriteElementString("powerup", $"");
+                
 
-                }
-                writer.WriteEndElement();
             }
+            #endregion
 
-            writer.Close();
         }
         /// <summary>
         /// Adds/subtracts HP
@@ -164,8 +197,44 @@ namespace BrickBreaker.Screens
                 hp = 1;
             }
             hpLabel.Text = $"HP is: {hp}";
+
+            
             return hp;
         }
+
+        private void ChangingBackground(int back)
+        {
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            switch (back)
+            {
+                case 1:
+                    this.BackgroundImage = Properties.Resources.tiltedTowersImage;
+                    backgroundLabel.Text = "Tilted Towers";
+                    break;
+                case 2:
+                    this.BackgroundImage = Properties.Resources.pleasantParkImage;
+                    backgroundLabel.Text = "Pleasant Park";
+                    break;
+                case 3:
+                    this.BackgroundImage = Properties.Resources.luckyLandingImage;
+                    backgroundLabel.Text = "Lucky Landing";
+                    break;
+                case 4:
+                    this.BackgroundImage = Properties.Resources.retailRoadImage;
+                    backgroundLabel.Text = "Retail Road";
+                    break;
+
+                default:
+                    this.BackgroundImage = null;
+                    backgroundLabel.Text = "None";
+                    backgrounds = 0;
+                    break;
+                    
+            }
+        }
+       
+        
 
         private void compareKeys()
         {
@@ -243,7 +312,7 @@ namespace BrickBreaker.Screens
                     break;
                 case Keys.M:
                     currentPowerup += 1;
-                    if (currentPowerup >= Powerup.Default || currentPowerup < 0)
+                    if (currentPowerup >= PowerupEnum.Default || currentPowerup < 0)
                     {
                         currentPowerup = 0;
                     }
@@ -251,7 +320,7 @@ namespace BrickBreaker.Screens
                     break;
                 case Keys.N:
                     currentPowerup -= 1;
-                    if(currentPowerup >= Powerup.Default || currentPowerup < 0)
+                    if(currentPowerup >= PowerupEnum.Default || currentPowerup < 0)
                     {
                         currentPowerup = 0;
                     }
@@ -271,9 +340,12 @@ namespace BrickBreaker.Screens
                 case Keys.Space:
                     replace = !replace;
                     delete = !delete;
-
                     replaceLabel.Text = $"Replace: {replace}";
                     deleteLabel.Text = $"Delete: {delete}";
+                    break;
+                case Keys.B:
+                    backgrounds += 1;
+                    ChangingBackground(backgrounds);
 
                     break;
             }
@@ -322,18 +394,12 @@ namespace BrickBreaker.Screens
         }
         private void RileyFunc()
         {
-            Form1.loadingFonts("burbank.otf", 18, instructionLabel);
-            Form1.loadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel);
+            Form1.LoadingFonts("burbank.otf", 18, instructionLabel);
+            Form1.LoadingFonts("burbank.otf", 15, replaceLabel, deleteLabel, hpLabel, powerUpLabel, backgroundLabel);
 
-            deleteLabel.Text = $"Delete: {delete}";
-            
-
-            
-
-            
+            deleteLabel.Text = $"Delete: {delete}";         
 
 
-           
         }
         /// <summary>
         /// Reveals the instructions with using a key
@@ -356,23 +422,13 @@ namespace BrickBreaker.Screens
                 "\n Space: Changes on whether using right click adds/removes a block";
 
             instructionLabel.Visible = !instructionLabel.Visible;
+            
 
         }
+     
        
     }
 
-    enum Powerup
-    {
-        None = 0,
-
-        Ammo = 1,
-        ChugJug = 2,
-        Scar = 3,
-        Shotgun = 4,
-        RocketLauncher = 5,
-        InfinityGauntlet = 6,
-        
-        Default = 7
-    }
+    
   
 }

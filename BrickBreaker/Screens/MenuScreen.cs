@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrickBreaker.Screens;
+using System.Windows.Media;
 
 namespace BrickBreaker
 {
     public partial class MenuScreen : UserControl
     {
+
+        MediaPlayer menuMusic = new MediaPlayer();
         public MenuScreen()
         {
+            menuMusic.Open(new Uri(Application.StartupPath + "/Resources/Classic Lobby Music.wav"));
+            menuMusic.Play();
             InitializeComponent();
             RileyFunc();
             
@@ -34,7 +39,7 @@ namespace BrickBreaker
             }
             else if (modeSelector.SelectedItem == "Single Player")
             {
-                Form1.ChangeScreen(this, new GameScreen());
+                Form1.ChangeScreen(this, new UserInfo());
             }
 
 
@@ -44,13 +49,13 @@ namespace BrickBreaker
         //Comment out for color testing
         private void RileyFunc()
         {
-            playButton.BackColor = Color.FromArgb(255, 247, 255, 25);
-            modeSelector.BackColor = Color.FromArgb(255, 0, 86, 255);
-            exitButton.BackColor = Color.FromArgb(255, 247, 255, 25);
+            playButton.BackColor = System.Drawing.Color.FromArgb(255, 247, 255, 25);
+            modeSelector.BackColor = System.Drawing.Color.FromArgb(255, 0, 86, 255);
+            exitButton.BackColor = System.Drawing.Color.FromArgb(255, 247, 255, 25);
 
-            Form1.loadingFonts("burbank.otf", 36, titleLabel);
-            Form1.loadingFonts("burbank.otf", 27, playButton, exitButton);
-            Form1.loadingFonts("burbank.otf", 20, modeSelector);
+            Form1.LoadingFonts("burbank.otf", 36, titleLabel);
+            Form1.LoadingFonts("burbank.otf", 27, playButton, exitButton);
+            Form1.LoadingFonts("burbank.otf", 20, modeSelector);
             
 
             modeSelector.Items.Add("Level Editor");
@@ -61,22 +66,22 @@ namespace BrickBreaker
         //NOTE: if you want to remove these next lines, go to designer and remove the reference.  DO NOT delete these lines in code or the program breaks!!
         private void playButton_MouseHover(object sender, EventArgs e)
         {
-            playButton.BackColor = Color.FromArgb(150, 247, 255, 25);
+            playButton.BackColor = System.Drawing.Color.FromArgb(150, 247, 255, 25);
         }
 
         private void playButton_MouseLeave(object sender, EventArgs e)
         {
-            playButton.BackColor = Color.FromArgb(255, 247, 255, 25);
+            playButton.BackColor = System.Drawing.Color.FromArgb(255, 247, 255, 25);
         }
 
         private void exitButton_MouseHover(object sender, EventArgs e)
         {
-            exitButton.BackColor = Color.FromArgb(150, 247, 255, 25);
+            exitButton.BackColor = System.Drawing.Color.FromArgb(150, 247, 255, 25);
         }
 
         private void exitButton_MouseLeave(object sender, EventArgs e)
         {
-            exitButton.BackColor = Color.FromArgb(255, 247, 255, 25);
+            exitButton.BackColor = System.Drawing.Color.FromArgb(255, 247, 255, 25);
         }
         //private void levelDesignerButton_Click(object sender, EventArgs e)
         //{

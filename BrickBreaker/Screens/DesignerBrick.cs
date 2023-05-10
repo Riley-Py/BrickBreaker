@@ -8,17 +8,18 @@ using System.Windows.Forms;
 
 namespace BrickBreaker.Screens
 {
-    internal class DesignerBrick
+    public class DesignerBrick
     {
         //public static int lastX = 0, lastY = 0;
         public int x, y;
         public int width, height;
-        public Powerup powerup;
+        public PowerupEnum powerup;
         public SolidBrush solidBrush;
         public int hp;
         public Image powerupImage;
+      
 
-        public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, Powerup pu)
+        public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, PowerupEnum pu)
         {
             x = _x;
             y = _y;
@@ -28,6 +29,7 @@ namespace BrickBreaker.Screens
             powerup = pu;
             powerupImage = PowerUpToImage(pu);
             hp = _hp;
+       
         }
 
 
@@ -54,24 +56,24 @@ namespace BrickBreaker.Screens
         /// </summary>
         /// <param name="powerup"></param>
         /// <returns></returns>
-        private Image PowerUpToImage(Powerup powerup)
+        private Image PowerUpToImage(PowerupEnum powerup)
         {
-            Powerup power = powerup;
+            PowerupEnum power = powerup;
             
             //Add more powerups as needed (modify the enum list in level designer, however)
             switch (power)
             {
-                case Powerup.Ammo:
+                case PowerupEnum.Ammo:
                     return Properties.Resources.ammoBox;
-                case Powerup.ChugJug:
+                case PowerupEnum.ChugJug:
                     return Properties.Resources.chugJugEdited;
-                case Powerup.RocketLauncher:
+                case PowerupEnum.RocketLauncher:
                      return Properties.Resources.rocketLauncher;
-                case Powerup.Scar:
+                case PowerupEnum.Scar:
                     return Properties.Resources.scar;
-                case Powerup.Shotgun:
+                case PowerupEnum.Shotgun:
                     return Properties.Resources.shotgun;
-                case Powerup.InfinityGauntlet:
+                case PowerupEnum.InfinityGauntlet:
                     return Properties.Resources.thanos;
 
             }
@@ -101,5 +103,6 @@ namespace BrickBreaker.Screens
             }
             return false;
         }
+       
     }
 }
