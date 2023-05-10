@@ -113,7 +113,7 @@ namespace BrickBreaker
                     {
                         DesignerBrick b = new DesignerBrick(Convert.ToInt32(x),
                         Convert.ToInt32(y), Convert.ToInt32(hp),
-                        Convert.ToInt32(w), Convert.ToInt32(h), PowerupEnum.None);
+                        Convert.ToInt32(w), Convert.ToInt32(h), pu);
                         blocks.Add(b);
                     }
 

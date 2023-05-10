@@ -86,15 +86,15 @@ namespace BrickBreaker
         }
         public bool BlockCollision(DesignerBrick b)
         {
-            Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+            Rectangle blockRec = new Rectangle(b.x - b.width, b.y - b.height, b.width*2, b.height*2);
             Rectangle ballRec = DoubleRectangle(x, y, size, size);
 
             int thres = 7;
-            Rectangle blockTop = new Rectangle(b.x + thres, b.y, b.width - (thres * 2), b.height / 2);
-            Rectangle blockBottom = new Rectangle(b.x + thres, b.y + (b.height/2), b.width - (thres * 2), b.height / 2);
+            Rectangle blockTop = new Rectangle(blockRec.X + thres, blockRec.Y, blockRec.Width - (thres * 2), blockRec.Height / 2);
+            Rectangle blockBottom = new Rectangle(blockRec.X + thres, blockRec.Y + (blockRec.Height / 2), blockRec.Width - (thres * 2), blockRec.Height / 2);
 
-            Rectangle blockLeft = new Rectangle(b.x, b.y + (thres), thres, b.height - (thres*2));
-            Rectangle blockRight = new Rectangle(b.x + b.width - thres, b.y + (thres), thres, b.height - (thres * 2));
+            Rectangle blockLeft = new Rectangle(blockRec.X, blockRec.Y + (thres), thres, blockRec.Height - (thres*2));
+            Rectangle blockRight = new Rectangle(blockRec.X + blockRec.Width - thres, blockRec.Y + (thres), thres, blockRec.Height - (thres * 2));
             bool intersects = IntersectsWithBrick(blockRec);
             if (intersects)
             {

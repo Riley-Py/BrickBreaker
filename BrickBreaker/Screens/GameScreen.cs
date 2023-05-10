@@ -179,8 +179,11 @@ namespace BrickBreaker
                     {
 
                         block.hp--;
+                        goto next;
                     }
                 }
+                next:
+                    continue;
             }
             // Check for collision with top and side walls
 
@@ -218,14 +221,7 @@ namespace BrickBreaker
 
             // Check for collision of ball with paddle, (incl. paddle movement)
 
-            // Check if ball has collided with any blocks
-            foreach (DesignerBrick b in bricks)
-            {
-                if (ball.BlockCollision(b))
-                {
-                    b.hp--;
-                }
-            }
+
 
 
             // Powerup actions
@@ -246,9 +242,15 @@ namespace BrickBreaker
 
                     break;
                 }
+
+                else
+                {
+                    b.solidBrush.Color = b.HPToColor(b.hp);
+                }
             }
 
             // Redraw the screen
+
             Refresh();
         }
 
@@ -257,6 +259,7 @@ namespace BrickBreaker
             if (tempLoader.ChangeLevel())
             {
                 bricks = tempLoader.LoadDesigner();
+                OnStart();
             }
             else
             {
@@ -422,11 +425,11 @@ namespace BrickBreaker
                             b.hp--;
 
                             // add powerup created from bullet if the block was destroyed
-                            if (b.hp <= 0)
-                            {
-                                createPowerup("RocketLauncher", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
+                            //if (b.hp <= 0)
+                            //{
+                            //    createPowerup("RocketLauncher", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
 
-                            }
+                            //}
 
                             // remove bullet if it cannot do anything anymore
                             bullets[i].damageVal--;

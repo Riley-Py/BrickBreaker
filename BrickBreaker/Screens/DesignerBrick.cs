@@ -31,9 +31,41 @@ namespace BrickBreaker.Screens
             hp = _hp;
        
         }
+        public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, string pu)
+        {
+            x = _x;
+            y = _y;
+            solidBrush = new SolidBrush(HPToColor(_hp));
+            width = _w;
+            height = _h;
+            powerup = NameToPowerup(pu);
+            powerupImage = PowerUpToImage(powerup);
+            hp = _hp;
 
-
-        private Color HPToColor(int hitPoints)
+        }
+        private PowerupEnum NameToPowerup(string name)
+        {
+            switch (name)
+            {
+                case "None":
+                    return PowerupEnum.None;
+                    break;
+                case "Ammo":
+                    return PowerupEnum.Ammo;
+                case "ChugJug":
+                    return PowerupEnum.ChugJug;
+                case "Scar":
+                    return PowerupEnum.Scar;
+                case "Shotgun":
+                    return PowerupEnum.Shotgun;
+                case "RocketLauncher":
+                    return PowerupEnum.RocketLauncher;
+                case "InfinityGauntlet":
+                    return PowerupEnum.InfinityGauntlet;
+            }
+            return PowerupEnum.None;
+        }
+        public Color HPToColor(int hitPoints)
         {
             switch(hitPoints)
             {
