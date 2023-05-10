@@ -68,7 +68,7 @@ namespace BrickBreaker
                 //add ball
                 case "Ammo":
                     Ball ball = new Ball(GameScreen.paddle.x + GameScreen.paddle.width/2, GameScreen.paddle.y - GameScreen.paddle.height, 3, 3, 20);
-                    GameScreen.ballList.Add(ball);
+                    GameScreen.ballList.Add(ball); 
                     break;
 
                 //add extra life, to a maximum of one extra life
