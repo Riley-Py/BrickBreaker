@@ -81,6 +81,15 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Classic_Lobby_Music {
+            get {
+                return ResourceManager.GetStream("Classic_Lobby_Music", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;HighScore&gt;&lt;score&gt;23&lt;/score&gt;&lt;playerName&gt;Logan&lt;/playerName&gt;&lt;/HighScore&gt;&lt;/HighScore&gt;.
         /// </summary>
         internal static string HighScoreXML {

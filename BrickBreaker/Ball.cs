@@ -48,6 +48,8 @@ namespace BrickBreaker
         {
             return Math.Abs(p2.X - p1.X) + Math.Abs(p2.Y - p1.Y);
         }
+
+        
         public bool BlockCollision(Block b)
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
@@ -58,37 +60,78 @@ namespace BrickBreaker
                 BlockUnintersectorinator(b.x, b.y, b.width, b.height);
 
             }
-            //if (ballRec.IntersectsWith(blockRec))
-            //{
-            //    if (ySpeed > 0)
-            //    {
-            //        x = b.x - 0;
-            //    }
-            //    ySpeed *= -1;
-            //    score++;
-            //}
 
             return intersects;
+        }
+
+        private int BoolToInt(bool i)
+        {
+            return (i) ? 1 : 0;
+        }
+
+        private bool IntersectsWithBrick(Rectangle b)
+        {
+            //Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+            int bX = b.X;
+            int bY = b.Y;
+            int bW = b.Width;
+            int bH = b.Height;
+
+            if (x + size > bX && x < bX + bW && y + size > bY && y < bY + bH)
+            {
+                return true;
+            }
+
+            return false;
         }
         public bool BlockCollision(DesignerBrick b)
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = DoubleRectangle(x, y, size, size);
-            bool intersects = blockRec.IntersectsWith(ballRec);
+
+            int thres = 7;
+            Rectangle blockTop = new Rectangle(b.x + thres, b.y, b.width - (thres * 2), b.height / 2);
+            Rectangle blockBottom = new Rectangle(b.x + thres, b.y + (b.height/2), b.width - (thres * 2), b.height / 2);
+
+            Rectangle blockLeft = new Rectangle(b.x, b.y + (thres), thres, b.height - (thres*2));
+            Rectangle blockRight = new Rectangle(b.x + b.width - thres, b.y + (thres), thres, b.height - (thres * 2));
+            bool intersects = IntersectsWithBrick(blockRec);
             if (intersects)
             {
-                BlockUnintersectorinator(b.x, b.y, b.width, b.height);
+                //BlockUnintersectorinator(b.x, b.y, b.width, b.height);
+
+                bool top = IntersectsWithBrick(blockTop);
+                bool bottom = IntersectsWithBrick(blockBottom);
+                bool left = IntersectsWithBrick(blockLeft);
+                bool right = IntersectsWithBrick(blockRight);
+
+                //if(BoolToInt(top) + BoolToInt(bottom) + BoolToInt(left) + BoolToInt(right) > 1)
+                //{
+                //    Application.Exit();
+                //}
+
+                if (top)
+                {
+                    y = blockRec.Top - size;
+                    ySpeed *= -1;
+                }
+                else if (bottom)
+                {
+                    y = blockRec.Bottom;
+                    ySpeed *= -1;
+                }
+                else if (left)
+                {
+                    x = blockRec.Left - size;
+                    xSpeed *= -1;
+                }
+                else if (right)
+                {
+                    x = blockRec.Right;
+                    xSpeed *= -1;
+                }
 
             }
-            //if (ballRec.IntersectsWith(blockRec))
-            //{
-            //    if (ySpeed > 0)
-            //    {
-            //        x = b.x - 0;
-            //    }
-            //    ySpeed *= -1;
-            //    score++;
-            //}
 
             return intersects;
         }
@@ -131,7 +174,7 @@ namespace BrickBreaker
             if (closestIndex == 0) 
             {
                 //if(deltaCorner.X < deltaCorner.Y) //top
-                if(realX > cX + size / 2)
+                if(realX > cX - size/2)
                 {
                     y = cY - (size);
                     ySpeed *= -1;
@@ -147,7 +190,7 @@ namespace BrickBreaker
             else if (closestIndex == 1) // 
             {
                 //if (deltaCorner.X < deltaCorner.Y) //top
-                if(realX < cX + size / 2)
+                if(realX < cX + size/2)
                 {
                     y = cY - (size);
                     ySpeed *= -1;
@@ -164,7 +207,7 @@ namespace BrickBreaker
             else if (closestIndex == 2) 
             {
                 //if (deltaCorner.X < deltaCorner.Y) //bottom
-                if (realX > cX + size/2)
+                if (realX > cX - size/2)
                 {
                     y = cY;
                     ySpeed *= -1;
@@ -180,7 +223,7 @@ namespace BrickBreaker
             
             {
                 //if (deltaCorner.X < deltaCorner.Y) //bottom
-                if (realX < cX + size / 2)
+                if (realX < cX + size/2)
                 {
                     y = cY;
                     ySpeed *= -1;
