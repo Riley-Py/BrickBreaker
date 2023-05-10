@@ -51,6 +51,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -62,6 +63,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animator.cs" />
@@ -110,6 +112,13 @@
     <Compile Include="Screens\UserInfo.Designer.cs">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\Classic Lobby Music.wav" />
+    <None Include="Resources\luckyLandingImage.png" />
+    <None Include="Resources\retailRoadImage.png" />
+    <None Include="Resources\tiltedTowersImage.png" />
+    <None Include="Resources\pleasantParkImage.png" />
+    <None Include="Resources\pleasantParkImage.jpg" />
+    <Compile Include="TempLoader.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
