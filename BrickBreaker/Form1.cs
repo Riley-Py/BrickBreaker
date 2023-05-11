@@ -20,6 +20,7 @@ namespace BrickBreaker
         public static int score;
         public static string username;
 
+        
        
 
 
@@ -37,6 +38,8 @@ namespace BrickBreaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            HighScore high = new HighScore(score, playerName);
+            highScore.Add(high);
             // Start the program centred on the Menu Screen
             ChangeScreen(this, new MenuScreen());
         }
@@ -67,10 +70,44 @@ namespace BrickBreaker
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             //LoganSaveHS();
+            JamesSaveHS();
         }
 
-        public void LoganCode()
+        public void JamesLoadHS()
         {
+            string score, playerName;
+
+            XmlReader reader = XmlReader.Create("Resources/HighScoreXML.xml");
+
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                {
+                    score = reader.ReadString();
+
+                    reader.ReadToNextSibling("firstName");
+                    playerName = reader.ReadString();
+
+                    HighScore high = new HighScore(score, playerName);
+                    highScore.Add(high);
+                }
+            }
+
+            reader.Close();
+        }
+
+        public void JamesSaveHS()
+        {
+            XmlWriter writer = XmlWriter.Create("Resources/HighScoreXML.xml", null);
+
+            writer.WriteStartElement("HighScore");
+
+            foreach (HighScore high in highScore)
+            {
+                writer.WriteStartElement("HighScore");
+
+                writer.WriteElementString("score", high.score);
+                writer.WriteElementString("playerName", high.playerName);
 
         }
         public static void LoganSaveHS(List<HighScore> highScore)
