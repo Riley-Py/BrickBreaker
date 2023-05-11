@@ -129,7 +129,7 @@ namespace BrickBreaker
         {
             level++;
             fileName = level.ToString();
-            
+            fileName += ".xml";
             return File.Exists(Path(fileName));
         }
     }

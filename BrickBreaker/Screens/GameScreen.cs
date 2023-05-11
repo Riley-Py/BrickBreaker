@@ -58,6 +58,7 @@ namespace BrickBreaker
         //List<Ball> ballList = new List<Ball>();
         public GameScreen()
         {
+            tempLoader = new TempLoader("0.xml");
             InitializeComponent();
             OnStart();
         }
@@ -72,7 +73,7 @@ namespace BrickBreaker
         public void OnStart()
         {
             // reset powerup code
-            tempLoader = new TempLoader("0.xml");
+            
             
             onStartPowerup();
 
@@ -365,13 +366,13 @@ namespace BrickBreaker
             #region code that should be in the game loop and used by everyone
             ////This code deletes blocks in what I think is a more proper way than just deleting a block when it is hit
             // remove blocks from power ups 
-            for (int i = 0; i < bricks.Count; i++)
-            {
-                if (bricks[i].hp <= 0)
-                {
-                    bricks.RemoveAt(i);
-                }
-            }
+            //for (int i = 0; i < bricks.Count; i++)
+            //{
+            //    if (bricks[i].hp <= 0)
+            //    {
+            //        bricks.RemoveAt(i);
+            //    }
+            //}
             // end game if powerup causes it -- Repeat code from above that could be simplified
             if (bricks.Count == 0)
             {

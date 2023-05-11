@@ -10,7 +10,7 @@ namespace BrickBreaker
     public class Ball
     {
         public double x, y, xSpeed, ySpeed, size, score;
-        public double speedCap = 8;
+        public double speedCap = 7;
         public double speedMin = 0.3;
         public double paddleMoveOffset = 0.55;
         public Color colour;

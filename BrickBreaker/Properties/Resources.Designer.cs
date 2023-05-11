@@ -61,6 +61,76 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;Level&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;188&lt;/x&gt;
+        ///    &lt;y&gt;252&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;231&lt;/x&gt;
+        ///    &lt;y&gt;252&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;274&lt;/x&gt;
+        ///    &lt;y&gt;252&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/poweru [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string _0 {
+            get {
+                return ResourceManager.GetString("_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;Level&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;290&lt;/x&gt;
+        ///    &lt;y&gt;179&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;290&lt;/x&gt;
+        ///    &lt;y&gt;198&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;290&lt;/x&gt;
+        ///    &lt;y&gt;217&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/poweru [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string _1 {
+            get {
+                return ResourceManager.GetString("_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ammoBox {
