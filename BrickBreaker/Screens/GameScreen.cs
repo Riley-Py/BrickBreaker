@@ -118,6 +118,19 @@ namespace BrickBreaker
 
             #endregion
 
+            int bgInt = bricks[0].background;
+            string imgName = "";
+
+            switch (bgInt)
+            {
+                case 0:
+                    imgName = "pleasantParkImage.jpg";
+                    break;
+                    
+            }
+            string app = Application.StartupPath;
+            this.BackgroundImage = Properties.Resources.pleasantParkImage;
+
             // start the game engine loop
             gameTimer.Enabled = true;
         }
@@ -373,24 +386,6 @@ namespace BrickBreaker
                 }catch{} // can probably be fixed with a break; but I am trying to remove those right now
             }
 
-            #region code that should be in the game loop and used by everyone
-            ////This code deletes blocks in what I think is a more proper way than just deleting a block when it is hit
-            // remove blocks from power ups 
-            //for (int i = 0; i < bricks.Count; i++)
-            //{
-            //    if (bricks[i].hp <= 0)
-            //    {
-            //        bricks.RemoveAt(i);
-            //    }
-            //}
-            // end game if powerup causes it -- Repeat code from above that could be simplified
-            if (bricks.Count == 0)
-            {
-                gameTimer.Enabled = false;
-                OnEnd();
-            }
-            #endregion
-
             //// Gun code
             foreach (Gun g in guns)
             {
@@ -434,13 +429,6 @@ namespace BrickBreaker
                         {
                             // remove lives from blocks
                             b.hp--;
-
-                            // add powerup created from bullet if the block was destroyed
-                            //if (b.hp <= 0)
-                            //{
-                            //    createPowerup("RocketLauncher", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
-
-                            //}
 
                             // remove bullet if it cannot do anything anymore
                             bullets[i].damageVal--;

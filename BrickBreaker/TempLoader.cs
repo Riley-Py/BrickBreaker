@@ -115,9 +115,18 @@ namespace BrickBreaker
 
                     if (x.Length > 0)
                     {
+                        int bg;
+                        if(back == "")
+                        {
+                            bg = 0;
+                        }
+                        else
+                        {
+                            bg = Convert.ToInt32(back);
+                        }
                         DesignerBrick b = new DesignerBrick(Convert.ToInt32(x),
                         Convert.ToInt32(y), Convert.ToInt32(hp),
-                        Convert.ToInt32(w), Convert.ToInt32(h), pu, Convert.ToInt32(back));
+                        Convert.ToInt32(w), Convert.ToInt32(h), pu, bg);
 
                         blocks.Add(b);
                     }

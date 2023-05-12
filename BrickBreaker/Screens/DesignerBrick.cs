@@ -33,7 +33,7 @@ namespace BrickBreaker.Screens
             background = _background;
        
         }
-        public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, string pu)
+        public DesignerBrick(int _x, int _y, int _hp, int _w, int _h, string pu, int _background)
         {
             x = _x;
             y = _y;
@@ -43,6 +43,7 @@ namespace BrickBreaker.Screens
             powerup = NameToPowerup(pu);
             powerupImage = PowerUpToImage(powerup);
             hp = _hp;
+            background = _background;
 
         }
         private PowerupEnum NameToPowerup(string name)
