@@ -77,6 +77,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Gun.cs" />
+    <Compile Include="HealthBar.cs" />
     <Compile Include="HighScore.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Powerup.cs" />
@@ -140,15 +141,15 @@
       <DependentUpon>UserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <None Include="bin\Debug\Levels\0.xml">
+    <Content Include="bin\Debug\Levels\0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="bin\Debug\Levels\1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="bin\Debug\Resources\Classic Lobby Music.wav">
+    <Resource Include="bin\Debug\Resources\Classic Lobby Music.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
     <Content Include="burbank.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

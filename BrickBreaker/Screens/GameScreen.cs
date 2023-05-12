@@ -26,6 +26,8 @@ namespace BrickBreaker
         //sounds
         MediaPlayer brickBreaking = new MediaPlayer();
 
+        //healthbar
+        HealthBar hpBar = new HealthBar();
 
         //player1 button control keys - DO NOT CHANGE
         Boolean leftArrowDown, rightArrowDown;
@@ -284,6 +286,9 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            //health bar
+            hpBar.setProgress(lives, maxLives);
+            
             // Draws paddle
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
