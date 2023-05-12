@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Media;
 using BrickBreaker.Screens;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using System.Windows.Media;
 
 namespace BrickBreaker
 {
@@ -22,11 +23,16 @@ namespace BrickBreaker
     {
         #region global values
 
+        //sounds
+        MediaPlayer brickBreaking = new MediaPlayer();
+
+
         //player1 button control keys - DO NOT CHANGE
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
         public static int lives;
+        public int maxLives = 3;
         TempLoader tempLoader;
 
         // Paddle and Ball objects
@@ -42,9 +48,9 @@ namespace BrickBreaker
         public static List<Bullet> bullets = new List<Bullet>();
 
         // Brushes
-        SolidBrush paddleBrush = new SolidBrush(Color.White);
-        SolidBrush ballBrush = new SolidBrush(Color.White);
-        SolidBrush blockBrush = new SolidBrush(Color.Red);
+        SolidBrush paddleBrush = new SolidBrush(System.Drawing.Color.White);
+        SolidBrush ballBrush = new SolidBrush(System.Drawing.Color.White);
+        SolidBrush blockBrush = new SolidBrush(System.Drawing.Color.Red);
 
         // Powerup variables
         int appearance;
@@ -78,7 +84,7 @@ namespace BrickBreaker
             onStartPowerup();
 
             //set life counter
-            lives = 3;
+            lives = maxLives;
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -89,7 +95,7 @@ namespace BrickBreaker
             int paddleX = ((this.Width / 2) - (paddleWidth / 2));
             int paddleY = (this.Height - paddleHeight) - 60;
             int paddleSpeed = 8;
-            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
+            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, System.Drawing.Color.White);
 
             // setup starting ball values
             int ballX = this.Width / 2 - 10;
@@ -104,7 +110,6 @@ namespace BrickBreaker
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
             
-            //TODO - replace all the code in this region eventually with code that loads levels from xml files
             
             bricks.Clear();
             bricks = tempLoader.LoadDesigner();
@@ -257,7 +262,7 @@ namespace BrickBreaker
 
         public void OnEnd()
         {
-            if (tempLoader.ChangeLevel())
+            if (tempLoader.ChangeLevel() && lives > 0)
             {
                 bricks = tempLoader.LoadDesigner();
                 OnStart();

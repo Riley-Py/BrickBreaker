@@ -62,32 +62,36 @@ namespace BrickBreaker.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;Level&gt;
-        ///  &lt;Brick&gt;
-        ///    &lt;x&gt;188&lt;/x&gt;
-        ///    &lt;y&gt;252&lt;/y&gt;
-        ///    &lt;width&gt;42&lt;/width&gt;
-        ///    &lt;height&gt;18&lt;/height&gt;
-        ///    &lt;hp&gt;1&lt;/hp&gt;
-        ///    &lt;color&gt;Gray&lt;/color&gt;
-        ///    &lt;powerup&gt;None&lt;/powerup&gt;
-        ///  &lt;/Brick&gt;
-        ///  &lt;Brick&gt;
-        ///    &lt;x&gt;231&lt;/x&gt;
-        ///    &lt;y&gt;252&lt;/y&gt;
-        ///    &lt;width&gt;42&lt;/width&gt;
-        ///    &lt;height&gt;18&lt;/height&gt;
-        ///    &lt;hp&gt;1&lt;/hp&gt;
-        ///    &lt;color&gt;Gray&lt;/color&gt;
-        ///    &lt;powerup&gt;None&lt;/powerup&gt;
-        ///  &lt;/Brick&gt;
-        ///  &lt;Brick&gt;
-        ///    &lt;x&gt;274&lt;/x&gt;
-        ///    &lt;y&gt;252&lt;/y&gt;
-        ///    &lt;width&gt;42&lt;/width&gt;
-        ///    &lt;height&gt;18&lt;/height&gt;
-        ///    &lt;hp&gt;1&lt;/hp&gt;
-        ///    &lt;color&gt;Gray&lt;/color&gt;
-        ///    &lt;powerup&gt;None&lt;/poweru [rest of string was truncated]&quot;;.
+        ///	&lt;Brick&gt;
+        ///		&lt;x&gt;264&lt;/x&gt;
+        ///		&lt;y&gt;173&lt;/y&gt;
+        ///		&lt;width&gt;42&lt;/width&gt;
+        ///		&lt;height&gt;18&lt;/height&gt;
+        ///		&lt;hp&gt;1&lt;/hp&gt;
+        ///		&lt;color&gt;Gray&lt;/color&gt;
+        ///		&lt;powerup&gt;None&lt;/powerup&gt;
+        ///	&lt;/Brick&gt;
+        ///	&lt;Brick&gt;
+        ///		&lt;x&gt;264&lt;/x&gt;
+        ///		&lt;y&gt;154&lt;/y&gt;
+        ///		&lt;width&gt;42&lt;/width&gt;
+        ///		&lt;height&gt;18&lt;/height&gt;
+        ///		&lt;hp&gt;1&lt;/hp&gt;
+        ///		&lt;color&gt;Gray&lt;/color&gt;
+        ///		&lt;powerup&gt;None&lt;/powerup&gt;
+        ///	&lt;/Brick&gt;
+        ///	&lt;Brick&gt;
+        ///		&lt;x&gt;307&lt;/x&gt;
+        ///		&lt;y&gt;154&lt;/y&gt;
+        ///		&lt;width&gt;42&lt;/width&gt;
+        ///		&lt;height&gt;18&lt;/height&gt;
+        ///		&lt;hp&gt;1&lt;/hp&gt;
+        ///		&lt;color&gt;Gray&lt;/color&gt;
+        ///		&lt;powerup&gt;None&lt;/powerup&gt;
+        ///	&lt;/Brick&gt;
+        ///	&lt;Brick&gt;
+        ///		&lt;x&gt;307&lt;/x&gt;
+        ///		&lt;y&gt;173 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string _0 {
             get {

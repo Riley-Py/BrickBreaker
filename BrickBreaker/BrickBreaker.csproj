@@ -146,6 +146,9 @@
     <Content Include="bin\Debug\Levels\1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="bin\Debug\Resources\Classic Lobby Music.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="burbank.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

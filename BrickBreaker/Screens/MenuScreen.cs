@@ -18,7 +18,8 @@ namespace BrickBreaker
         MediaPlayer menuMusic = new MediaPlayer();
         public MenuScreen()
         {
-            menuMusic.Open(new Uri(Application.StartupPath + "/Resources/Classic Lobby Music.wav"));
+            string loc = Application.StartupPath + "/Resources/Classic Lobby Music.wav";
+            menuMusic.Open(new Uri(loc));
             menuMusic.Play();
             InitializeComponent();
             RileyFunc();
@@ -32,6 +33,7 @@ namespace BrickBreaker
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            menuMusic.Stop();
             //Reads the selected mode and see if it's a certain selection.  Otherwise, nothing happens
             if (modeSelector.SelectedItem == "Level Editor")
             {

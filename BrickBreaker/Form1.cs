@@ -30,7 +30,7 @@ namespace BrickBreaker
             HighScore high = new HighScore("23", "Logan");
             
             highScore.Add(high);
-            LoganCode();
+            //LoganCode();
 
             //LoganSaveHS();
             //LoganLoadHS();
@@ -38,8 +38,8 @@ namespace BrickBreaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            HighScore high = new HighScore(score, playerName);
-            highScore.Add(high);
+            //HighScore high = new HighScore(score, playerName);
+            //highScore.Add(high);
             // Start the program centred on the Menu Screen
             ChangeScreen(this, new MenuScreen());
         }
@@ -109,6 +109,7 @@ namespace BrickBreaker
                 writer.WriteElementString("score", high.score);
                 writer.WriteElementString("playerName", high.playerName);
 
+            }
         }
         public static void LoganSaveHS(List<HighScore> highScore)
         {
