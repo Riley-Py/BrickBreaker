@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Media;
 using BrickBreaker.Screens;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using System.Windows.Media;
 
 namespace BrickBreaker
 {
@@ -22,11 +23,18 @@ namespace BrickBreaker
     {
         #region global values
 
+        //sounds
+        MediaPlayer brickBreaking = new MediaPlayer();
+
+        //healthbar
+        HealthBar hpBar = new HealthBar();
+
         //player1 button control keys - DO NOT CHANGE
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
         public static int lives;
+        public int maxLives = 3;
         TempLoader tempLoader;
 
         // Paddle and Ball objects
@@ -42,21 +50,23 @@ namespace BrickBreaker
         public static List<Bullet> bullets = new List<Bullet>();
 
         // Brushes
-        SolidBrush paddleBrush = new SolidBrush(Color.White);
-        SolidBrush ballBrush = new SolidBrush(Color.White);
-        SolidBrush blockBrush = new SolidBrush(Color.Red);
+        SolidBrush paddleBrush = new SolidBrush(System.Drawing.Color.White);
+        SolidBrush ballBrush = new SolidBrush(System.Drawing.Color.White);
+        SolidBrush blockBrush = new SolidBrush(System.Drawing.Color.Red);
 
         // Powerup variables
         int appearance;
         public static int powerSize = 20;
 
-        Image[] images = new Image[] {Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos};
-        
-        
+        Image[] powerupImages = new Image[] { Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos };
+        Image[] gunImages = new Image[] { Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos };
+        Image[] bulletImages = new Image[] { Properties.Resources.ammoBox, Properties.Resources.chugJugEdited, Properties.Resources.scar, Properties.Resources.shotgun, Properties.Resources.thanos };
+     
         #endregion
         //List<Ball> ballList = new List<Ball>();
         public GameScreen()
         {
+            tempLoader = new TempLoader("0.xml");
             InitializeComponent();
             OnStart();
         }
@@ -71,12 +81,12 @@ namespace BrickBreaker
         public void OnStart()
         {
             // reset powerup code
-            tempLoader = new TempLoader("0.xml");
+            
             
             onStartPowerup();
 
             //set life counter
-            lives = 3;
+            lives = maxLives;
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -87,22 +97,21 @@ namespace BrickBreaker
             int paddleX = ((this.Width / 2) - (paddleWidth / 2));
             int paddleY = (this.Height - paddleHeight) - 60;
             int paddleSpeed = 8;
-            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
+            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, System.Drawing.Color.White);
 
             // setup starting ball values
             int ballX = this.Width / 2 - 10;
             int ballY = this.Height - paddle.height - 80;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
+            int xSpeed = 3;
+            int ySpeed = 3;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
             
-            //TODO - replace all the code in this region eventually with code that loads levels from xml files
             
             bricks.Clear();
             bricks = tempLoader.LoadDesigner();
@@ -177,19 +186,12 @@ namespace BrickBreaker
                     if (b.BlockCollision(block))
                     {
 
-                        createPowerup("Ammo", block.x + block.width / 2 - powerSize / 2, block.y + block.height / 2 - powerSize / 2, powerSize);
-
-                        bricks.Remove(block);
-
-                        if (bricks.Count == 0)
-                        {
-                            gameTimer.Enabled = false;
-                            OnEnd();
-                        }
-                        
-                        break;
+                        block.hp--;
+                        goto next;
                     }
                 }
+                next:
+                    continue;
             }
             // Check for collision with top and side walls
 
@@ -227,13 +229,16 @@ namespace BrickBreaker
 
             // Check for collision of ball with paddle, (incl. paddle movement)
 
-            // Check if ball has collided with any blocks
+
+
+
+            // Powerup actions
+            runPowerupLoop();
             foreach (DesignerBrick b in bricks)
             {
-                if (ball.BlockCollision(b))
+                if(b.hp <= 0)
                 {
-
-                    createPowerup("Ammo", b.x + b.width/2 - powerSize/2, b.y + b.height / 2 - powerSize/2, powerSize);
+                    createPowerup(powerupName(b.powerup), b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
 
                     bricks.Remove(b);
 
@@ -245,30 +250,45 @@ namespace BrickBreaker
 
                     break;
                 }
+
+                else
+                {
+                    b.solidBrush.Color = b.HPToColor(b.hp);
+                }
             }
 
-
-            // Powerup actions
-            runPowerupLoop();
-
             // Redraw the screen
+
             Refresh();
         }
 
         public void OnEnd()
         {
-            // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-            
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+            if (tempLoader.ChangeLevel() && lives > 0)
+            {
+                bricks = tempLoader.LoadDesigner();
+                OnStart();
+            }
+            else
+            {
+                Form form = this.FindForm();
+                MenuScreen ps = new MenuScreen();
 
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
+                ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
+                form.Controls.Add(ps);
+                form.Controls.Remove(this);
+            }
+            
+            // Goes to the game over screen
+            
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            //health bar
+            hpBar.setProgress(lives, maxLives);
+            
             // Draws paddle
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
@@ -301,7 +321,7 @@ namespace BrickBreaker
             // Draws powerups
             foreach (Powerup p in powers)
             {
-                e.Graphics.DrawImage(images[p.appearance], p.x, p.y, p.size + 40, p.size + 40);
+                e.Graphics.DrawImage(powerupImages[p.appearance], p.x, p.y, p.size, p.size);
             }
 
             // Draws guns
@@ -356,13 +376,13 @@ namespace BrickBreaker
             #region code that should be in the game loop and used by everyone
             ////This code deletes blocks in what I think is a more proper way than just deleting a block when it is hit
             // remove blocks from power ups 
-            for (int i = 0; i < bricks.Count; i++)
-            {
-                if (bricks[i].hp <= 0)
-                {
-                    bricks.RemoveAt(i);
-                }
-            }
+            //for (int i = 0; i < bricks.Count; i++)
+            //{
+            //    if (bricks[i].hp <= 0)
+            //    {
+            //        bricks.RemoveAt(i);
+            //    }
+            //}
             // end game if powerup causes it -- Repeat code from above that could be simplified
             if (bricks.Count == 0)
             {
@@ -416,10 +436,11 @@ namespace BrickBreaker
                             b.hp--;
 
                             // add powerup created from bullet if the block was destroyed
-                            if (b.hp <= 0)
-                            {
-                                createPowerup("Ammo", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
-                            }
+                            //if (b.hp <= 0)
+                            //{
+                            //    createPowerup("RocketLauncher", b.x + b.width / 2 - powerSize / 2, b.y + b.height / 2 - powerSize / 2, powerSize);
+
+                            //}
 
                             // remove bullet if it cannot do anything anymore
                             bullets[i].damageVal--;
@@ -441,7 +462,29 @@ namespace BrickBreaker
             catch { } //this code exists because I haven't yet fixed an issue where everything breaks when a bullet and
                       //hit a block at the same time
         }
-
+        
+        public string powerupName(PowerupEnum powerup)
+        {
+            switch (powerup)
+            {
+                case PowerupEnum.None:
+                    return "None";
+                    break;
+                case PowerupEnum.Ammo:
+                    return "Ammo";
+                case PowerupEnum.ChugJug:
+                    return "ChugJug";
+                case PowerupEnum.Scar:
+                    return "Scar";
+                case PowerupEnum.Shotgun:
+                    return "Shotgun";
+                case PowerupEnum.RocketLauncher:
+                    return "RocketLauncher";
+                case PowerupEnum.InfinityGauntlet:
+                    return "InfinityGauntlet";
+            }
+            return "Err";
+        }
         public void createPowerup(string powerName, int x, int y, int size) 
         {
             #region Overall Notes

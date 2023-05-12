@@ -22,6 +22,7 @@ namespace BrickBreaker
         public string gunType;
         public int x, y, width, height;
         public int lifeSpan;
+        public int appearance, bulletAppearance;
 
         public Gun(string _gunType)
         {
@@ -36,14 +37,18 @@ namespace BrickBreaker
             switch (gunType)
             {
                 case "Scar":
-                    //assign image here?
+                    appearance = 1;
+                    bulletAppearance = 1;
                     break;
 
                 case "Shotgun":
-
+                    appearance = 2;
+                    bulletAppearance = 2;
                     break;
 
                 case "RocketLauncher":
+                    appearance = 2;
+                    bulletAppearance = 2;
                     break;
             }
         }
@@ -79,7 +84,6 @@ namespace BrickBreaker
                     break;
             }
         }
-
 
         public void Move()
         {

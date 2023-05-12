@@ -1,7 +1,9 @@
 ﻿using BrickBreaker.Screens;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -72,11 +74,17 @@ namespace BrickBreaker
         }
 
         //private DesignerBrick.
-        public List<DesignerBrick> LoadDesigner()
+
+        private string Path(string fN)
         {
             string path = Assembly.GetEntryAssembly().Location;
             path = path.Substring(0, path.Length - 16);
-            path += $"Levels\\{fileName}";
+            path += $"Levels\\{fN}";
+            return path;
+        }
+        public List<DesignerBrick> LoadDesigner()
+        {
+            string path = Path(fileName);
             XmlReader reader = XmlReader.Create(path);
             reader.ReadToFollowing("Level");
             List<DesignerBrick> blocks = new List<DesignerBrick>();
@@ -109,7 +117,8 @@ namespace BrickBreaker
                     {
                         DesignerBrick b = new DesignerBrick(Convert.ToInt32(x),
                         Convert.ToInt32(y), Convert.ToInt32(hp),
-                        Convert.ToInt32(w), Convert.ToInt32(h), PowerupEnum.None, Convert.ToInt32(back));
+                        Convert.ToInt32(w), Convert.ToInt32(h), pu, Convert.ToInt32(back));
+
                         blocks.Add(b);
                     }
 
@@ -125,7 +134,8 @@ namespace BrickBreaker
         {
             level++;
             fileName = level.ToString();
-            return true;
+            fileName += ".xml";
+            return File.Exists(Path(fileName));
         }
     }
 }
