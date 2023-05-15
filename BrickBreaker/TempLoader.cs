@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -25,9 +26,10 @@ namespace BrickBreaker
 
         public List<Block> Load() 
         {
-            string path = Assembly.GetEntryAssembly().Location;
-            path = path.Substring(0, path.Length - 16);
-            path += $"Levels\\{fileName}";
+            //string path = Assembly.GetEntryAssembly().Location;
+            //path = path.Substring(0, path.Length - 16);
+            //path += $"Levels\\{fileName}";
+            string path = Application.StartupPath + $"/Resources/{fileName}";
             XmlReader reader = XmlReader.Create(path);
             reader.ReadToFollowing("Level");
             List<Block> blocks = new List<Block>();
@@ -77,9 +79,9 @@ namespace BrickBreaker
 
         private string Path(string fN)
         {
-            string path = Assembly.GetEntryAssembly().Location;
-            path = path.Substring(0, path.Length - 16);
-            path += $"Levels\\{fN}";
+            string path = Application.StartupPath + $"/Resources/{fileName}";
+
+            //path += $"Levels\\{fN}";
             return path;
         }
         public List<DesignerBrick> LoadDesigner()
