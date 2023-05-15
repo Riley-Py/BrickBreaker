@@ -18,8 +18,8 @@ namespace BrickBreaker
         MediaPlayer menuMusic = new MediaPlayer();
         public MenuScreen()
         {
-            string loc = Application.StartupPath + "/Resources/Classic Lobby Music.wav";
-            menuMusic.Open(new Uri(loc));
+            string loc = Application.StartupPath + "/Resources/menumusic.wav";
+           menuMusic.Open(new Uri(loc));
             menuMusic.Play();
             InitializeComponent();
             RileyFunc();

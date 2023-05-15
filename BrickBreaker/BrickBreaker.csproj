@@ -113,6 +113,9 @@
     <Compile Include="Screens\UserInfo.Designer.cs">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\menumusic.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Classic Lobby Music.wav" />
     <None Include="Resources\luckyLandingImage.png" />
     <None Include="Resources\retailRoadImage.png" />
@@ -147,9 +150,6 @@
     <Content Include="bin\Debug\Levels\1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="bin\Debug\Resources\Classic Lobby Music.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="bin\Debug\Levels\2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -215,6 +215,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Levels\dingus.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
