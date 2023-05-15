@@ -62,40 +62,106 @@ namespace BrickBreaker.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;Level&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;264&lt;/x&gt;
-        ///		&lt;y&gt;173&lt;/y&gt;
-        ///		&lt;width&gt;42&lt;/width&gt;
-        ///		&lt;height&gt;18&lt;/height&gt;
-        ///		&lt;hp&gt;1&lt;/hp&gt;
-        ///		&lt;color&gt;Gray&lt;/color&gt;
-        ///		&lt;powerup&gt;None&lt;/powerup&gt;
-        ///	&lt;/Brick&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;264&lt;/x&gt;
-        ///		&lt;y&gt;154&lt;/y&gt;
-        ///		&lt;width&gt;42&lt;/width&gt;
-        ///		&lt;height&gt;18&lt;/height&gt;
-        ///		&lt;hp&gt;1&lt;/hp&gt;
-        ///		&lt;color&gt;Gray&lt;/color&gt;
-        ///		&lt;powerup&gt;None&lt;/powerup&gt;
-        ///	&lt;/Brick&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;307&lt;/x&gt;
-        ///		&lt;y&gt;154&lt;/y&gt;
-        ///		&lt;width&gt;42&lt;/width&gt;
-        ///		&lt;height&gt;18&lt;/height&gt;
-        ///		&lt;hp&gt;1&lt;/hp&gt;
-        ///		&lt;color&gt;Gray&lt;/color&gt;
-        ///		&lt;powerup&gt;None&lt;/powerup&gt;
-        ///	&lt;/Brick&gt;
-        ///	&lt;Brick&gt;
-        ///		&lt;x&gt;307&lt;/x&gt;
-        ///		&lt;y&gt;173 [rest of string was truncated]&quot;;.
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;249&lt;/x&gt;
+        ///    &lt;y&gt;164&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;292&lt;/x&gt;
+        ///    &lt;y&gt;183&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;206&lt;/x&gt;
+        ///    &lt;y&gt;164&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/poweru [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string _0 {
             get {
                 return ResourceManager.GetString("_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;Level&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;298&lt;/x&gt;
+        ///    &lt;y&gt;155&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;255&lt;/x&gt;
+        ///    &lt;y&gt;193&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;255&lt;/x&gt;
+        ///    &lt;y&gt;174&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///    &lt;color&gt;Gray&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/poweru [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string _1 {
+            get {
+                return ResourceManager.GetString("_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;Level&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;309&lt;/x&gt;
+        ///    &lt;y&gt;108&lt;/y&gt;
+        ///    &lt;width&gt;18&lt;/width&gt;
+        ///    &lt;height&gt;42&lt;/height&gt;
+        ///    &lt;hp&gt;4&lt;/hp&gt;
+        ///    &lt;color&gt;Purple&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;287&lt;/x&gt;
+        ///    &lt;y&gt;139&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;4&lt;/hp&gt;
+        ///    &lt;color&gt;Purple&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/powerup&gt;
+        ///  &lt;/Brick&gt;
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;330&lt;/x&gt;
+        ///    &lt;y&gt;139&lt;/y&gt;
+        ///    &lt;width&gt;42&lt;/width&gt;
+        ///    &lt;height&gt;18&lt;/height&gt;
+        ///    &lt;hp&gt;4&lt;/hp&gt;
+        ///    &lt;color&gt;Purple&lt;/color&gt;
+        ///    &lt;powerup&gt;None&lt;/ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string _2 {
+            get {
+                return ResourceManager.GetString("_2", resourceCulture);
             }
         }
         
@@ -128,9 +194,9 @@ namespace BrickBreaker.Properties {
         ///    &lt;color&gt;Gray&lt;/color&gt;
         ///    &lt;powerup&gt;None&lt;/poweru [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string _1 {
+        internal static string _3 {
             get {
-                return ResourceManager.GetString("_1", resourceCulture);
+                return ResourceManager.GetString("_3", resourceCulture);
             }
         }
         
